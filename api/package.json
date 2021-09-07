@@ -1,0 +1,40 @@
+{
+  "name": "naszechoinki-api",
+  "version": "0.0.1",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "author": "Wiktor Poniewierski",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "connect-pg-simple": "^6.2.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "helmet": "^4.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.95.10",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.12",
+    "pg": "^8.6.0",
+    "randomstring": "^1.2.1",
+    "sequelize": "^6.6.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/hanks-bs/trio-nextapp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hanks-bs/trio-nextapp/issues"
+  },
+  "homepage": "https://github.com/hanks-bs/trio-nextapp#readme",
+  "description": ""
+}
