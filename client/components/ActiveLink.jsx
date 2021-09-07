@@ -17,7 +17,7 @@ const ActiveLink = ({ children, activeClassName, ...props }) => {
       ? `${childClassName} ${activeClassName}`.trim()
       : childClassName;
   return (
-    <Link {...props}>
+    <Link {...props} scroll={false}>
       {React.cloneElement(child, {
         className: className || null,
       })}

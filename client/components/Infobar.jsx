@@ -15,6 +15,10 @@ const useStyles = makeStyles((theme) => ({
         padding: "2px 30px",
     
         "& a": {
+          [theme.breakpoints.down(666)]: {
+            marginRight: 0,
+            padding: 5,
+          },
           marginRight: 10,
           display: "flex",
           alignItems: "center",
@@ -35,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Infobar() {
     const classes = useStyles();
     const theme = useTheme();
-    const matches = useMediaQuery(theme.breakpoints.down('xs'));
+    const matches = useMediaQuery(theme.breakpoints.down(666));
 
     return (
         <>

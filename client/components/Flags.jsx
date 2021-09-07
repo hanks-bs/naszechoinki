@@ -40,8 +40,7 @@ export default function Flags() {
   function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
   }
-  console.log();
-
+ 
   return (
     <>
       <div className={classes.container}>

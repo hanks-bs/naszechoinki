@@ -7,12 +7,7 @@ import Infobar from "./Infobar";
 import React from 'react'
 export default function Layout({ children, userdata }) {
 
-  const childrenWithProps = React.Children.map(children, (child, i) =>
-  {
-  console.log(children)
-  return React.cloneElement(child, { userdata: userdata })
-}
-);
+
   return (
     <>
     <Infobar />
@@ -24,7 +19,7 @@ export default function Layout({ children, userdata }) {
         exit={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
-        <main>{childrenWithProps}</main>
+        <main>{children}</main>
       </motion.div>
       <Footer/>
     </>

@@ -139,7 +139,7 @@ class Footer extends React.Component {
                         key={`footer-${item.name}`}
                         style={{ margin: "0 10px" }}
                       >
-                        <Link href={item.to}>
+                        <Link href={item.to} >
                           <a>
                             <Typography>{item.name}</Typography>
                           </a>

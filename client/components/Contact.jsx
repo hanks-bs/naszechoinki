@@ -79,8 +79,11 @@ const useStyles = makeStyles((theme) => ({
     padding: 30,
   },
   heading: {
+    [theme.breakpoints.down(610)]: {
+      fontSize: "3.2rem",
+    },
     [theme.breakpoints.down(360)]: {
-      fontSize: "2.9rem",
+      fontSize: "2.6rem",
     },
 
     fontSize: "3.5rem",

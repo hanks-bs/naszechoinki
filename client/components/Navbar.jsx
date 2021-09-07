@@ -56,7 +56,7 @@ const styles = (theme) => ({
     [theme.breakpoints.down(1575)]: {
       width: "80%",
     },
-    [theme.breakpoints.down(1052)]: {
+    [theme.breakpoints.down(1118)]: {
       width: "90%",
     },
     [theme.breakpoints.down(860)]: {
@@ -114,9 +114,14 @@ const styles = (theme) => ({
   navOpen: {
     [theme.breakpoints.up(816)]: {
       display: "flex",
+      flexDirection: "row",
       justifyContent: "center",
+      padding: 0,
     },
-    display: "block",
+    display: "flex",
+    padding: 50,
+    flexDirection: "column",
+    gap: 20,
   },
   buttonOpen: {
     top: 28,
@@ -214,7 +219,6 @@ class Navbar extends React.Component {
                     [classes.navOpen]: this.state.open,
                     [null]: !this.state.open,
                   })}
-                  style={{ padding: 0 }}
                 >
                   {links.map((item) => {
                     return (

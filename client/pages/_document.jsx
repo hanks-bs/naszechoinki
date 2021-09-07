@@ -16,7 +16,6 @@ const generateCsp = () => {
   const nonce = hash.digest('base64');
 
   let csp = ``;
-  csp += `default-src 'none';`;
   csp += `base-uri 'self';`;
   csp += `style-src https://fonts.googleapis.com 'unsafe-inline';`; // NextJS requires 'unsafe-inline'
   csp += `script-src 'nonce-${nonce}' 'self' ${production ? '' : "'unsafe-eval'"};`; // NextJS requires 'self' and 'unsafe-eval' in dev (faster source maps)

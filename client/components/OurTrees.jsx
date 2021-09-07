@@ -72,6 +72,10 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
 
     "& > h3": {
+      [theme.breakpoints.down(610)]: {
+        fontSize: "1.6rem",
+        padding: "20px 0",
+      },
       fontSize: "1.75rem",
       textAlign: "center",
       padding: "25px 0",
