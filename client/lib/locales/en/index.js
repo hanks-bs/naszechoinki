@@ -34,22 +34,5 @@ export default {
   check_offer: "Check our offer",
   //Nasze choinki END
 
-  //Kontakt START
-  firstname: "First name",
-  lastname: "Last name",
-  mess_content: "Message content",
-  send: "Send",
-  firstname_tooshort:
-    "The first name field is too short. Min number of characters is :min.",
-  firstname_toolong:
-    "The first name is too long. Max number of characters is :max.",
-  lastname_tooshort:
-    "The last name field is too short. Min number of characters is :min.",
-  lastname_toolong:
-    "The last name is too long. Max number of characters is :max.",
-  message_tooshort:
-    "The message field is too short. Min number of characters is :min.",
-  message_toolong:
-    "The message name is too long. Max number of characters is :max.",
-  //Kontakt END
+ 
 };

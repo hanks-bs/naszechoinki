@@ -16,13 +16,12 @@ import pl_seedlings from "./../lib/locales/pl/seedlings";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     [theme.breakpoints.down("sm")]: {
-      padding: "85px 15px",
+      padding: "85px 15px 0 15px",
     },
-    padding: "85px 30px",
+    padding: "85px 30px 0 30px",
   },
   ContainerBox: {
     padding: 16,
@@ -90,6 +89,15 @@ const useStyles = makeStyles((theme) => ({
       cursor: "default",
     },
   },
+  orderBox: {
+    textAlign: "center",
+    marginBottom: 20,
+    "& > button": {
+      fontSize: "1.3rem",
+      padding: "8px 70px",
+      borderRadius: 30
+    },
+  },
 }));
 
 export default function SeedlingsMain() {
@@ -104,6 +112,12 @@ export default function SeedlingsMain() {
       <CssBaseline />
       <section className={classes.root} id={`about-us`}>
         <Container maxWidth={`lg`}>
+          <Box className={classes.orderBox}>
+         
+            <Button> {t.submit_order}</Button>
+           
+          </Box>
+
           <Typography variant="h1" component="h1">
             {t.seedlings}
           </Typography>
@@ -121,7 +135,63 @@ export default function SeedlingsMain() {
               justifyContent="space-around"
               spacing={6}
             >
+              <Grid item className={classes.gridItem}>
+                <Grid
+                  container
+                  direction="column"
+                  className={classes.heroGridContainer}
+                  style={{ overflow: "hidden", textAlign: "center" }}
+                >
+                  <Grid item style={{ height: "100%", width: "100%" }}>
+                    <Box
+                      className={classes.image}
+                      style={{
+                        backgroundImage:
+                          "url(https://naszechoinki.pl/lib/fb1tn1/9c0975902916554798f3fcb6ba8d0f25.jpg)",
+                      }}
+                    />
+                  </Grid>
+                  <Grid item className={classes.gridDescription}>
+                    <Typography
+                      component="h3"
+                      variant="h5"
+                      className={classes.gridHeading}
+                    >
+                      Jodła kaukaska
+                    </Typography>
+                    <Typography
+                      component="p"
+                      className={classes.pStyle}
+                      style={{ textAlign: "left" }}
+                    >
+                      <span style={{ fontWeight: 700, color: "#000" }}>
+                        {t_spec.age}:
+                      </span>{" "}
+                      4 lata
+                    </Typography>
+                    <Typography
+                      component="p"
+                      className={classes.pStyle}
+                      style={{ textAlign: "left", marginTop: 5 }}
+                    >
+                      <span style={{ fontWeight: 700, color: "#000" }}>
+                        {t_spec.other}:{" "}
+                      </span>{" "}
+                      Lorem ipsum
+                    </Typography>
 
+                    <Button
+                      className={classes.gridItemButton}
+                      disableTouchRipple
+                    >
+                      {t_spec.price}{" "}
+                      {locale === "pl"
+                        ? `25 ${t_spec.price_sign}`
+                        : `${t_spec.price_sign}5`}
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Grid>
 
               <Grid item className={classes.gridItem}>
                 <Grid
@@ -152,121 +222,93 @@ export default function SeedlingsMain() {
                       className={classes.pStyle}
                       style={{ textAlign: "left" }}
                     >
-                      <span style={{ fontWeight: 700, color: "#000" }}>{t_spec.age}: </span> 4 lata
+                      <span style={{ fontWeight: 700, color: "#000" }}>
+                        {t_spec.age}:{" "}
+                      </span>{" "}
+                      4 lata
                     </Typography>
                     <Typography
                       component="p"
                       className={classes.pStyle}
                       style={{ textAlign: "left", marginTop: 5 }}
                     >
-                      <span style={{ fontWeight: 700, color: "#000" }}>{t_spec.other}: </span> Lorem
-                      ipsum
+                      <span style={{ fontWeight: 700, color: "#000" }}>
+                        {t_spec.other}:{" "}
+                      </span>{" "}
+                      Lorem ipsum
                     </Typography>
-                   
-                    <Button className={classes.gridItemButton} disableTouchRipple>
-                    {t_spec.price} {locale === 'pl' ? `25 ${t_spec.price_sign}` : `${t_spec.price_sign}5`}
+
+                    <Button
+                      className={classes.gridItemButton}
+                      disableTouchRipple
+                    >
+                      {t_spec.price}{" "}
+                      {locale === "pl"
+                        ? `25 ${t_spec.price_sign}`
+                        : `${t_spec.price_sign}5`}
                     </Button>
                   </Grid>
                 </Grid>
               </Grid>
 
               <Grid item className={classes.gridItem}>
-              <Grid
-                container
-                direction="column"
-                className={classes.heroGridContainer}
-                style={{ overflow: "hidden", textAlign: "center" }}
-              >
-                <Grid item style={{ height: "100%", width: "100%" }}>
-                  <Box
-                    className={classes.image}
-                    style={{
-                      backgroundImage:
-                        "url(https://naszechoinki.pl/lib/fb1tn1/9c0975902916554798f3fcb6ba8d0f25.jpg)",
-                    }}
-                  />
-                </Grid>
-                <Grid item className={classes.gridDescription}>
-                  <Typography
-                    component="h3"
-                    variant="h5"
-                    className={classes.gridHeading}
-                  >
-                    Jodła kaukaska
-                  </Typography>
-                  <Typography
-                    component="p"
-                    className={classes.pStyle}
-                    style={{ textAlign: "left" }}
-                  >
-                    <span style={{ fontWeight: 700, color: "#000" }}>{t_spec.age}: </span> 4 lata
-                  </Typography>
-                  <Typography
-                    component="p"
-                    className={classes.pStyle}
-                    style={{ textAlign: "left", marginTop: 5 }}
-                  >
-                    <span style={{ fontWeight: 700, color: "#000" }}>{t_spec.other}: </span> Lorem
-                    ipsum
-                  </Typography>
-                 
-                  <Button className={classes.gridItemButton} disableTouchRipple>
-                  {t_spec.price} {locale !== 'pl' ? `25 ${t_spec.price_sign}`: `${t_spec.price_sign}5`}
-                  </Button>
+                <Grid
+                  container
+                  direction="column"
+                  className={classes.heroGridContainer}
+                  style={{ overflow: "hidden", textAlign: "center" }}
+                >
+                  <Grid item style={{ height: "100%", width: "100%" }}>
+                    <Box
+                      className={classes.image}
+                      style={{
+                        backgroundImage:
+                          "url(https://naszechoinki.pl/lib/fb1tn1/9c0975902916554798f3fcb6ba8d0f25.jpg)",
+                      }}
+                    />
+                  </Grid>
+                  <Grid item className={classes.gridDescription}>
+                    <Typography
+                      component="h3"
+                      variant="h5"
+                      className={classes.gridHeading}
+                    >
+                      Jodła kaukaska
+                    </Typography>
+                    <Typography
+                      component="p"
+                      className={classes.pStyle}
+                      style={{ textAlign: "left" }}
+                    >
+                      <span style={{ fontWeight: 700, color: "#000" }}>
+                        {t_spec.age}:{" "}
+                      </span>{" "}
+                      4 lata
+                    </Typography>
+                    <Typography
+                      component="p"
+                      className={classes.pStyle}
+                      style={{ textAlign: "left", marginTop: 5 }}
+                    >
+                      <span style={{ fontWeight: 700, color: "#000" }}>
+                        {t_spec.other}:{" "}
+                      </span>{" "}
+                      Lorem ipsum
+                    </Typography>
+
+                    <Button
+                      className={classes.gridItemButton}
+                      disableTouchRipple
+                    >
+                      {t_spec.price}{" "}
+                      {locale === "pl"
+                        ? `25 ${t_spec.price_sign}`
+                        : `${t_spec.price_sign}5`}
+                    </Button>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
-
-            <Grid item className={classes.gridItem}>
-            <Grid
-              container
-              direction="column"
-              className={classes.heroGridContainer}
-              style={{ overflow: "hidden", textAlign: "center" }}
-            >
-              <Grid item style={{ height: "100%", width: "100%" }}>
-                <Box
-                  className={classes.image}
-                  style={{
-                    backgroundImage:
-                      "url(https://naszechoinki.pl/lib/fb1tn1/9c0975902916554798f3fcb6ba8d0f25.jpg)",
-                  }}
-                />
-              </Grid>
-              <Grid item className={classes.gridDescription}>
-                <Typography
-                  component="h3"
-                  variant="h5"
-                  className={classes.gridHeading}
-                >
-                  Jodła kaukaska
-                </Typography>
-                <Typography
-                  component="p"
-                  className={classes.pStyle}
-                  style={{ textAlign: "left" }}
-                >
-                  <span style={{ fontWeight: 700, color: "#000" }}>{t_spec.age}: </span> 4 lata
-                </Typography>
-                <Typography
-                  component="p"
-                  className={classes.pStyle}
-                  style={{ textAlign: "left", marginTop: 5 }}
-                >
-                  <span style={{ fontWeight: 700, color: "#000" }}>{t_spec.other}: </span> Lorem
-                  ipsum
-                </Typography>
-               
-                <Button className={classes.gridItemButton} disableTouchRipple>
-                {t_spec.price} {locale === 'pl' ? `25 ${t_spec.price_sign}`: `${t_spec.price_sign}5`}
-                </Button>
-              </Grid>
-            </Grid>
-          </Grid>
-
-             
-
-              </Grid>
           </Box>
         </Container>
       </section>

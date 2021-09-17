@@ -9,7 +9,7 @@ import en_seedlings from './../../lib/locales/en/seedlings';
 import pl from './../../lib/locales/pl/pl';
 import pl_seedlings from './../../lib/locales/pl/seedlings';
 import { useRouter } from "next/router";
-
+import SeedlingsContact from './../../components/SeedlingsContact';
 export default function Seedlings(props) {
   const router = useRouter();
   const { locale } = router;
@@ -35,6 +35,7 @@ export default function Seedlings(props) {
     </Head>
       <HeroSection/>
       <SeedlingsMain userdata={props.userdata}/>
+      <SeedlingsContact />
      
     </>
   );

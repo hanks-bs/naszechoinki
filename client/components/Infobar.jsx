@@ -57,14 +57,14 @@ export default function Infobar() {
             </a>
           </Link>
           {matches ? null : '|'}
-          <Link href="tel:48604771938">
+          <Link href="tel:+48604771938">
             <a>
               <PhoneIcon />
               +48 604 771 938
             </a>
           </Link>
           {matches ? null : '|'}
-          <Link href="tel:48696443291">
+          <Link href="tel:+48696443291">
             <a>
               <PhoneIcon />
               +48 696 443 291

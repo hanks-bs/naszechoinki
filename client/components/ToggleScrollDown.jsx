@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ToggleScrollDown({ ref }) {
+export default function ToggleScrollDown() {
   const classes = useStyles();
   const router = useRouter();
   const { locale } = router;

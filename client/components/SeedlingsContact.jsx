@@ -13,7 +13,9 @@ const Typography = dynamic(() => import("@material-ui/core/Typography"), {
 import TextField from "@material-ui/core/TextField";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import * as Validator from "validatorjs";
-
+import Box from '@material-ui/core/Box';
+import Link from '@material-ui/core/Link';
+import LocalMallIcon from '@material-ui/icons/LocalMall';
 const CssTextField = withStyles({
   root: {
     "& label.Mui-focused": {
@@ -77,15 +79,16 @@ const useStyles = makeStyles((theme) => ({
     padding: 30,
   },
   heading: {
+    marginBottom: 30,
     fontSize: "2.5rem",
     color: "#3e5411",
-    textAlign: "center",
+    display: "flex",
+    justifyContent: "center",
+    position: "relative",
     fontWeight: 500,
   },
   button: {
-    marginTop: 60,
-    left: "100%",
-    transform: "translateX(-100%)",
+    marginLeft: 10,
     "&:disabled": {
       "&:hover": {
         backgroundColor: "#1f1f1f52",
@@ -102,9 +105,30 @@ const useStyles = makeStyles((theme) => ({
     marginTop: -12,
     marginLeft: -12,
   },
+  requiredinfo: {
+    fontSize: ".8rem",
+    color: "rgb(0 0 0 / 0.82)",
+    marginTop: "25px",
+  },
+  buttonBox: {
+    textAlign: "right",
+  },
+  linkHover: {
+    "&:hover": {
+      textDecoration: 'none'
+    },
+  },
+  MallIcon: {
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
+    fontSize: "4rem",
+    marginTop: -13,
+    marginRight: 15
+  },
 }));
 
-export default function Contact() {
+export default function SeedlingsContact() {
   const classes = useStyles();
   const router = useRouter();
   const { locale } = router;
@@ -113,7 +137,11 @@ export default function Contact() {
   const [firstnameError, setFirstnameError] = useState(false);
   const [lastnameError, setLastnameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
+  const [phoneError, setPhoneError] = useState(false);
   const [messageError, setMessageError] = useState(false);
+  const [adressError, setAdressError] = useState(false);
+  const [postCodeError, setPostCodeError] = useState(false);
+  const [cityError, setCityError] = useState(false);
 
   const validateFirstName = async () => {
     setFirstnameError(false);
@@ -135,7 +163,6 @@ export default function Contact() {
       return setFirstnameError(validation.errors.first("name"));
     });
   };
-
   const validateLastName = async () => {
     setLastnameError(false);
     const lastname = document.querySelector("#lastname").value;
@@ -171,7 +198,100 @@ export default function Contact() {
       return setEmailError(validation.errors.first("email"));
     });
   };
+  const validatePhone = async () => {
+    setPhoneError(false);
 
+    const phone = document.querySelector("#phone").value;
+
+    Validator.register(
+      "telephone",
+      function (value, requirement, attribute) {
+        // requirement parameter defaults to null
+        const phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3})$/;
+        return phoneno.test(value);
+      },
+      t.invalid_format
+    );
+
+    const validation = new Validator(
+      { telephone: phone },
+      { telephone: "telephone|required" },
+      {
+        required: { string: t.required_err },
+        telephone: { string: t.invalid_format },
+      }
+    );
+    validation.checkAsync(undefined, () => {
+      return setPhoneError(validation.errors.first("telephone"));
+    });
+  };
+  const validateAdress = async () => {
+    setAdressError(false);
+    const adress = document.querySelector("#adress").value;
+    const minLength = 3;
+    const maxLength = 100;
+
+    const validation = new Validator(
+      { adress: adress },
+      { adress: `min:${minLength}|max:${maxLength}|required` },
+      {
+        required: { string: t.required_err },
+        min: { string: t.adress_tooshort },
+        max: { string: t.adress_toolong },
+      }
+    );
+
+    validation.checkAsync(undefined, () => {
+      return setAdressError(validation.errors.first("adress"));
+    });
+  };
+  const validatePostCode = async () => {
+    setPostCodeError(false);
+
+    const postcode = document.querySelector("#postcode").value;
+
+    Validator.register(
+      "postcode",
+      function (value, requirement, attribute) {
+        // requirement parameter defaults to null
+        const postcode = /^\d{2}-\d{3}$/;
+        return postcode.test(value);
+      },
+      t.invalid_format
+    );
+
+    const validation = new Validator(
+      { postcode: postcode },
+      { postcode: "postcode|required" },
+      {
+        required: { string: t.required_err },
+        postcode: { string: t.invalid_format },
+      }
+    );
+    validation.checkAsync(undefined, () => {
+      return setPostCodeError(validation.errors.first("postcode"));
+    });
+  };
+  const validateCity = async () => {
+    setCityError(false);
+    const city = document.querySelector("#city").value;
+    const minLength = 3;
+    const maxLength = 15;
+
+    const validation = new Validator(
+      { city: city },
+      { city: `min:${minLength}|max:${maxLength}|required` },
+      {
+        required: { string: t.required_err },
+        min: { string: t.city_tooshort },
+        max: { string: t.city_toolong },
+      }
+    );
+
+    validation.checkAsync(undefined, () => {
+      return setCityError(validation.errors.first("city"));
+    });
+  };
   const validateMessage = async () => {
     setMessageError(false);
 
@@ -202,11 +322,15 @@ export default function Contact() {
     await validateLastName();
     await validateEmail();
     await validateMessage();
+    await validatePhone();
+    await validateAdress();
+    await validatePostCode();
+    await validateCity();
 
     if (!firstnameError && !lastnameError && !emailError && !messageError) {
-      return setLoading(false);//Jeśli serwer nie zwróci, to dopiero wtedy wyłączyć łądowanie buttona!!
+      return setLoading(false); //Jeśli serwer nie zwróci, to dopiero wtedy wyłączyć łądowanie buttona!!
     }
-    return setLoading(false)
+    return setLoading(false);
   };
 
   return (
@@ -214,24 +338,13 @@ export default function Contact() {
       <section id="contact" className={classes.contact}>
         <Container maxWidth={`lg`} className={classes.container}>
           <Grid container className={classes.box}>
-            <Grid item xs={12} sm={6}>
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d81312.20213901027!2d20.909186!3d50.440983!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x8f75e606863db0ed!2sSzk%C3%B3%C5%82ka%20drzew%20i%20krzew%C3%B3w%20ozdobnych.%20Hurtownia%20choinek.!5e0!3m2!1sen!2sus!4v1630862949923!5m2!1sen!2sus"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                allowFullScreen
-                title="Mapa"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6} className={classes.inner}>
+            <Grid item xs={12} className={classes.inner}>
               <Typography
                 component="h2"
                 variant="h2"
                 className={classes.heading}
               >
-                {t.contact}
+              <LocalMallIcon className={classes.MallIcon} /> {t.submit_order}
               </Typography>
               <form
                 autoComplete="off"
@@ -262,7 +375,7 @@ export default function Contact() {
                       required
                     />
                   </Grid>
-                  <Grid item xs={12} className={classes.gridItem}>
+                  <Grid item xs={12} sm={6} className={classes.gridItem}>
                     <CssTextField
                       fullWidth
                       id="email"
@@ -270,6 +383,60 @@ export default function Contact() {
                       error={emailError ? true : false}
                       helperText={emailError}
                       onChange={() => setEmailError(false)}
+                      required
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6} className={classes.gridItem}>
+                    <CssTextField
+                      fullWidth
+                      id="phone"
+                      label={t.phone_number}
+                      error={phoneError ? true : false}
+                      helperText={phoneError}
+                      onChange={() => setPhoneError(false)}
+                      required
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6} className={classes.gridItem}>
+                    <CssTextField
+                      fullWidth
+                      id="company"
+                      label={t.company_name_label}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6} className={classes.gridItem}>
+                    <CssTextField fullWidth id="nip" label={t.nip_label} />
+                  </Grid>
+                  <Grid item xs={12} className={classes.gridItem}>
+                    <CssTextField
+                      fullWidth
+                      id="adress"
+                      label={t.adress}
+                      error={adressError ? true : false}
+                      helperText={adressError}
+                      onChange={() => setAdressError(false)}
+                      required
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6} className={classes.gridItem}>
+                    <CssTextField
+                      fullWidth
+                      id="postcode"
+                      label={t.post_code}
+                      error={postCodeError ? true : false}
+                      helperText={postCodeError}
+                      onChange={() => setPostCodeError(false)}
+                      required
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6} className={classes.gridItem}>
+                    <CssTextField
+                      fullWidth
+                      id="city"
+                      label={t.city}
+                      error={cityError ? true : false}
+                      helperText={cityError}
+                      onChange={() => setCityError(false)}
                       required
                     />
                   </Grid>
@@ -287,6 +454,11 @@ export default function Contact() {
                     />
                   </Grid>
                 </Grid>
+                <Typography component={"p"} className={classes.requiredinfo}>
+                  * - {t.required_err}
+                </Typography>
+                <Box className={classes.buttonBox}>
+                <Link href="tel:+48696443291" className={classes.linkHover}><Button style={{color: '#3e5411', backgroundColor: "transparent"}}>Zadzwoń</Button></Link>
                 <Button
                   className={classes.button}
                   type="submit"
@@ -300,56 +472,9 @@ export default function Contact() {
                       className={classes.buttonProgress}
                     />
                   )}
-                </Button>
+                </Button></Box>
+                
               </form>
-            </Grid>
-          </Grid>
-          <Grid container className={classes.contactContainer}>
-            <Grid item>
-              <Typography component="h3" variant="h3">
-                {t.trees}
-              </Typography>
-              <Grid
-                container
-                direction="column"
-                className={classes.subcontainer}
-              >
-                <Grid item>
-                  <span>Tel.: </span>604 771 938
-                </Grid>
-                <Grid item>
-                  <span>Email: </span>mieczyslaw.bednarz@wp.pl
-                </Grid>
-                <Grid item>
-                  <span>{t.adress}: </span>
-                </Grid>
-                <Grid item>Suchowola 65a</Grid>
-                <Grid item>28-130 Stopnica</Grid>
-                <Grid item>woj. świętokrzyskie</Grid>
-              </Grid>
-            </Grid>
-            <Grid item>
-              <Typography component="h3" variant="h3">
-                {t.nursery_garden}
-              </Typography>
-              <Grid
-                container
-                direction="column"
-                className={classes.subcontainer}
-              >
-                <Grid item>
-                  <span>Tel.: </span>696 443 291
-                </Grid>
-                <Grid item>
-                  <span>Email: </span>bednarz.patrycja.91@gmail.com
-                </Grid>
-                <Grid item>
-                  <span>{t.adress}: </span>
-                </Grid>
-                <Grid item>Wolica 124</Grid>
-                <Grid item>28-130 Stopnica</Grid>
-                <Grid item>woj. świętokrzyskie</Grid>
-              </Grid>
             </Grid>
           </Grid>
         </Container>

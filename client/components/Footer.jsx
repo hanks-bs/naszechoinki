@@ -158,8 +158,8 @@ class Footer extends React.Component {
               justifyContent="center"
             >
               <Grid item>
-                <Link href="mailto:info@trio.pl">
-                  <a>
+                <Link href="https://www.facebook.com/Projektowanie-ogrod%C3%B3w-1510889432343866" target="_blank">
+                  <a  target="_blank">
                     <IconButton
                       aria-label="Facebook"
                       TouchRippleProps={{
@@ -178,7 +178,7 @@ class Footer extends React.Component {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="mailto:info@trio.pl">
+                <Link href="mailto:choinkibednarz@gmail.com" >
                   <a>
                     <IconButton
                       aria-label="Email"
@@ -198,8 +198,8 @@ class Footer extends React.Component {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="/">
-                  <a>
+                <Link href="https://instagram.com/projektowanie_ogrodow" >
+                  <a  target="_blank">
                     <IconButton
                       aria-label="Instagram"
                       style={{ borderRadius: "50%" }}
