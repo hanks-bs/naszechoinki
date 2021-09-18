@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 const  Grid = dynamic(() => import("@material-ui/core/Grid"), {ssr: false});
 const  TextField  = dynamic(() => import('@material-ui/core/TextField'));
 const Layout = dynamic(() => import("./../../components/DefaultLayout"));
-const Paper = dynamic(() => import("@material-ui/core/Paper"), {ssr: false});
+import Paper from "@material-ui/core/Paper";
 import  Avatar from "@material-ui/core/Avatar";
 const LockIcon = dynamic(() => import("@material-ui/icons/Lock"), {ssr: false});
 const AccountCircle = dynamic(() => import("@material-ui/icons/AccountCircle"), {ssr: false});

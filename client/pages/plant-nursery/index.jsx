@@ -1,19 +1,19 @@
 import dynamic from "next/dynamic";
-const Layout = dynamic(() => import("./../../components/DefaultLayout"));
-const HeroSection = dynamic(() => import("./../../components/HeroSection"));
+const Layout = dynamic(() => import("../../components/DefaultLayout"));
+const HeroSection = dynamic(() => import("../../components/HeroSection"));
 import Head from "next/head";
-import en from './../../lib/locales/en/en';
-import en_pricelist from './../../lib/locales/en/pricelist';
-import pl from './../../lib/locales/pl/pl';
-import pl_pricelist from './../../lib/locales/pl/pricelist';
+import en from '../../lib/locales/en/en';
+import en_plant_nursery from '../../lib/locales/en/plant_nursery';
+import pl from '../../lib/locales/pl/pl';
+import pl_plant_nursery from '../../lib/locales/pl/plant_nursery';
 import { useRouter } from "next/router";
-import PriceListMain from './../../components/PriceListMain';
+import PlantNurseryMain from '../../components/PlantNurseryMain';
 
-export default function Pricelist () {
+export default function PlantNursery () {
     const router = useRouter();
     const { locale } = router;
     const t = locale === 'pl' ? pl : en;
-    const t_spec = locale === 'pl' ? pl_pricelist : en_pricelist;
+    const t_spec = locale === 'pl' ? pl_plant_nursery : en_plant_nursery;
     return (
         <>
         <Head>
@@ -30,10 +30,10 @@ export default function Pricelist () {
         <meta name="subject" content={t_spec.subject} />
   
       </Head>
-
-      <PriceListMain/>
+     
+      <PlantNurseryMain/>
 
         </>
     )
 }
-Pricelist.Layout = Layout;
+PlantNursery.Layout = Layout;

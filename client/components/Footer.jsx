@@ -10,14 +10,14 @@ const Image = dynamic(() => import("next/image"), { ssr: true });
 const Divider = dynamic(() => import("@material-ui/core/Divider"), {
   ssr: false,
 });
-import MailOutlineSharpIcon from "@material-ui/icons/MailOutlineSharp";
-import InstagramIcon from '@material-ui/icons/Instagram';
-import IconButton from "@material-ui/core/IconButton";
+const MailOutlineSharpIcon = dynamic(() => import("@material-ui/icons/MailOutlineSharp"));
+const InstagramIcon = dynamic(() => import('@material-ui/icons/Instagram'));
+const IconButton = dynamic(() => import("@material-ui/core/IconButton"));
 import { withStyles } from "@material-ui/core/styles";
 import { withRouter } from "next/router";
 import en from "./../lib/locales/en/en";
 import pl from "./../lib/locales/pl/pl";
-import Copyright from './Copyright';
+const Copyright = dynamic(() => import('./Copyright'));
 
 const styles = (theme) => ({
   footerStyle: {
@@ -83,8 +83,8 @@ class Footer extends React.Component {
       },
       {
         id: 3,
-        to: `/${locale}/${t.link_nursery_garden}`,
-        name: t.nursery_garden
+        to: `/${locale}/${t.link_plant_nursery}`,
+        name: t.plant_nursery
         ,
       },
       {
@@ -98,6 +98,10 @@ class Footer extends React.Component {
         name: t.contact,
       },
     ];
+         const scrollToContact = async () => {
+        await router.push('/');
+        await document.querySelector('section#contact').scrollIntoView();
+      }
     return (
       <>
         <footer className={classes.footerStyle}>
@@ -139,11 +143,16 @@ class Footer extends React.Component {
                         key={`footer-${item.name}`}
                         style={{ margin: "0 10px" }}
                       >
-                        <Link href={item.to} >
+                      {item.id === 5 ? (
+                         <Typography onClick={scrollToContact} style={{cursor: 'pointer'}}>{item.name}</Typography>
+                      ) : (
+                         <Link href={item.to} >
                           <a>
                             <Typography>{item.name}</Typography>
                           </a>
                         </Link>
+                      )}
+                       
                       </Grid>
                     );
                   })}
@@ -158,8 +167,8 @@ class Footer extends React.Component {
               justifyContent="center"
             >
               <Grid item>
-                <Link href="https://www.facebook.com/Projektowanie-ogrod%C3%B3w-1510889432343866" target="_blank">
-                  <a  target="_blank">
+                <a href="https://www.facebook.com/Projektowanie-ogrod%C3%B3w-1510889432343866" target="_blank" rel="noopener noreferrer">
+                  
                     <IconButton
                       aria-label="Facebook"
                       TouchRippleProps={{
@@ -174,8 +183,8 @@ class Footer extends React.Component {
                         f
                       </Avatar>
                     </IconButton>
-                  </a>
-                </Link>
+                 
+                </a>
               </Grid>
               <Grid item>
                 <Link href="mailto:choinkibednarz@gmail.com" >
@@ -198,8 +207,8 @@ class Footer extends React.Component {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="https://instagram.com/projektowanie_ogrodow" >
-                  <a  target="_blank">
+                <a href="https://instagram.com/projektowanie_ogrodow" rel="noopener noreferrer" target="_blank">
+                  
                     <IconButton
                       aria-label="Instagram"
                       style={{ borderRadius: "50%" }}
@@ -214,8 +223,8 @@ class Footer extends React.Component {
                         <InstagramIcon />
                       </Avatar>
                     </IconButton>
-                  </a>
-                </Link>
+                  
+                </a>
               </Grid>
             </Grid>
           </Grid>

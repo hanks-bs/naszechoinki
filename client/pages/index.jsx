@@ -1,10 +1,7 @@
 import dynamic from "next/dynamic";
 import Head from "next/head";
 const Layout = dynamic(() => import("./../components/DefaultLayout"));
-const CssBaseline = dynamic(() => import("@material-ui/core/CssBaseline"), {
-  ssr: false,
-});
-const HeroSection = dynamic(() => import("./../components/HeroSection"));
+import CssBaseline from "@material-ui/core/CssBaseline";
 const WhyUs = dynamic(() => import("./../components/WhyUs"));
 const Contact = dynamic(() => import("./../components/Contact"));
 const OurTrees = dynamic(() => import("./../components/OurTrees"));
@@ -36,7 +33,6 @@ export default function Home(props) {
         <meta name="subject" content={t_spec.subject} />
 
       </Head>
-      <HeroSection />
       <WhyUs />
       <OurTrees />
       <Contact />

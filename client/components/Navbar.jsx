@@ -18,6 +18,7 @@ import pl_index from "./../lib/locales/pl/index";
 
 const styles = (theme) => ({
   iconOpen: {
+    zIndex: 1,
     "&:hover": {
       background: "transparent",
     },
@@ -82,6 +83,8 @@ const styles = (theme) => ({
     },
   },
   itemStyle: {
+    cursor: "pointer",
+
     "&:hover": {
       backgroundColor: "#303030a1",
       color: "#fff",
@@ -100,6 +103,9 @@ const styles = (theme) => ({
     },
   },
   active: {
+    "& > a": {
+      cursor: "default",
+    },
     "&:hover": {
       backgroundColor: "#303030",
       color: "#fff",
@@ -171,9 +177,9 @@ class Navbar extends React.Component {
       },
       {
         id: 3,
-        to: `/${locale}/${t.link_nursery_garden}`,
-        link: `/${t.link_nursery_garden}`,
-        name: t.nursery_garden
+        to: `/${locale}/${t.link_plant_nursery}`,
+        link: `/${t.link_plant_nursery}`,
+        name: t.plant_nursery
         ,
       },
       {
@@ -189,7 +195,14 @@ class Navbar extends React.Component {
         name: t.contact,
       },
     ];
+
+     const scrollToContact = async () => {
+        await router.push('/');
+        await document.querySelector('section#contact').scrollIntoView();
+      }
     return (
+
+     
       <>
         <nav
           className={classes.Nav}
@@ -222,6 +235,15 @@ class Navbar extends React.Component {
                 >
                   {links.map((item) => {
                     return (
+                        (item.id === 5) ?  
+
+                          (<ListItem className={classes.itemStyle} onClick={scrollToContact}>
+                          <span href={item.link} className={classes.liststyle}  >
+                            {item.name}
+                            </span>
+                                            
+                          </ListItem>
+                          ) : (
                       <ActiveLink
                         key={item.name}
                         activeClassName={classes.active}
@@ -229,12 +251,20 @@ class Navbar extends React.Component {
                         link={item.link}
                         locale={locale}
                       >
-                        <a className={classes.itemStyle}>
-                          <ListItem className={classes.liststyle}>
+                       
+                          <ListItem className={classes.itemStyle}>
+                       
+                          
+                          <a href={item.link} className={classes.liststyle}  >
                             {item.name}
+                            </a>
+                        
+                         
                           </ListItem>
-                        </a>
-                      </ActiveLink>
+                       
+                      </ActiveLink> )
+                      
+                      
                     );
                   })}
                 </List>

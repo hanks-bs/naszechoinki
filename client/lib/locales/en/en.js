@@ -18,8 +18,8 @@ export default {
   link_seedlings: "seedlings",
   contact: "Contact",
   link_contact: "contact",
-  nursery_garden: "Nursery garden",
-  link_nursery_garden: "nursery-garden",
+  plant_nursery: "Plant nursery",
+  link_plant_nursery: "plant-nursery",
   gallery: "Gallery",
   link_gallery: "gallery",
 

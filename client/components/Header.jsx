@@ -33,8 +33,8 @@ export default function Header() {
 
       <header className={classes.Header}>
         <Flags />
-        <Link href={`/${router.locale}`}>
-          <a style={{ display: " inherit" }} title={t.HomePage}>
+        
+        
             <Image
               width={445}
               height={61}
@@ -43,8 +43,8 @@ export default function Header() {
               objectFit="contain"
               quality="75%"
             />
-          </a>
-        </Link>
+        
+        
       </header>
     </>
   );

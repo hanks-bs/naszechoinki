@@ -27,6 +27,10 @@ module.exports = {
         source: '/galeria',
         destination: '/gallery',
       },
+      {
+        source: '/logowanie',
+        destination: '/signin',
+      },
     ]
   },
 };

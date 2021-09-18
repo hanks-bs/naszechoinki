@@ -18,8 +18,8 @@ export default {
   link_seedlings: "sadzonki",
   contact: "Kontakt",
   link_contact: "kontakt",
-  nursery_garden: "Szkółka",
-  link_nursery_garden: "szkolka",
+  plant_nursery: "Szkółka",
+  link_plant_nursery: "szkolka",
   gallery: "Galeria",
   link_gallery: "galeria",
 

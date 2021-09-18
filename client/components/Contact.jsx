@@ -13,7 +13,7 @@ const Typography = dynamic(() => import("@material-ui/core/Typography"), {
 import TextField from "@material-ui/core/TextField";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import * as Validator from "validatorjs";
-
+import ContactSupportIcon from '@material-ui/icons/ContactSupport';
 const CssTextField = withStyles({
   root: {
     "& label.Mui-focused": {
@@ -77,6 +77,8 @@ const useStyles = makeStyles((theme) => ({
     padding: 30,
   },
   heading: {
+    display: "flex",
+    justifyContent: "center",
     fontSize: "2.5rem",
     color: "#3e5411",
     textAlign: "center",
@@ -101,6 +103,14 @@ const useStyles = makeStyles((theme) => ({
     left: "50%",
     marginTop: -12,
     marginLeft: -12,
+  },
+  Contacticon: {
+    [theme.breakpoints.down("xs")]: {
+      display: "none",
+    },
+    fontSize: "4rem",
+    marginTop: -10,
+    marginRight: 15
   },
 }));
 
@@ -231,7 +241,7 @@ export default function Contact() {
                 variant="h2"
                 className={classes.heading}
               >
-                {t.contact}
+                  <ContactSupportIcon className={classes.Contacticon} /> {t.contact}
               </Typography>
               <form
                 autoComplete="off"
@@ -330,7 +340,7 @@ export default function Contact() {
             </Grid>
             <Grid item>
               <Typography component="h3" variant="h3">
-                {t.nursery_garden}
+                {t.plant_nursery}
               </Typography>
               <Grid
                 container

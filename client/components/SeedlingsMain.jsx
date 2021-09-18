@@ -114,7 +114,7 @@ export default function SeedlingsMain() {
         <Container maxWidth={`lg`}>
           <Box className={classes.orderBox}>
          
-            <Button> {t.submit_order}</Button>
+            <Button onClick={ async () => {document.querySelector('section#contact').scrollIntoView()}}> {t.submit_order}</Button>
            
           </Box>
 
@@ -153,7 +153,7 @@ export default function SeedlingsMain() {
                   </Grid>
                   <Grid item className={classes.gridDescription}>
                     <Typography
-                      component="h3"
+                      component="h2"
                       variant="h5"
                       className={classes.gridHeading}
                     >
@@ -211,7 +211,7 @@ export default function SeedlingsMain() {
                   </Grid>
                   <Grid item className={classes.gridDescription}>
                     <Typography
-                      component="h3"
+                      component="h2"
                       variant="h5"
                       className={classes.gridHeading}
                     >
@@ -269,7 +269,7 @@ export default function SeedlingsMain() {
                   </Grid>
                   <Grid item className={classes.gridDescription}>
                     <Typography
-                      component="h3"
+                      component="h2"
                       variant="h5"
                       className={classes.gridHeading}
                     >

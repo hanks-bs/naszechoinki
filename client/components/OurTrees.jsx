@@ -3,14 +3,14 @@ import en from "./../lib/locales/en/en";
 import en_index from "./../lib/locales/en/index";
 import pl from "./../lib/locales/pl/pl";
 import pl_index from "./../lib/locales/pl/index";
-import { useRouter } from "next/router";
+import { useRouter } from "next/router" ;
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
-import { Typography } from "@material-ui/core";
-import Link from "next/link";
+import Typography from "@material-ui/core/Typography";
+const Link = dynamic(() => import("next/link"));
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,11 +48,15 @@ const useStyles = makeStyles((theme) => ({
       transform: "translateX(-50%)",
   },
   heading: {
+    [theme.breakpoints.up(600)]: {
+     whiteSpace: "nowrap",
+    },
     textAlign: "center",
     backgroundColor:  theme.palette.defaultColor,
     color: "#fff",
     [theme.breakpoints.down("sm")]: {
       padding: "12px 35px",
+      width: "80%"
     },
     padding: "12px 95px",
     borderRadius: 20,
@@ -71,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#ffffffd4",
     width: "100%",
 
-    "& > h3": {
+    "& > h2": {
       [theme.breakpoints.down(610)]: {
         fontSize: "1.6rem",
         padding: "20px 0",
@@ -102,21 +106,21 @@ export default function OurTrees() {
        
           <Grid item className={classes.item} style={{backgroundImage: "url('./images/home/jod-kau.jpg')"}}>
           <Box className={classes.description}>
-          <Typography component="h3" variant="h3">{t_spec.cau_fir}</Typography>
+          <Typography component="h2" variant="h3">{t_spec.cau_fir}</Typography>
           </Box>
           </Grid>
          
 
           <Grid item className={classes.item} style={{backgroundImage: "url('./images/home/swierk.jpg')"}}>
           <Box className={classes.description}>
-          <Typography component="h3" variant="h3">{t_spec.blue_spruce}</Typography>
+          <Typography component="h2" variant="h3">{t_spec.blue_spruce}</Typography>
           </Box>
           </Grid>
           
 
           <Grid item className={classes.item} style={{backgroundImage: "url('./images/home/swierk-pos.jpg')"}}>
           <Box className={classes.description}>
-          <Typography component="h3" variant="h3">{t_spec.Nor_spruce}</Typography>
+          <Typography component="h2" variant="h3">{t_spec.Nor_spruce}</Typography>
           </Box>
           </Grid>
           

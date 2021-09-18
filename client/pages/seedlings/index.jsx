@@ -33,7 +33,7 @@ export default function Seedlings(props) {
       <meta name="subject" content={t_spec.subject} />
 
     </Head>
-      <HeroSection/>
+     
       <SeedlingsMain userdata={props.userdata}/>
       <SeedlingsContact />
      

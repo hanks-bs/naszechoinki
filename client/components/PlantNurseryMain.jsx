@@ -7,14 +7,14 @@ import Typography from "@material-ui/core/Typography";
 const Container = dynamic(() => import("@material-ui/core/Container"));
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
-const Image = dynamic(() => import("next/image"), { ssr: true });
 import Grid from "@material-ui/core/Grid";
-import Button from "@material-ui/core/Button";
-import en from "./../lib/locales/en/en";
-import en_pricelist from "./../lib/locales/en/pricelist";
-import pl from "./../lib/locales/pl/pl";
-import pl_pricelist from "./../lib/locales/pl/pricelist";
+import en from "../lib/locales/en/en";
+import en_plant_nursery from "../lib/locales/en/plant_nursery";
+import pl from "../lib/locales/pl/pl";
+import pl_plant_nursery from "../lib/locales/pl/plant_nursery";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import FilesDownload from "./FilesDownload";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -69,12 +69,22 @@ const useStyles = makeStyles((theme) => ({
     padding: "75px 45px",
   },
   image: {
-    [theme.breakpoints.down(400)]: {
+    [theme.breakpoints.down(500)]: {
       width: "100%",
+     },
+    [theme.breakpoints.up(840)]: {
+      width: "40%",
+     },
+     [theme.breakpoints.up(950)]: {
+      width: "35%",
+     },
+    [theme.breakpoints.down(610)]: {
+      fontSize: "0.8rem",
     },
+
     boxShadow: "0px 0px 15px 1px #00000026",
-    width: 330,
-    height: 450,
+    width: 400,
+    height: 350,
     borderRadius: 55,
     textAlign: "center",
     backgroundSize: "cover",
@@ -102,13 +112,9 @@ const useStyles = makeStyles((theme) => ({
     color: "#3e5411",
   },
   gridDescription: {
-
     [theme.breakpoints.up(840)]: {
-        width: 400,
-      },
-      [theme.breakpoints.up(1128)]: {
-        width: 600,
-      },
+     width: "58.33333%",
+    },
     [theme.breakpoints.down(658)]: {
         padding: "20px 0",
       },
@@ -141,29 +147,22 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "space-around",
   },
+
 }));
 
-export default function PriceListMain() {
+export default function PlantNurseryMain() {
   const classes = useStyles();
   const router = useRouter();
   const { locale } = router;
   const t = locale === "pl" ? pl : en;
-  const t_spec = locale === "pl" ? pl_pricelist : en_pricelist;
-
-  const scrollToContactSeedlings = async () => {
-    await router.push('sadzonki');
-    await document.querySelector('section#contact').scrollIntoView();
-    }
+  const t_spec = locale === "pl" ? pl_plant_nursery : en_plant_nursery;
   return (
     <>
       <section className={classes.root} id={`about-us`}>
         <Container maxWidth={`lg`}>
-          <Box className={classes.orderBox}>
-            <Button onClick={scrollToContactSeedlings}> {t.submit_order}</Button>
-          </Box>
 
           <Typography variant="h1" component="h1">
-            {t_spec.tree_pricelist}
+            {t.plant_nursery}
           </Typography>
           <Typography
             component="p"
@@ -191,13 +190,7 @@ export default function PriceListMain() {
                       component="h2"
                       variant="h5"
                     >
-                      Jodła kaukaska (cięta)
-                    </Typography>
-                    <Typography component="p" className={classes.pStyle}>
-                      <span style={{ fontWeight: 700, color: "#000" }}>
-                        {t_spec.available_heights}:{" "}
-                      </span>
-                      180 - 250 cm
+                      Oferta handlowa
                     </Typography>
                     <Typography component="p" className={classes.pStyle}>
                       <span style={{ fontWeight: 700, color: "#000" }}>
@@ -209,66 +202,80 @@ export default function PriceListMain() {
                       printer took a galley of type and scrambled it to make a
                       type specimen book.
                     </Typography>
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              <Grid item className={classes.gridItem}>
+                <Grid container direction="row" className={classes.gridRow}>
+                  <Grid
+                    item
+                    className={classes.image}
+                    style={{
+                      backgroundImage:
+                        "url('https://naszechoinki.pl/files/dynamicContent/sites/fb1tn1/images/pl/webpage_27/kqlwg2o5/element_399/20180914_165238.webp')",
+                    }}
+                  />
+
+                  <Grid item className={classes.gridDescription}>
+                    <Typography
+                      className={classes.gridHeading}
+                      component="h2"
+                      variant="h5"
+                    >
+                      Oferta handlowa
+                    </Typography>
                     <Typography component="p" className={classes.pStyle}>
                       <span style={{ fontWeight: 700, color: "#000" }}>
-                        {t_spec.add_info}:{" "}
+                        {t_spec.description}:{" "}
                       </span>
                       Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry.
+                      typesetting industry. Lorem Ipsum has been the industry's
+                      standard dummy text ever since the 1500s, when an unknown
+                      printer took a galley of type and scrambled it to make a
+                      type specimen book.
                     </Typography>
                   </Grid>
                 </Grid>
               </Grid>
-              <Grid item className={classes.gridItem}>
-              <Grid container direction="row" className={classes.gridRow}>
-                <Grid
-                  item
-                  className={classes.image}
-                  style={{
-                    backgroundImage:
-                      "url('https://naszechoinki.pl/files/dynamicContent/sites/fb1tn1/images/pl/webpage_27/kqlwg2o5/element_399/20180914_165238.webp')",
-                  }}
-                />
 
-                <Grid item  className={classes.gridDescription}>
-                  <Typography
-                    className={classes.gridHeading}
-                    component="h2"
-                    variant="h5"
-                  >
-                    Jodła kaukaska (cięta)
-                  </Typography>
-                  <Typography component="p" className={classes.pStyle}>
-                    <span style={{ fontWeight: 700, color: "#000" }}>
-                      {t_spec.available_heights}:{" "}
-                    </span>
-                    180 - 250 cm
-                  </Typography>
-                  <Typography component="p" className={classes.pStyle}>
-                    <span style={{ fontWeight: 700, color: "#000" }}>
-                      {t_spec.description}:{" "}
-                    </span>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
-                  </Typography>
-                  <Typography component="p" className={classes.pStyle}>
-                    <span style={{ fontWeight: 700, color: "#000" }}>
-                      {t_spec.add_info}:{" "}
-                    </span>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry.
-                  </Typography>
+              <Grid item className={classes.gridItem}>
+                <Grid container direction="row" className={classes.gridRow}>
+                  <Grid
+                    item
+                    className={classes.image}
+                    style={{
+                      backgroundImage:
+                        "url('https://naszechoinki.pl/files/dynamicContent/sites/fb1tn1/images/pl/webpage_27/kqlwg2o5/element_399/20180914_165238.webp')",
+                    }}
+                  />
+
+                  <Grid item className={classes.gridDescription}>
+                    <Typography
+                      className={classes.gridHeading}
+                      component="h2"
+                      variant="h5"
+                    >
+                      Oferta handlowa
+                    </Typography>
+                    <Typography component="p" className={classes.pStyle}>
+                      <span style={{ fontWeight: 700, color: "#000" }}>
+                        {t_spec.description}:{" "}
+                      </span>
+                      Lorem Ipsum is simply dummy text of the printing and
+                      typesetting industry. Lorem Ipsum has been the industry's
+                      standard dummy text ever since the 1500s, when an unknown
+                      printer took a galley of type and scrambled it to make a
+                      type specimen book.
+                    </Typography>
+                  </Grid>
                 </Grid>
               </Grid>
-            </Grid>
+              
               </Grid>
           </Box>
-          <Box className={classes.orderBox} style={{marginBottom: 45}}>
-            <Button onClick={scrollToContactSeedlings}> {t.submit_order}</Button>
-          </Box>
+          <FilesDownload />
+          
         </Container>
       </section>
     </>

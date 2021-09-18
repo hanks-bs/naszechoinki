@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 const Footer = dynamic(() => import("./Footer"));
 const Header = dynamic(() => import("./Header"));
 import Infobar from "./Infobar";
-import React from 'react'
+import React from 'react';
+import HeroSection from './HeroSection';
 export default function Layout({ children, userdata }) {
 
 
@@ -14,6 +15,7 @@ export default function Layout({ children, userdata }) {
       {/*<Navbar userdata={userdata} />*/}
       <Header />
       <Navbar />
+      <HeroSection />
       <motion.div
         initial={{ opacity: 0 }}
         exit={{ opacity: 0 }}

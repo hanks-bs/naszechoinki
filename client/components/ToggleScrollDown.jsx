@@ -54,5 +54,5 @@ export default function ToggleScrollDown() {
   const { locale } = router;
   const t = locale === "pl" ? pl : en;
 
-  return <button onClick={() => (document.querySelectorAll('section')[1].scrollIntoView())} className={classes.ScrollDown} aria-label={t.scrolldown}></button>;
+  return <button onClick={() => {document.querySelectorAll('section')[1].scrollIntoView()}} className={classes.ScrollDown} aria-label={t.scrolldown}></button>;
 }
