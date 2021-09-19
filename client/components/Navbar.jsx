@@ -237,7 +237,7 @@ class Navbar extends React.Component {
                     return (
                         (item.id === 5) ?  
 
-                          (<ListItem className={classes.itemStyle} onClick={scrollToContact}>
+                          (<ListItem className={classes.itemStyle} onClick={scrollToContact} key={item.name}>
                           <span href={item.link} className={classes.liststyle}  >
                             {item.name}
                             </span>
@@ -252,7 +252,7 @@ class Navbar extends React.Component {
                         locale={locale}
                       >
                        
-                          <ListItem className={classes.itemStyle}>
+                          <ListItem className={classes.itemStyle} key={item.name}>
                        
                           
                           <a href={item.link} className={classes.liststyle}  >

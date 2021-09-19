@@ -11,6 +11,14 @@ export default {
   post_code: "Kod pocztowy",
   city: "Miejscowość",
 
+  previous: "Poprzednie",
+  next: "Następne",
+  exit_fullscreen: "Wyłącz pełny ekran",
+  enter_fullscreen: "Włącz pełny ekran",
+  of: 'z',
+  show_photo: "Pokaż zdjęcie",
+  close: "Zamknij",
+
   //Navbar
   price_list: "Cennik",
   link_price_list: "cennik",

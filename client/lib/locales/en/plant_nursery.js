@@ -10,6 +10,9 @@ export default {
     description: "Opis",
     add_info: "Dodatkowe informacje",
     tree_pricelist: "Cennik choinek",
+    files_download: "Files to download",
+    download: "Download",
+
   
   };
   

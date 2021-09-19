@@ -11,6 +11,14 @@ export default {
   post_code: "Postcode",
   city: "City",
 
+  previous: "Previous",
+  next: "Next",
+  exit_fullscreen: "Exit fullscreen",
+  enter_fullscreen: "Enter fullscreen",
+  of: 'of',
+  show_photo: "Show photo",
+  close: "Close",
+
   //Navbar
   price_list: "Price list",
   link_price_list: "pricelist",

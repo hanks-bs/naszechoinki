@@ -14,6 +14,10 @@ const useStyles = makeStyles((theme) => ({
     singleItem: {
         fontWeight: "700",
         textAlign: "center",
+        [theme.breakpoints.down(548)]: {
+          marginRight: 15,
+        },
+        
         marginRight: "85px",
         "& > div > div": {
             margin: "5px 0",
@@ -21,6 +25,13 @@ const useStyles = makeStyles((theme) => ({
       },
       imagefile: {
           position: "relative",
+      },
+      filesContainer: {
+        margin: "40px 0 60px 0",
+       
+        [theme.breakpoints.down(548)]: {
+          justifyContent: "space-around"
+        },
       },
       NameFile: {},
       download: {
@@ -41,9 +52,9 @@ export default function FilesDownload() {
   return (
     <>
       <Typography component="h2" variant="h1">
-        Pliki do pobrania
+       {t_spec.files_download}
       </Typography>
-      <Grid container style={{ margin: "40px 0 60px 0" }}>
+      <Grid container className={classes.filesContainer}>
 
         <Grid item className={classes.singleItem}>
           <Grid container direction="column" >
@@ -54,7 +65,7 @@ export default function FilesDownload() {
               Plik 1
             </Grid>
             <Grid item className={classes.download}>
-            <a href="/images/excel-icon.png" download>POBIERZ</a>
+            <a href="/images/excel-icon.png" download>{t_spec.download.toUpperCase()}</a>
             </Grid>
           </Grid>
         </Grid>
@@ -68,7 +79,7 @@ export default function FilesDownload() {
             Plik 1
           </Grid>
           <Grid item className={classes.download}>
-          <a href="/images/excel-icon.png" download>POBIERZ</a>
+          <a href="/images/excel-icon.png" download>{t_spec.download.toUpperCase()}</a>
           </Grid>
         </Grid>
       </Grid>
@@ -83,7 +94,7 @@ export default function FilesDownload() {
           Plik 1
         </Grid>
         <Grid item className={classes.download}>
-        <a href="/images/excel-icon.png" download>POBIERZ</a>
+        <a href="/images/excel-icon.png" download>{t_spec.download.toUpperCase()}</a>
         </Grid>
       </Grid>
     </Grid>
