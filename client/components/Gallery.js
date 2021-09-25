@@ -181,6 +181,7 @@ var Photo = function Photo(_ref) {
       {
         onClick: onClick ? handleClick : null,
       }
+      
     )
   );
 };
@@ -195,6 +196,7 @@ var photoPropType = PropTypes.shape({
   srcSet: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   sizes: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 });
+
 Photo.propTypes = {
   index: PropTypes.number.isRequired,
   onClick: PropTypes.func,

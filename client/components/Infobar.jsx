@@ -6,7 +6,6 @@ import PhoneIcon from "@material-ui/icons/Phone";
 import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import withAuth from './../lib/auth';
 const useStyles = makeStyles((theme) => ({
     infobar: {
         position: 'relative',

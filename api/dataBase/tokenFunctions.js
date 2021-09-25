@@ -46,33 +46,11 @@ export const checkToken  =  async (req, res, next) => {
 
 export const authenticateToken =  async (req, res, next) => {
    
-    const API_key = null;// = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwZXJtaXNzaW9uc19pZCI6MSwibG9ja2VkIjpmYWxzZSwiaWF0IjoxNjI0MjA0NzM3LCJleHAiOjE2MjQ4MDk1Mzd9.c-Q6St0BCGVFfrQ4MZNDgzQHLPnQj1tXNAQTn9kBrPE"
+   
     const authHeader = await req.headers['authorization'];
     const CookieRefreshToken = req.cookies.jid;
     const token = authHeader && authHeader.split(' ')[1];
 
-    if(API_key != null)
-    {
-        const valApiKey = jwt.verify(API_key, process.env.API_TOKEN_SECRET, (err, data) => {
-            if(err) return {errors: err.message};
-            return data
-        })
-        if(valApiKey.errors || valApiKey.locked) return res.status(403).json(valApiKey.errors);
-
-        const checkApiKey = await db('api_keys').select('*').where({key: API_key})
-        .then(response =>
-            {
-                if(!response[0]) return {errors: "Invalid token."};
-                if(response[0].locked) return {errors: "This token is banned."}
-                return true;
-            })
-
-            if(checkApiKey.errors) return res.status(403).json(checkApiKey.errors);
-            return next();
-    }
-
-
-   
     if(CookieRefreshToken && !token)
     {
        
@@ -127,19 +105,16 @@ export const authenticateToken =  async (req, res, next) => {
 
             })
             jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-                if(err) {res.sendStatus(403);  error = true;}
+                if(err) { res.sendStatus(403);  error = true;}
 
             })
             if(!error) next();
         } catch (error) {
             console.log(error);
-            return error;
+            return res.status(404).json({error: error});
         }
-       
+      
     }
-  
-    
-
 }
 
 export const generateAccessToken = (userData) => {

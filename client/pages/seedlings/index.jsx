@@ -10,11 +10,17 @@ import pl from './../../lib/locales/pl/pl';
 import pl_seedlings from './../../lib/locales/pl/seedlings';
 import { useRouter } from "next/router";
 import SeedlingsContact from './../../components/SeedlingsContact';
+import axiosInstance from './../../lib/axios';
+import { useEffect} from "react";
+
 export default function Seedlings(props) {
   const router = useRouter();
   const { locale } = router;
   const t = locale === 'pl' ? pl : en;
   const t_spec = locale === 'pl' ? pl_seedlings : en_seedlings;
+
+  const items = props.items;
+  useEffect(() => { console.log(props)})
   return (
     <>
       <CssBaseline />
@@ -34,11 +40,16 @@ export default function Seedlings(props) {
 
     </Head>
      
-      <SeedlingsMain userdata={props.userdata}/>
+      <SeedlingsMain userdata={props.userdata} items={items}/>
       <SeedlingsContact />
      
     </>
-  );
+  )
+}
+
+Seedlings.getInitialProps = async (ctx) => {
+  const items = await axiosInstance.get('/api/seedlings_items');
+  return {items: items.data};
 }
 
 Seedlings.Layout = Layout;

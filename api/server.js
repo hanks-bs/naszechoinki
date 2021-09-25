@@ -6,6 +6,7 @@ import userRoutes from './routes/users.js';
 import randomString from 'randomstring';
 import cookieParser from 'cookie-parser';
 import dotenv from "dotenv";
+import bodyParser from "body-parser";
 
 dotenv.config();
 
@@ -14,8 +15,15 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 //middleware//
+
+// Parse JSON bodies (as sent by API clients)
+app.use(express.json());
+
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }))
+
+
+
 app.use(cookieParser())
 // adding Helmet to enhance your API's security
 app.use(helmet());
@@ -31,7 +39,7 @@ app.use(cors(corsOptions));
 // adding morgan to log HTTP requests
 app.use(morgan('combined'));
 
-app.use(json());
+
 
 //ROUTES//
 //  Connect all our routes to our application

@@ -6,7 +6,6 @@ import Typography from "@material-ui/core/Typography";
 const Container = dynamic(() => import("@material-ui/core/Container"));
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
-const Image = dynamic(() => import("next/image"), { ssr: true });
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import en from "./../lib/locales/en/en";
@@ -15,6 +14,36 @@ import pl from "./../lib/locales/pl/pl";
 import pl_seedlings from "./../lib/locales/pl/seedlings";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+import SeedlingsModal from "./SeedlingsModal";
+import { useState, useEffect } from "react";
+import axiosInstance from "./../lib/axios";
+
+const elements = [
+  {
+    id: 1,
+    title_pl: "Jodła kaukaska",
+    title_en: "Jodła kaukaska",
+    age: 4,
+    others_pl: "Lorem ipsum PL",
+    others_en: "Lorem ipsum EN",
+    price_pl: 250,
+    price_en: 25,
+    image_link: "123",
+  },
+  {
+    id: 2,
+    title_pl: "Jodła kaukaska 2",
+    title_en: "Jodła kaukaska 2",
+    age: 4,
+    others_pl: "Lorem ipsum PL",
+    others_en: "Lorem ipsum EN",
+    price_pl: 250,
+    price_en: 25,
+    image_link: "123",
+  },
+];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,11 +76,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   gridItem: {
+    justifySelf: "center",
+    position: "relative",
     [theme.breakpoints.down("sm")]: {
       padding: "0 15px",
     },
     padding: "0 45px",
-    width: 320,
+    width: 335,
   },
   image: {
     textAlign: "center",
@@ -73,6 +104,8 @@ const useStyles = makeStyles((theme) => ({
     margin: "0 auto",
   },
   gridHeading: {
+    marginLeft: "auto",
+    marginRight: "auto",
     fontWeight: "700",
     textAlign: "center",
     marginBottom: 15,
@@ -80,9 +113,17 @@ const useStyles = makeStyles((theme) => ({
   },
   gridDescription: {
     padding: 20,
+    position: "relative",
+    alignItems: "baseline",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    height: 250,
   },
   gridItemButton: {
     marginTop: 25,
+    marginLeft: "auto",
+    marginRight: "auto",
     "&:hover": {
       color: "#fff",
       backgroundColor: "#3e5411",
@@ -95,27 +136,101 @@ const useStyles = makeStyles((theme) => ({
     "& > button": {
       fontSize: "1.3rem",
       padding: "8px 70px",
-      borderRadius: 30
+      borderRadius: 30,
     },
+  },
+  edit: {
+    position: "absolute",
+    [theme.breakpoints.down(670)]: {
+      left: 15,
+    },
+    left: -27,
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "#688039",
+      color: "#fff",
+    },
+  },
+  delete: {
+    position: "absolute",
+    [theme.breakpoints.down(670)]: {
+      right: 15,
+    },
+    right: -27,
+    backgroundColor: "#ff3636",
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "#ff7b7b",
+      color: "#fff",
+    },
+  },
+  controllers: {
+    position: "relative",
+    [theme.breakpoints.down(670)]: {
+      top: 15,
+    },
+    top: -20,
+    "& > button": {
+      minWidth: "auto",
+      padding: 5,
+    },
+  },
+  columns: {
+    marginLeft: "auto",
+    marginRight: "auto",
   },
 }));
 
-export default function SeedlingsMain() {
+function SeedlingsMain(props) {
   const classes = useStyles();
   const router = useRouter();
   const { locale } = router;
   const t = locale === "pl" ? pl : en;
   const t_spec = locale === "pl" ? pl_seedlings : en_seedlings;
 
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState({});
+  const handleDelete = async (e, id) => {
+
+
+    
+    const elem = e.target;
+    setInterval(function () {
+      if (!elem.closest(".MuiGrid-item").style.opacity) {
+        elem.closest(".MuiGrid-item").remove();
+      }
+      if (elem.closest(".MuiGrid-item").style.opacity > 0) {
+        elem.closest(".MuiGrid-item").style.opacity -= 0.1;
+      }
+    }, 30);
+    setTimeout(() => {
+      elem.closest(".MuiGrid-item").remove();
+    }, 310);
+  };
+  const handleEdit = async (e, id) => {
+    const response = await axiosInstance.get(`/api/seedlings_items/${id}`);
+    setData(response.data[0]);
+    setOpen(true);
+  };
+  const userdata = props.userdata;
   return (
     <>
       <CssBaseline />
+
       <section className={classes.root} id={`about-us`}>
         <Container maxWidth={`lg`}>
+          {userdata ? (
+            <SeedlingsModal data={data} open={open} setOpen={setOpen} />
+          ) : null}
           <Box className={classes.orderBox}>
-         
-            <Button onClick={ async () => {document.querySelector('section#contact').scrollIntoView()}}> {t.submit_order}</Button>
-           
+            <Button
+              onClick={async () => {
+                document.querySelector("section#contact").scrollIntoView();
+              }}
+            >
+              {" "}
+              {t.submit_order}
+            </Button>
           </Box>
 
           <Typography variant="h1" component="h1">
@@ -131,183 +246,102 @@ export default function SeedlingsMain() {
           <Box component="div" className={classes.BoxStyle}>
             <Grid
               container
+              className={classes.columns}
               direction="row"
               justifyContent="space-around"
               spacing={6}
             >
-              <Grid item className={classes.gridItem}>
-                <Grid
-                  container
-                  direction="column"
-                  className={classes.heroGridContainer}
-                  style={{ overflow: "hidden", textAlign: "center" }}
-                >
-                  <Grid item style={{ height: "100%", width: "100%" }}>
-                    <Box
-                      className={classes.image}
-                      style={{
-                        backgroundImage:
-                          "url(https://naszechoinki.pl/lib/fb1tn1/9c0975902916554798f3fcb6ba8d0f25.jpg)",
-                      }}
-                    />
-                  </Grid>
-                  <Grid item className={classes.gridDescription}>
-                    <Typography
-                      component="h2"
-                      variant="h5"
-                      className={classes.gridHeading}
+              {props.items.map((elem) => {
+                return (
+                  <>
+                    <Grid
+                      item
+                      className={classes.gridItem}
+                      style={{ opacity: 1 }}
                     >
-                      Jodła kaukaska
-                    </Typography>
-                    <Typography
-                      component="p"
-                      className={classes.pStyle}
-                      style={{ textAlign: "left" }}
-                    >
-                      <span style={{ fontWeight: 700, color: "#000" }}>
-                        {t_spec.age}:
-                      </span>{" "}
-                      4 lata
-                    </Typography>
-                    <Typography
-                      component="p"
-                      className={classes.pStyle}
-                      style={{ textAlign: "left", marginTop: 5 }}
-                    >
-                      <span style={{ fontWeight: 700, color: "#000" }}>
-                        {t_spec.other}:{" "}
-                      </span>{" "}
-                      Lorem ipsum
-                    </Typography>
+                      {userdata ? (
+                        <Box className={classes.controllers}>
+                          <Button
+                            className={classes.edit}
+                            alt="Edytuj"
+                            onClick={(e) => {
+                              handleEdit(e, elem.id);
+                            }}
+                          >
+                            <EditIcon />
+                          </Button>
+                          <Button
+                            className={classes.delete}
+                            onClick={(e) => handleDelete(e, elem.id)}
+                          >
+                            <DeleteIcon />
+                          </Button>
+                        </Box>
+                      ) : null}
 
-                    <Button
-                      className={classes.gridItemButton}
-                      disableTouchRipple
-                    >
-                      {t_spec.price}{" "}
-                      {locale === "pl"
-                        ? `25 ${t_spec.price_sign}`
-                        : `${t_spec.price_sign}5`}
-                    </Button>
-                  </Grid>
-                </Grid>
-              </Grid>
-
-              <Grid item className={classes.gridItem}>
-                <Grid
-                  container
-                  direction="column"
-                  className={classes.heroGridContainer}
-                  style={{ overflow: "hidden", textAlign: "center" }}
-                >
-                  <Grid item style={{ height: "100%", width: "100%" }}>
-                    <Box
-                      className={classes.image}
-                      style={{
-                        backgroundImage:
-                          "url(https://naszechoinki.pl/lib/fb1tn1/9c0975902916554798f3fcb6ba8d0f25.jpg)",
-                      }}
-                    />
-                  </Grid>
-                  <Grid item className={classes.gridDescription}>
-                    <Typography
-                      component="h2"
-                      variant="h5"
-                      className={classes.gridHeading}
-                    >
-                      Jodła kaukaska
-                    </Typography>
-                    <Typography
-                      component="p"
-                      className={classes.pStyle}
-                      style={{ textAlign: "left" }}
-                    >
-                      <span style={{ fontWeight: 700, color: "#000" }}>
-                        {t_spec.age}:{" "}
-                      </span>{" "}
-                      4 lata
-                    </Typography>
-                    <Typography
-                      component="p"
-                      className={classes.pStyle}
-                      style={{ textAlign: "left", marginTop: 5 }}
-                    >
-                      <span style={{ fontWeight: 700, color: "#000" }}>
-                        {t_spec.other}:{" "}
-                      </span>{" "}
-                      Lorem ipsum
-                    </Typography>
-
-                    <Button
-                      className={classes.gridItemButton}
-                      disableTouchRipple
-                    >
-                      {t_spec.price}{" "}
-                      {locale === "pl"
-                        ? `25 ${t_spec.price_sign}`
-                        : `${t_spec.price_sign}5`}
-                    </Button>
-                  </Grid>
-                </Grid>
-              </Grid>
-
-              <Grid item className={classes.gridItem}>
-                <Grid
-                  container
-                  direction="column"
-                  className={classes.heroGridContainer}
-                  style={{ overflow: "hidden", textAlign: "center" }}
-                >
-                  <Grid item style={{ height: "100%", width: "100%" }}>
-                    <Box
-                      className={classes.image}
-                      style={{
-                        backgroundImage:
-                          "url(https://naszechoinki.pl/lib/fb1tn1/9c0975902916554798f3fcb6ba8d0f25.jpg)",
-                      }}
-                    />
-                  </Grid>
-                  <Grid item className={classes.gridDescription}>
-                    <Typography
-                      component="h2"
-                      variant="h5"
-                      className={classes.gridHeading}
-                    >
-                      Jodła kaukaska
-                    </Typography>
-                    <Typography
-                      component="p"
-                      className={classes.pStyle}
-                      style={{ textAlign: "left" }}
-                    >
-                      <span style={{ fontWeight: 700, color: "#000" }}>
-                        {t_spec.age}:{" "}
-                      </span>{" "}
-                      4 lata
-                    </Typography>
-                    <Typography
-                      component="p"
-                      className={classes.pStyle}
-                      style={{ textAlign: "left", marginTop: 5 }}
-                    >
-                      <span style={{ fontWeight: 700, color: "#000" }}>
-                        {t_spec.other}:{" "}
-                      </span>{" "}
-                      Lorem ipsum
-                    </Typography>
-
-                    <Button
-                      className={classes.gridItemButton}
-                      disableTouchRipple
-                    >
-                      {t_spec.price}{" "}
-                      {locale === "pl"
-                        ? `25 ${t_spec.price_sign}`
-                        : `${t_spec.price_sign}5`}
-                    </Button>
-                  </Grid>
-                </Grid>
-              </Grid>
+                      <Grid
+                        container
+                        direction="column"
+                        className={classes.heroGridContainer}
+                        style={{ overflow: "hidden", textAlign: "center" }}
+                      >
+                        <Grid item style={{ height: "100%", width: "100%" }}>
+                          <Box
+                            className={classes.image}
+                            style={{
+                              backgroundImage:
+                                "url(https://naszechoinki.pl/lib/fb1tn1/9c0975902916554798f3fcb6ba8d0f25.jpg)",
+                            }}
+                          />
+                        </Grid>
+                        <Grid item className={classes.gridDescription}>
+                          <Typography
+                            component="h2"
+                            variant="h5"
+                            className={classes.gridHeading}
+                          >
+                            {locale === "pl" ? elem.title_pl : elem.title_en}
+                          </Typography>
+                          <div>
+                            <Typography
+                              component="p"
+                              className={classes.pStyle}
+                              style={{ textAlign: "left" }}
+                            >
+                              <span style={{ fontWeight: 700, color: "#000" }}>
+                                {t_spec.age}:
+                              </span>{" "}
+                              {elem.age} {locale === "pl" ? "lat/a" : "year/s old"}
+                            </Typography>
+                            <Typography
+                              component="p"
+                              className={classes.pStyle}
+                              style={{ textAlign: "left", marginTop: 5 }}
+                            >
+                              <span style={{ fontWeight: 700, color: "#000" }}>
+                                {t_spec.other}:{" "}
+                              </span>{" "}
+                              {locale === "pl"
+                                ? elem.others_pl
+                                : elem.others_en}
+                            </Typography>
+                          </div>
+                          <Button
+                            className={classes.gridItemButton}
+                            disableTouchRipple
+                          >
+                            {t_spec.price}{" "}
+                            {locale === "pl"
+                              ? `${elem.price_pl} ${t_spec.price_sign}`
+                              : `${t_spec.price_sign}${elem.price_en}`}
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </>
+                );
+              })}
+              
             </Grid>
           </Box>
         </Container>
@@ -315,3 +349,5 @@ export default function SeedlingsMain() {
     </>
   );
 }
+
+export default SeedlingsMain;
