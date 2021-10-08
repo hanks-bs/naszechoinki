@@ -24,6 +24,7 @@
     "knex": "^0.95.10",
     "morgan": "^1.10.0",
     "multer": "^1.4.3",
+    "nodemailer": "^6.6.5",
     "nodemon": "^2.0.12",
     "pg": "^8.6.0",
     "randomstring": "^1.2.1",
@@ -39,6 +40,7 @@
   "homepage": "https://github.com/hanks-bs/trio-nextapp#readme",
   "description": "",
   "devDependencies": {
+    "fs": "^0.0.1-security",
     "validatorjs": "^3.22.1"
   }
 }

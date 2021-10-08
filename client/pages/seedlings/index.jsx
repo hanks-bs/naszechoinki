@@ -20,7 +20,6 @@ export default function Seedlings(props) {
   const t_spec = locale === 'pl' ? pl_seedlings : en_seedlings;
 
   const items = props.items;
-  useEffect(() => { console.log(props)})
   return (
     <>
       <CssBaseline />

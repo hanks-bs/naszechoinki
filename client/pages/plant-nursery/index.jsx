@@ -8,8 +8,9 @@ import pl from '../../lib/locales/pl/pl';
 import pl_plant_nursery from '../../lib/locales/pl/plant_nursery';
 import { useRouter } from "next/router";
 import PlantNurseryMain from '../../components/PlantNurseryMain';
+import axiosInstance from './../../lib/axios';
 
-export default function PlantNursery () {
+export default function PlantNursery (props) {
     const router = useRouter();
     const { locale } = router;
     const t = locale === 'pl' ? pl : en;
@@ -31,9 +32,16 @@ export default function PlantNursery () {
   
       </Head>
      
-      <PlantNurseryMain/>
+      <PlantNurseryMain userdata={props.userdata} items={props.items} files={props.files}/>
 
         </>
     )
 }
+
+PlantNursery.getInitialProps = async (ctx) => {
+  const items = await axiosInstance.get('/api/plantnursery_items');
+  const files = await axiosInstance.get('/api/files_download');
+  return {items: items.data, files: files.data};
+}
+
 PlantNursery.Layout = Layout;

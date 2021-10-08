@@ -8,8 +8,9 @@ import pl from './../../lib/locales/pl/pl';
 import pl_pricelist from './../../lib/locales/pl/pricelist';
 import { useRouter } from "next/router";
 import PriceListMain from './../../components/PriceListMain';
+import axiosInstance from './../../lib/axios';
 
-export default function Pricelist () {
+export default function Pricelist (props) {
     const router = useRouter();
     const { locale } = router;
     const t = locale === 'pl' ? pl : en;
@@ -31,9 +32,15 @@ export default function Pricelist () {
   
       </Head>
 
-      <PriceListMain/>
+      <PriceListMain userdata={props.userdata} items={props.items}/>
 
         </>
     )
 }
+
+Pricelist.getInitialProps = async (ctx) => {
+  const items = await axiosInstance.get('/api/pricelist_items');
+  return {items: items.data};
+}
+
 Pricelist.Layout = Layout;

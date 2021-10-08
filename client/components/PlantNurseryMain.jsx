@@ -15,6 +15,12 @@ import pl_plant_nursery from "../lib/locales/pl/plant_nursery";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import FilesDownload from "./FilesDownload";
+import Button from "@material-ui/core/Button";
+import axiosInstance from "./../lib/axios";
+import EditIcon from "@material-ui/icons/Edit";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { useState } from "react";
+import PlantNurseryModal from './../components/PlantNurseryModal';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -147,20 +153,79 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "space-around",
   },
+  edit: {
+    [theme.breakpoints.down(840)]: {
+      right: 15,
+    },
+    right: 27,
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "#688039",
+      color: "#fff",
+    },
+  },
+  delete: {
+    [theme.breakpoints.down(840)]: {
+      right: 50,
+    },
+    right: -27,
+    backgroundColor: "#ff3636",
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "#ff7b7b",
+      color: "#fff",
+    },
+  },
+  controllers: {
+    top: -100,
+    zIndex: 1,
+    left: "50%",
+    transform: "translateX(-50%)",
+    textAlign: "center",
+    position: "absolute",
+    [theme.breakpoints.down(670)]: {
+      top: 15,
+    },
+    "& > button": {
+      minWidth: "auto",
+    },
+  },
 
 }));
 
-export default function PlantNurseryMain() {
+export default function PlantNurseryMain(props) {
   const classes = useStyles();
   const router = useRouter();
   const { locale } = router;
   const t = locale === "pl" ? pl : en;
   const t_spec = locale === "pl" ? pl_plant_nursery : en_plant_nursery;
+  const userdata = props.userdata;
+
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState({});
+
+
+  const handleDelete = async (id) => {
+    const response = await axiosInstance.delete(`/api/plantnursery_items/${id}`, {
+      withCredentials: true,
+    });
+    if (response.data === true) return router.reload();
+  };
+
+  const handleEdit = async (e, id) => {
+    const response = await axiosInstance.get(`/api/plantnursery_items/${id}`);
+
+    setData(response.data);
+    setOpen(true);
+  };
+
   return (
     <>
       <section className={classes.root} id={`about-us`}>
         <Container maxWidth={`lg`}>
-
+        {userdata ? (
+          <PlantNurseryModal data={data} open={open} setOpen={setOpen} />
+        ) : null}
           <Typography variant="h1" component="h1">
             {t.plant_nursery}
           </Typography>
@@ -173,108 +238,67 @@ export default function PlantNurseryMain() {
           </Typography>
           <Box component="div" className={classes.BoxStyle}>
             <Grid container direction="column">
-              <Grid item className={classes.gridItem}>
+
+              {props.items.map(item => {
+                return(
+                <Grid item className={classes.gridItem} key={`item-${item.id}`}>
                 <Grid container direction="row" className={classes.gridRow}>
                   <Grid
                     item
                     className={classes.image}
                     style={{
                       backgroundImage:
-                        "url('https://naszechoinki.pl/files/dynamicContent/sites/fb1tn1/images/pl/webpage_27/kqlwg2o5/element_399/20180914_165238.webp')",
+                        `url(${item.image_link})`,
                     }}
                   />
 
-                  <Grid item className={classes.gridDescription}>
+                  <Grid item className={classes.gridDescription} style={{position: "relative"}}>
+                  {userdata ? (
+                    <Box className={classes.controllers}>
+                      <Button
+                        className={classes.edit}
+                        alt="Edytuj"
+                        onClick={(e) => {
+                          handleEdit(e, item.id);
+                        }}
+                      >
+                        <EditIcon />
+                      </Button>
+                      <Button
+                        className={classes.delete}
+                        alt="Usuń"
+                        onClick={(e) => {
+                          handleDelete(e, item.id);
+                        }}
+                      >
+                        <DeleteIcon />
+                      </Button>
+                    </Box>
+                  ) : null}
                     <Typography
                       className={classes.gridHeading}
                       component="h2"
                       variant="h5"
                     >
-                      Oferta handlowa
+                    {locale === 'pl' ? item.title_pl : item.title_en}
                     </Typography>
                     <Typography component="p" className={classes.pStyle}>
                       <span style={{ fontWeight: 700, color: "#000" }}>
                         {t_spec.description}:{" "}
                       </span>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book.
+                      {locale === 'pl' ? item.description_pl : item.description_en}
                     </Typography>
                   </Grid>
                 </Grid>
               </Grid>
+              )})}
+              
 
-              <Grid item className={classes.gridItem}>
-                <Grid container direction="row" className={classes.gridRow}>
-                  <Grid
-                    item
-                    className={classes.image}
-                    style={{
-                      backgroundImage:
-                        "url('https://naszechoinki.pl/files/dynamicContent/sites/fb1tn1/images/pl/webpage_27/kqlwg2o5/element_399/20180914_165238.webp')",
-                    }}
-                  />
 
-                  <Grid item className={classes.gridDescription}>
-                    <Typography
-                      className={classes.gridHeading}
-                      component="h2"
-                      variant="h5"
-                    >
-                      Oferta handlowa
-                    </Typography>
-                    <Typography component="p" className={classes.pStyle}>
-                      <span style={{ fontWeight: 700, color: "#000" }}>
-                        {t_spec.description}:{" "}
-                      </span>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book.
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Grid>
-
-              <Grid item className={classes.gridItem}>
-                <Grid container direction="row" className={classes.gridRow}>
-                  <Grid
-                    item
-                    className={classes.image}
-                    style={{
-                      backgroundImage:
-                        "url('https://naszechoinki.pl/files/dynamicContent/sites/fb1tn1/images/pl/webpage_27/kqlwg2o5/element_399/20180914_165238.webp')",
-                    }}
-                  />
-
-                  <Grid item className={classes.gridDescription}>
-                    <Typography
-                      className={classes.gridHeading}
-                      component="h2"
-                      variant="h5"
-                    >
-                      Oferta handlowa
-                    </Typography>
-                    <Typography component="p" className={classes.pStyle}>
-                      <span style={{ fontWeight: 700, color: "#000" }}>
-                        {t_spec.description}:{" "}
-                      </span>
-                      Lorem Ipsum is simply dummy text of the printing and
-                      typesetting industry. Lorem Ipsum has been the industry's
-                      standard dummy text ever since the 1500s, when an unknown
-                      printer took a galley of type and scrambled it to make a
-                      type specimen book.
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Grid>
               
               </Grid>
           </Box>
-          <FilesDownload />
+          <FilesDownload userdata={userdata} files={props.files}/>
           
         </Container>
       </section>

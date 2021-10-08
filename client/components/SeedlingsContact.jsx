@@ -16,6 +16,7 @@ import * as Validator from "validatorjs";
 import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
+import axiosInstance from './../lib/axios';
 const CssTextField = withStyles({
   root: {
     "& label.Mui-focused": {
@@ -134,17 +135,37 @@ export default function SeedlingsContact() {
   const { locale } = router;
   const t = locale === "pl" ? pl : en;
   const [loading, setLoading] = useState(false);
+
+  const [firstname, setFirstname] = useState(false);
   const [firstnameError, setFirstnameError] = useState(false);
+
+  const [lastname, setLastname] = useState(false);
   const [lastnameError, setLastnameError] = useState(false);
+
+  const [email, setEmail] = useState(false);
   const [emailError, setEmailError] = useState(false);
+
+  const [phone, setPhone] = useState(false);
   const [phoneError, setPhoneError] = useState(false);
+
+  const [company, setCompany] = useState(false);
+  const [nip, setNIP] = useState(false);
+
+
+  const [message, setMessage] = useState(false);
   const [messageError, setMessageError] = useState(false);
+
+  const [adress, setAdress] = useState(false);
   const [adressError, setAdressError] = useState(false);
+
+  const [postCode, setPostCode] = useState(false);
   const [postCodeError, setPostCodeError] = useState(false);
+
+  const [city, setCity] = useState(false);
   const [cityError, setCityError] = useState(false);
 
   const validateFirstName = async () => {
-    setFirstnameError(false);
+    setFirstnameError(false)
     const firstname = document.querySelector("#firstname").value;
     const minLength = 3;
     const maxLength = 15;
@@ -159,8 +180,9 @@ export default function SeedlingsContact() {
       }
     );
 
-    validation.checkAsync(undefined, () => {
-      return setFirstnameError(validation.errors.first("name"));
+    validation.checkAsync(undefined, async () => {
+         setFirstnameError(validation.errors.first("name"));
+       return ;
     });
   };
   const validateLastName = async () => {
@@ -178,7 +200,7 @@ export default function SeedlingsContact() {
         max: { string: t.lastname_toolong },
       }
     );
-    validation.checkAsync(undefined, () => {
+    validation.checkAsync(undefined, async() => {
       return setLastnameError(validation.errors.first("lastname"));
     });
   };
@@ -221,8 +243,8 @@ export default function SeedlingsContact() {
         telephone: { string: t.invalid_format },
       }
     );
-    validation.checkAsync(undefined, () => {
-      return setPhoneError(validation.errors.first("telephone"));
+    validation.checkAsync(undefined, async() => {
+      return await setPhoneError(validation.errors.first("telephone"));
     });
   };
   const validateAdress = async () => {
@@ -317,17 +339,31 @@ export default function SeedlingsContact() {
   const handleValidation = async (e) => {
     e.preventDefault();
     setLoading(true);
+    
+    if (!firstnameError && !lastnameError && !emailError && !messageError && !phoneError && !adressError && !postCodeError && !cityError) {
+      const formData = {};
+      if(firstname) formData.firstname = firstname;
+      if(lastname) formData.lastname = lastname;
+      if(email) formData.email = email;
+      if(phone) formData.phone = phone;
+      if(company) formData.companyname=company;
+      if(nip) formData.nip=nip;
+      if(adress) formData.adress=adress
+      if(postCode) formData.postcode=postCode;
+      if(city) formData.city=city;
+      if(message) formData.message=message;
 
-    await validateFirstName();
-    await validateLastName();
-    await validateEmail();
-    await validateMessage();
-    await validatePhone();
-    await validateAdress();
-    await validatePostCode();
-    await validateCity();
-
-    if (!firstnameError && !lastnameError && !emailError && !messageError) {
+      const response = await axiosInstance.post('/api/seedlings_items/contact', formData,  {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+      },
+        onUploadProgress: (data) => {
+          //Set the progress value to show the progress bar
+          console.log(Math.round((100 * data.loaded) / data.total));
+        },
+      });
+      if(response.data===true) document.querySelector('form#contact').reset();
       return setLoading(false); //Jeśli serwer nie zwróci, to dopiero wtedy wyłączyć łądowanie buttona!!
     }
     return setLoading(false);
@@ -347,6 +383,7 @@ export default function SeedlingsContact() {
               <LocalMallIcon className={classes.MallIcon} /> {t.submit_order}
               </Typography>
               <form
+              id="contact"
                 autoComplete="off"
                 noValidate
                 onSubmit={(e) => handleValidation(e)}
@@ -359,7 +396,7 @@ export default function SeedlingsContact() {
                       error={firstnameError ? true : false}
                       helperText={firstnameError}
                       label={t.firstname}
-                      onChange={() => setFirstnameError(false)}
+                      onChange={async(e) => {setFirstname(e.target.value); await validateFirstName()}}
                       required
                     />
                   </Grid>
@@ -371,7 +408,7 @@ export default function SeedlingsContact() {
                       error={lastnameError ? true : false}
                       helperText={lastnameError}
                       label={t.lastname}
-                      onChange={() => setLastnameError(false)}
+                      onChange={async(e) => {setLastname(e.target.value); await validateLastName()}}
                       required
                     />
                   </Grid>
@@ -382,7 +419,7 @@ export default function SeedlingsContact() {
                       label="Email"
                       error={emailError ? true : false}
                       helperText={emailError}
-                      onChange={() => setEmailError(false)}
+                      onChange={async(e) => {setEmail(e.target.value); await validateEmail();}}
                       required
                     />
                   </Grid>
@@ -393,7 +430,8 @@ export default function SeedlingsContact() {
                       label={t.phone_number}
                       error={phoneError ? true : false}
                       helperText={phoneError}
-                      onChange={() => setPhoneError(false)}
+                      onChange={async(e) => {setPhone(e.target.value); await validatePhone();}}
+                      placeholder={`+48`}
                       required
                     />
                   </Grid>
@@ -402,10 +440,11 @@ export default function SeedlingsContact() {
                       fullWidth
                       id="company"
                       label={t.company_name_label}
+                      onChange={(e) => setCompany(e.target.value)}
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} className={classes.gridItem}>
-                    <CssTextField fullWidth id="nip" label={t.nip_label} />
+                    <CssTextField fullWidth id="nip" label={t.nip_label} onChange={(e) => setNIP(e.target.value)}/>
                   </Grid>
                   <Grid item xs={12} className={classes.gridItem}>
                     <CssTextField
@@ -414,7 +453,7 @@ export default function SeedlingsContact() {
                       label={t.adress}
                       error={adressError ? true : false}
                       helperText={adressError}
-                      onChange={() => setAdressError(false)}
+                      onChange={async(e) => {setAdress(e.target.value); await validateAdress();}}
                       required
                     />
                   </Grid>
@@ -425,7 +464,7 @@ export default function SeedlingsContact() {
                       label={t.post_code}
                       error={postCodeError ? true : false}
                       helperText={postCodeError}
-                      onChange={() => setPostCodeError(false)}
+                      onChange={async(e) => {setPostCode(e.target.value); await validatePostCode();}}
                       required
                     />
                   </Grid>
@@ -436,7 +475,7 @@ export default function SeedlingsContact() {
                       label={t.city}
                       error={cityError ? true : false}
                       helperText={cityError}
-                      onChange={() => setCityError(false)}
+                      onChange={async(e) => {setCity(e.target.value); await validateCity();}}
                       required
                     />
                   </Grid>
@@ -447,7 +486,7 @@ export default function SeedlingsContact() {
                       label={t.mess_content}
                       error={messageError ? true : false}
                       helperText={messageError}
-                      onChange={() => setMessageError(false)}
+                      onChange={async(e) => {setMessage(e.target.value); await validateMessage();}}
                       multiline
                       style={{ marginTop: 40 }}
                       required

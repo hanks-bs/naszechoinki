@@ -13,37 +13,11 @@ import en_seedlings from "./../lib/locales/en/seedlings";
 import pl from "./../lib/locales/pl/pl";
 import pl_seedlings from "./../lib/locales/pl/seedlings";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SeedlingsModal from "./SeedlingsModal";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axiosInstance from "./../lib/axios";
-
-const elements = [
-  {
-    id: 1,
-    title_pl: "Jodła kaukaska",
-    title_en: "Jodła kaukaska",
-    age: 4,
-    others_pl: "Lorem ipsum PL",
-    others_en: "Lorem ipsum EN",
-    price_pl: 250,
-    price_en: 25,
-    image_link: "123",
-  },
-  {
-    id: 2,
-    title_pl: "Jodła kaukaska 2",
-    title_en: "Jodła kaukaska 2",
-    age: 4,
-    others_pl: "Lorem ipsum PL",
-    others_en: "Lorem ipsum EN",
-    price_pl: 250,
-    price_en: 25,
-    image_link: "123",
-  },
-];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -191,9 +165,11 @@ function SeedlingsMain(props) {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({});
   const handleDelete = async (e, id) => {
+    const response = await axiosInstance.delete(`/api/seedlings_items/${id}`, {
+      withCredentials: true,
+    });
+    if (response.data !== true) return false;
 
-
-    
     const elem = e.target;
     setInterval(function () {
       if (!elem.closest(".MuiGrid-item").style.opacity) {
@@ -251,13 +227,15 @@ function SeedlingsMain(props) {
               justifyContent="space-around"
               spacing={6}
             >
-              {props.items.map((elem) => {
+            {props.items.length ? (
+              props.items.map((elem) => {
                 return (
                   <>
                     <Grid
                       item
                       className={classes.gridItem}
                       style={{ opacity: 1 }}
+                      key={`item-${elem.id}`}
                     >
                       {userdata ? (
                         <Box className={classes.controllers}>
@@ -272,7 +250,10 @@ function SeedlingsMain(props) {
                           </Button>
                           <Button
                             className={classes.delete}
-                            onClick={(e) => handleDelete(e, elem.id)}
+                            alt="Usuń"
+                            onClick={(e) => {
+                              handleDelete(e, elem.id);
+                            }}
                           >
                             <DeleteIcon />
                           </Button>
@@ -289,8 +270,7 @@ function SeedlingsMain(props) {
                           <Box
                             className={classes.image}
                             style={{
-                              backgroundImage:
-                                "url(https://naszechoinki.pl/lib/fb1tn1/9c0975902916554798f3fcb6ba8d0f25.jpg)",
+                              backgroundImage: `url(${elem.image_link})`,
                             }}
                           />
                         </Grid>
@@ -311,9 +291,10 @@ function SeedlingsMain(props) {
                               <span style={{ fontWeight: 700, color: "#000" }}>
                                 {t_spec.age}:
                               </span>{" "}
-                              {elem.age} {locale === "pl" ? "lat/a" : "year/s old"}
+                              {elem.age}{" "}
+                              {locale === "pl" ? "lat/a" : "year/s old"}
                             </Typography>
-                            <Typography
+                            {elem.others_pl && elem.others_pl !== "undefined" && locale==='pl' ? <Typography
                               component="p"
                               className={classes.pStyle}
                               style={{ textAlign: "left", marginTop: 5 }}
@@ -321,10 +302,22 @@ function SeedlingsMain(props) {
                               <span style={{ fontWeight: 700, color: "#000" }}>
                                 {t_spec.other}:{" "}
                               </span>{" "}
-                              {locale === "pl"
-                                ? elem.others_pl
-                                : elem.others_en}
-                            </Typography>
+                             
+                                {elem.others_pl}
+                            </Typography> : null}
+                            {elem.others_en && elem.others_en !== "undefined" && locale==='en' ? <Typography
+                            component="p"
+                            className={classes.pStyle}
+                            style={{ textAlign: "left", marginTop: 5 }}
+                          >
+                            <span style={{ fontWeight: 700, color: "#000" }}>
+                              {t_spec.other}:{" "}
+                            </span>{" "}
+                           
+                              {elem.others_en}
+                          </Typography> : null}
+                            
+                            
                           </div>
                           <Button
                             className={classes.gridItemButton}
@@ -340,8 +333,8 @@ function SeedlingsMain(props) {
                     </Grid>
                   </>
                 );
-              })}
-              
+              })
+            ) : null}
             </Grid>
           </Box>
         </Container>
