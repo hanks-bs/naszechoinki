@@ -8,6 +8,7 @@ exports.up = function (knex) {
       table.string("height").notNullable().defaultTo("1");
       table.string("description_pl");
       table.string("description_en");
+      table.string("src").notNullable();
       table.timestamps(true, true);
     });
 };

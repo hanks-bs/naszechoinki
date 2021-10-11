@@ -8,7 +8,7 @@ class PlantNurseryAccess {
             return items;
           } catch (error) {
             console.log(error);
-            return res.status(500).json("Something went wrong");
+            return { error };
           }
     }
 
@@ -96,7 +96,7 @@ class PlantNurseryAccess {
           return items;
         } catch (error) {
           console.log(error);
-          return res.status(500).json("Something went wrong");
+          return { error };
         }
   }
 }

@@ -237,7 +237,7 @@ export default function PriceListMain(props) {
           </Typography>
           <Box component="div" className={classes.BoxStyle}>
             <Grid container direction="column">
-            {props.items.map((item) =>{
+            {props.items.length ? (props.items.map((item) =>{
               return(
                 <>
                 
@@ -311,7 +311,7 @@ export default function PriceListMain(props) {
                 </Grid>
               </Grid>
             </Grid></>
-            )})}
+            )}) ) : null}
 
               
               </Grid>

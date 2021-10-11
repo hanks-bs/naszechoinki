@@ -9,7 +9,7 @@ class PlantNurseryService {
             return response;
           } catch (error) {
             console.log(error);
-            return res.status(500).json("Something went wrong");
+            return { error };
           }
     }
 
@@ -193,7 +193,7 @@ class PlantNurseryService {
           return response;
         } catch (error) {
           console.log(error);
-          return res.status(500).json("Something went wrong");
+          return { error };
         }
     }
 }

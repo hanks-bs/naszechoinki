@@ -7,6 +7,7 @@ import pl from '../../lib/locales/pl/pl';
 import pl_gallery from '../../lib/locales/pl/gallery';
 import { useRouter } from "next/router";
 import GridGallery from './../../components/GridGallery';
+import axiosInstance from './../../lib/axios';
 
 export default function Gallery (props) {
     const router = useRouter();
@@ -30,9 +31,15 @@ export default function Gallery (props) {
   
       </Head>
      
-      <GridGallery userdata={props.userdata}/>
+      <GridGallery userdata={props.userdata} items={props.items} />
 
         </>
     )
 }
+Gallery.getInitialProps = async (ctx) => {
+  const items = await axiosInstance.get('/api/gallery');
+  return {items: items.data};
+}
+
+
 Gallery.Layout = Layout;

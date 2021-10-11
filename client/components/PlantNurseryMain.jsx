@@ -239,7 +239,7 @@ export default function PlantNurseryMain(props) {
           <Box component="div" className={classes.BoxStyle}>
             <Grid container direction="column">
 
-              {props.items.map(item => {
+              {props.items.length ? (props.items.map(item => {
                 return(
                 <Grid item className={classes.gridItem} key={`item-${item.id}`}>
                 <Grid container direction="row" className={classes.gridRow}>
@@ -291,7 +291,7 @@ export default function PlantNurseryMain(props) {
                   </Grid>
                 </Grid>
               </Grid>
-              )})}
+              )})) : null}
               
 
 

@@ -21,7 +21,7 @@ import Validator from "validatorjs";
 const Image = dynamic(() => import("next/image"), { ssr: true });
 import dynamic from "next/dynamic";
 import CircularProgress from "@material-ui/core/CircularProgress";
-
+import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles((theme) => ({
     addButton: {
@@ -140,16 +140,18 @@ const CssTextField = withStyles({
 
 
 
-export default function GalleryModal (props) {
+export default function GalleryModal ({open, data}) {
     const classes = useStyles();
     const router = useRouter();
     const { locale } = router;
 
+    const [modalNoDataError, setModalNoDataError] = useState(false);
+
     const [title_pl, setTitle_pl] = useState(undefined);
-    const [title_plError, setTitle_pl_error] = useState(false);
+    const [title_pl_error, setTitle_pl_error] = useState(false);
 
     const [title_en, setTitle_en] = useState(undefined);
-    const [title_enError, setTitle_en_error] = useState(false);
+    const [title_en_error, setTitle_en_error] = useState(false);
 
     const [image, setImage] = useState(undefined);
     const [imageError, setImageError] = useState(false);
@@ -215,11 +217,19 @@ export default function GalleryModal (props) {
         <>
         <Fab
           className={classes.addButton}
-          aria-label="Dodaj nowy element"
+          aria-label="Edytuj Galerię"
           onClick={(e) => handleOpen(e)}
           style={open ? { marginRight: 15 } : null}
         >
           <AddIcon />
+        </Fab>
+        <Fab
+          className={classes.addButton}
+          aria-label="Dodaj nowy element"
+          onClick={(e) => handleOpen(e)}
+          style={open ? { marginRight: 15 } : null}
+        >
+          <EditIcon />
         </Fab>
         <Modal
           aria-labelledby="transition-modal-title"
@@ -240,7 +250,7 @@ export default function GalleryModal (props) {
                 <CloseIcon />
               </button>
               <h2 id="modal-title" className={classes.heading}>
-                {!add ? "Edycja" : "Dodaj"}
+                "Dodaj"
               </h2>
               <form
                 autoComplete="off"
@@ -264,7 +274,6 @@ export default function GalleryModal (props) {
                         fullWidth
                         error={title_pl_error ? true : false}
                         helperText={title_pl_error}
-                        defaultValue={!add ? data.title_pl : ""}
                         onChange={(e) => {
                           setModalNoDataError(false);
                           setTitle_pl_error(false);
@@ -289,7 +298,6 @@ export default function GalleryModal (props) {
                         fullWidth
                         error={title_en_error ? true : false}
                         helperText={title_en_error}
-                        defaultValue={!add ? data.title_en : ""}
                         onChange={(e) => {
                           setModalNoDataError(false);
                           setTitle_en_error(false);
@@ -328,7 +336,7 @@ export default function GalleryModal (props) {
                           color="primary"
                           component="span"
                         >
-                          {!add ? "Zmień" : "Dodaj"}
+                          Dodaj
                         </Button>{" "}
                         {imageError ? (
                           <span style={{ color: "#f44336", fontSize: "0.75rem" }}>
@@ -341,25 +349,18 @@ export default function GalleryModal (props) {
                 </Box>
               </form>
               <Box className={classes.buttonsBox}>
-                {!add ? (
-                  <Button  disabled={loading} onClick={(e) => submitEdit(e, data.id)}>Edytuj {loading && (
+               
+                  <Button  disabled={loading} onClick={(e) => submitAdd()}>Dodaj {loading && (
                     <CircularProgress
                       size={24}
                       className={classes.buttonProgress}
                     />
                   )}</Button>
-                ) : (
-                  <Button  disabled={loading} onClick={(e) => submitAdd(data.id)}>Dodaj {loading && (
-                    <CircularProgress
-                      size={24}
-                      className={classes.buttonProgress}
-                    />
-                  )}</Button>
-                )}
+               
   
-                {!add && !loading ? <Button  disabled={loading} className={classes.delete} onClick={(e) => handleDelete(e, data.id)}>Usuń</Button> : null}
+                {!loading ? <Button  disabled={loading} className={classes.delete} onClick={(e) => handleDelete(data.id)}>Usuń</Button> : null}
               </Box>
-              {!add && !image && data.image_link ? `Nazwa: ${data.image_link.split("/")[3]}` : null }
+              {!image && data.src ? `Nazwa: ${data.src.split("/")[3]}` : null }
               {image ? `Nazwa: ${image.name}` : null}
               {image && (
                 <div>

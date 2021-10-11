@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import SelectedImage from "./SelectedImage";
+import GalleryModal from "./GalleryModal";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,7 +34,7 @@ const photos = [
       },
       {
         src: "https://source.unsplash.com/Dm-qxdynoEc/800x799",
-        width: 1,
+        width: 2,
         height: 1
       },
       {
@@ -77,17 +78,21 @@ const photos = [
   
   
 
-export default function GridGallery({userdata}) {
+export default function GridGallery({userdata, items}) {
   const classes = useStyles();
   const router = useRouter();
   const { locale } = router;
   const t = locale === "pl" ? pl : en;
   const t_spec = locale === "pl" ? pl_gallery : en_gallery;
 
+
+
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
   const [selectAll, setSelectAll] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  
+  const [open, setOpen] = useState(false);
 
   const openLightbox = useCallback((event, { photo, index }) => {
     setCurrentImage(index);
@@ -123,7 +128,7 @@ export default function GridGallery({userdata}) {
    
     <section className={classes.root} id={`gallery`}>
     <Container maxWidth={`lg`}>
-     
+    <GalleryModal data={items} open={open} setOpen={setOpen}/>
       <Typography variant="h1" component="h1">
         {t.seedlings}
       </Typography>

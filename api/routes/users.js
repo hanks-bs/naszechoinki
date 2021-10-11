@@ -9,6 +9,7 @@ import SignOut from '../controllers/signOut.js';
 import Seedlings from '../controllers/seedlings.js';
 import Pricelist from '../controllers/pricelist.js';
 import PlantNursery from '../controllers/plantnursery.js';
+import Gallery from '../controllers/gallery.js';
 import multer from 'multer';
 
 const max_size = 5242880; // 5 mb
@@ -76,8 +77,15 @@ userRoutes.post(["/api/plantnursery_items/", "/plantnursery_items/"], upload.sin
 userRoutes.put(["/api/plantnursery_items/:id", "/plantnursery_items/:id"], upload.single('image'), authenticateToken,PlantNursery.Items_Update);
 
 userRoutes.get(["/api/files_download", "/files_download"], PlantNursery.GetFiles);
-userRoutes.post(["/api/files_download/", "/files_download/"], uploadFiles.single('file'),authenticateToken, PlantNursery.AddFile);
+userRoutes.post(["/api/files_download/", "/files_download/"],authenticateToken, uploadFiles.single('file'), PlantNursery.AddFile);
 userRoutes.delete(["/api/files_download/:id", "/files_download/:id"], authenticateToken, PlantNursery.RemoveFile);
+
+//Gallery
+userRoutes.get(["/api/gallery", "/gallery"], Gallery.GetImages);
+userRoutes.get(["/api/gallery/:id", "/gallery/:id"], Gallery.GetSingleImage);
+userRoutes.put(["/api/gallery/:id", "/gallery/:id"],authenticateToken, Gallery.UpdateImage);
+userRoutes.post(["/api/gallery", "/gallery"],authenticateToken, upload.single('image'), Gallery.UploadImage);
+userRoutes.delete(["/api/gallery/:id", "/gallery/:id"],authenticateToken, Gallery.DeleteImage);
 
 
 
