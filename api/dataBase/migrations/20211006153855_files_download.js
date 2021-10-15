@@ -3,9 +3,10 @@ exports.up = function(knex) {
     return knex.schema
     .createTable("files_download", table => {
         table.increments("id");
-        table.string("title_pl").notNullable();
-        table.string("title_en").notNullable();
-        table.string("path").notNullable();
+        table.string("title_pl");
+        table.string("title_en");
+        table.string("src").notNullable();
+        table.string("alt").notNullable();
         table.timestamps(true, true);
 
     })

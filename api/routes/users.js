@@ -83,7 +83,7 @@ userRoutes.delete(["/api/files_download/:id", "/files_download/:id"], authentica
 //Gallery
 userRoutes.get(["/api/gallery", "/gallery"], Gallery.GetImages);
 userRoutes.get(["/api/gallery/:id", "/gallery/:id"], Gallery.GetSingleImage);
-userRoutes.put(["/api/gallery/:id", "/gallery/:id"],authenticateToken, Gallery.UpdateImage);
+userRoutes.put(["/api/gallery/:id", "/gallery/:id"],authenticateToken, upload.single('image'), Gallery.UpdateImage);
 userRoutes.post(["/api/gallery", "/gallery"],authenticateToken, upload.single('image'), Gallery.UploadImage);
 userRoutes.delete(["/api/gallery/:id", "/gallery/:id"],authenticateToken, Gallery.DeleteImage);
 

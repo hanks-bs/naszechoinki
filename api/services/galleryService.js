@@ -91,7 +91,7 @@ class GalleryService {
           if (type.indexOf(file.mimetype) < 0) errors.Filetype = true;
           if (size > max_size) errors.Filesize = true;
           const path = `/uploads/images/${file.filename}`;
-          formData.image_link = path;
+          formData.src = path;
           const response = await GalleryAccess.UpdateImage(id, formData);
           return response;
         }

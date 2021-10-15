@@ -38,7 +38,9 @@ export default function Gallery (props) {
 }
 Gallery.getInitialProps = async (ctx) => {
   const items = await axiosInstance.get('/api/gallery');
-  return {items: items.data};
+  return {items: items.data.sort((a, b) => {
+    return a.id - b.id;
+  })};
 }
 
 

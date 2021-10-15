@@ -1,9 +1,5 @@
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
-import en from "./../lib/locales/en/en";
-import en_pricelist from "./../lib/locales/en/pricelist";
-import pl from "./../lib/locales/pl/pl";
-import pl_pricelist from "./../lib/locales/pl/pricelist";
+import { useState } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
@@ -22,19 +18,39 @@ const Image = dynamic(() => import("next/image"), { ssr: true });
 import dynamic from "next/dynamic";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import EditIcon from '@material-ui/icons/Edit';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import clsx from  'clsx';
+import GalleryEditModal from './GalleryEditModal';
 
 const useStyles = makeStyles((theme) => ({
     addButton: {
       position: "fixed",
-      bottom: 55,
+      bottom: 15,
       right: 55,
       zIndex: 1,
-      backgroundColor: "#3e5411",
+      backgroundColor: "#303030",
       color: "#fff",
       "&:hover": {
-        backgroundColor: "#687c3f",
+        backgroundColor: "#575555",
       },
     },
+    editButton: { 
+      position: "fixed",
+    bottom: 85,
+    right: 55,
+    zIndex: 1,
+    backgroundColor: "#3e5411",
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "#687c3f",
+    },
+  },
     modal: {
       display: "flex",
       alignItems: "center",
@@ -54,6 +70,30 @@ const useStyles = makeStyles((theme) => ({
   
       [theme.breakpoints.down(320)]: {
         padding: 0,
+      },
+    },
+    paperEdit: {
+      position: "relative",
+      backgroundColor: "#fff",
+      padding: "20px 20px 35px",
+      width: "100%",
+      margin: "20px auto",
+      borderRadius: 12,
+      [theme.breakpoints.up("sm")]: {
+        width: 600,
+        minHeight: "50vh",
+      },
+      [theme.breakpoints.up("md")]: {
+        width: 850,
+        minHeight: "50vh",
+      },
+      [theme.breakpoints.up("lg")]: {
+        width: 1200,
+        minHeight: "50vh",
+      },
+  
+      [theme.breakpoints.down(320)]: {
+        padding: "20px 10px 45px",
       },
     },
     heading: {
@@ -120,6 +160,19 @@ const useStyles = makeStyles((theme) => ({
     input: {
       display: "none",
     },
+    modalEditBtn: {},
+    modalDeleteBtn: {},
+    modalBtns: {
+      backgroundColor: 'transparent',
+      padding: "5px 10px",
+     
+      "&$modalEditBtn": {
+        color: "#3e5411",
+      },
+      "&$modalDeleteBtn": {
+        color: "red",
+      }
+    }
   }));
 
 const CssTextField = withStyles({
@@ -138,14 +191,19 @@ const CssTextField = withStyles({
     },
   })(TextField);
 
-
-
-export default function GalleryModal ({open, data}) {
+export default function GalleryModal ({data}) {
     const classes = useStyles();
     const router = useRouter();
     const { locale } = router;
 
+
     const [modalNoDataError, setModalNoDataError] = useState(false);
+
+    const [openAdd, setOpenAdd] = useState(false);
+    const [openEdit, setOpenEdit] = useState(false);
+
+    const [openEditSingle, setOpenEditSingle] = useState(false);
+    const [dataPass, setDataPass] = useState({});
 
     const [title_pl, setTitle_pl] = useState(undefined);
     const [title_pl_error, setTitle_pl_error] = useState(false);
@@ -168,18 +226,12 @@ export default function GalleryModal ({open, data}) {
     const max_size = 10485760; // 10 mb
     const [loading, setLoading] = useState(false);
 
-    const handleClose = async () => {
+    const handleCloseAdd = async () => {
         setTitle_pl(undefined);
         setTitle_pl_error(false);
     
         setTitle_en(undefined);
         setTitle_en_error(false);
-    
-        setDescription_pl(undefined);
-        setDescription_pl_error(false);
-    
-        setDescription_en(undefined);
-        setDescription_en_error(false);
     
         setImage(undefined);
         setImageError(false);
@@ -192,7 +244,38 @@ export default function GalleryModal ({open, data}) {
 
         setProgress(0);
 
-        setOpen(false);
+        setOpenAdd(false);
+      }
+
+    const handleCloseEdit = async () => {
+        setTitle_pl(undefined);
+        setTitle_pl_error(false);
+
+        setOpenEditSingle(false);
+        setDataPass({});
+    
+        setTitle_en(undefined);
+        setTitle_en_error(false);
+    
+        setImage(undefined);
+        setImageError(false);
+
+        setWidth(0);
+        setWidthError(false);
+
+        setHeight(0);
+        setHeightError(false);
+
+        setProgress(0);
+
+        setOpenEdit(false);
+      }
+
+      const handleOpenEdit = async () => {
+        setOpenEdit(true)
+      }
+      const handleOpenAdd = async () => {
+        setOpenAdd(true);
       }
 
     const handleChangeImage = (e) => {
@@ -213,21 +296,28 @@ export default function GalleryModal ({open, data}) {
         return setImagePreview(undefined);
       };
 
+    const passData = async (id) => {
+      const data = await axiosInstance.get(`/api/gallery/${id}`);
+      setDataPass(data.data);
+     
+    }
+
     return (
         <>
+        <GalleryEditModal open={openEditSingle} setOpen={setOpenEditSingle} data={dataPass}/>
         <Fab
           className={classes.addButton}
           aria-label="Edytuj Galerię"
-          onClick={(e) => handleOpen(e)}
-          style={open ? { marginRight: 15 } : null}
+          onClick={(e) => handleOpenAdd(e)}
+          style={ openAdd || openEdit ? { marginRight: 15 } : null}
         >
           <AddIcon />
         </Fab>
         <Fab
-          className={classes.addButton}
+          className={classes.editButton}
           aria-label="Dodaj nowy element"
-          onClick={(e) => handleOpen(e)}
-          style={open ? { marginRight: 15 } : null}
+          onClick={(e) => handleOpenEdit(e)}
+          style={ openAdd || openEdit ? { marginRight: 15 } : null}
         >
           <EditIcon />
         </Fab>
@@ -235,8 +325,8 @@ export default function GalleryModal ({open, data}) {
           aria-labelledby="transition-modal-title"
           aria-describedby="transition-modal-description"
           className={classes.modal}
-          open={open}
-          onClose={handleClose}
+          open={openAdd}
+          onClose={handleCloseAdd}
           closeAfterTransition
           BackdropComponent={Backdrop}
           BackdropProps={{
@@ -244,13 +334,13 @@ export default function GalleryModal ({open, data}) {
           }}
           style={{ overflowY: "scroll" }}
         >
-          <Fade in={open}>
+          <Fade in={openAdd}>
             <Grid className={classes.paper}>
-              <button className={classes.closeButton} onClick={handleClose}>
+              <button className={classes.closeButton} onClick={handleCloseAdd}>
                 <CloseIcon />
               </button>
               <h2 id="modal-title" className={classes.heading}>
-                "Dodaj"
+                Dodaj
               </h2>
               <form
                 autoComplete="off"
@@ -296,6 +386,56 @@ export default function GalleryModal ({open, data}) {
                       <CssTextField
                         id={`loginform-login`}
                         fullWidth
+                        error={title_en_error ? true : false}
+                        helperText={title_en_error}
+                        onChange={(e) => {
+                          setModalNoDataError(false);
+                          setTitle_en_error(false);
+                          setTitle_en(e.target.value);
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
+                  <Grid
+                    container
+                    alignItems="center"
+                    style={{ marginRight: 10, marginBottom: 20 }}
+                  >
+                    <Grid item xs={3}>
+                      <Typography component={`p`} style={{ fontWeight: 700 }}>
+                        Wysokość (proporcje):
+                      </Typography>
+                    </Grid>
+                    <Grid item className={classes.gridItem} xs={8}>
+                      <CssTextField
+                        id={`loginform-login`}
+                        fullWidth
+                        type="number"
+                        error={title_en_error ? true : false}
+                        helperText={title_en_error}
+                        onChange={(e) => {
+                          setModalNoDataError(false);
+                          setTitle_en_error(false);
+                          setTitle_en(e.target.value);
+                        }}
+                      />
+                    </Grid>
+                  </Grid>
+                  <Grid
+                    container
+                    alignItems="center"
+                    style={{ marginRight: 10, marginBottom: 20 }}
+                  >
+                    <Grid item xs={3}>
+                      <Typography component={`p`} style={{ fontWeight: 700 }}>
+                        Szerokość (proporcje):
+                      </Typography>
+                    </Grid>
+                    <Grid item className={classes.gridItem} xs={8}>
+                      <CssTextField
+                        id={`loginform-login`}
+                        fullWidth
+                        type="number"
                         error={title_en_error ? true : false}
                         helperText={title_en_error}
                         onChange={(e) => {
@@ -356,9 +496,6 @@ export default function GalleryModal ({open, data}) {
                       className={classes.buttonProgress}
                     />
                   )}</Button>
-               
-  
-                {!loading ? <Button  disabled={loading} className={classes.delete} onClick={(e) => handleDelete(data.id)}>Usuń</Button> : null}
               </Box>
               {!image && data.src ? `Nazwa: ${data.src.split("/")[3]}` : null }
               {image ? `Nazwa: ${image.name}` : null}
@@ -381,6 +518,92 @@ export default function GalleryModal ({open, data}) {
             </Grid>
           </Fade>
         </Modal>
-      </>
+        <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={openEdit}
+        onClose={handleCloseEdit}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+        style={{ overflowY: "scroll" }}
+      >
+        <Fade in={openEdit}>
+          <Grid className={classes.paperEdit}>
+            <button className={classes.closeButton} onClick={handleCloseEdit}>
+              <CloseIcon />
+            </button>
+            <h2 id="modal-title" className={classes.heading}>
+              Lista zdjęć
+            </h2>
+            <form
+              autoComplete="off"
+              noValidate
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <Box className={classes.inputBox}>
+                <Grid
+                  container
+                  alignItems="center"
+                  style={{ marginRight: 10, marginBottom: 20 }}
+                >
+                
+                <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="Lista zdjęć">
+        <TableHead>
+          <TableRow>
+            <TableCell align="left">ID</TableCell>
+            <TableCell align="left">Nagłówek PL</TableCell>
+            <TableCell align="left">Nagłówek EN</TableCell>
+            <TableCell align="left">Miniaturka</TableCell>
+            <TableCell align="right">Opcje</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((item) => (
+            <TableRow key={item.id}>
+              <TableCell component="th" scope="row">
+                {item.id}
+              </TableCell>
+              <TableCell align="left">{item.title_pl}</TableCell>
+              <TableCell align="left">{item.title_en}</TableCell>
+              <TableCell align="left"><Image src={item.src } objectFit="contain" quality="75%" alt={item.title} width={100} height={50}/></TableCell>
+              <TableCell align="right"><Button onClick={async () => {await passData(item.id); await setOpenEditSingle(true)}}  className={clsx(classes.modalBtns,classes.modalEditBtn)}>EDYTUJ</Button> | <Button className={clsx(classes.modalBtns,classes.modalDeleteBtn)}>USUŃ</Button></TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+
+
+                </Grid>
+              </Box>
+            </form>
+            
+            {!image && data.src ? `Nazwa: ${data.src.split("/")[3]}` : null }
+            {image ? `Nazwa: ${image.name}` : null}
+            {image && (
+              <div>
+                <div style={{ marginTop: 10 }}>Podgląd:</div>
+                <Image
+                  className="preview"
+                  src={imagePreview}
+                  alt={image.name}
+                  width={200}
+                  height={150}
+                  objectFit="contain"
+                />
+              </div>
+            )}
+            {modalNoDataError ?  <div style={{ color: "#f44336", fontSize: "0.75rem", marginTop: 25 }}>
+            {modalNoDataError}
+          </div>: null}
+          </Grid>
+        </Fade>
+      </Modal>
+        </>
     );
 }
