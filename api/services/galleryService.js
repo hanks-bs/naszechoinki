@@ -33,12 +33,10 @@ class GalleryService {
       try {
         const errors = {};
         const formData = {};
-        if (!data.title_pl) errors.title_pl = true; else formData.title_pl = data.title_pl;
-        if (!data.title_en) errors.title_en = true; else formData.title_en = data.title_en;
+        if (data.title_pl) formData.title_pl = data.title_pl;
+        if (data.title_en) formData.title_en = data.title_en;
         if (data.height) formData.height = data.height;
         if (data.width) formData.width = data.width;
-        if (data.description_pl) formData.description_pl = data.description_pl;
-        if (data.description_en) formData.description_en = data.description_en;
         if (!file) errors.noFile = true;
   
         if (Object.keys(errors).length) return { errors };
@@ -72,11 +70,10 @@ class GalleryService {
         if (checkIfExist.length <= 0) return { error: { notExist: true } };
 
         if (Object.keys(errors).length) return { errors };
-  
-        if (data.title_pl) formData.title_pl = data.title_pl;
-        if (data.title_en) formData.title_en = data.title_en;
-        if (data.description_pl) formData.description_pl = data.description_pl;
-        if (data.description_en) formData.description_en = data.description_en;
+        
+        console.log(data);
+        if (data.title_pl || data.title_pl === "") formData.title_pl = data.title_pl;
+        if (data.title_en || data.title_en === "") formData.title_en = data.title_en;
         if (data.height) formData.height = data.height;
         if (data.width) formData.width = data.width;
         if (data.id) formData.id = data.id;

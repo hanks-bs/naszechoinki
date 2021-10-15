@@ -242,6 +242,7 @@ export default function GalleryModal ({data}) {
         setHeight(0);
         setHeightError(false);
 
+        setLoading(false);
         setProgress(0);
 
         setOpenAdd(false);
@@ -295,12 +296,48 @@ export default function GalleryModal ({data}) {
         
         return setImagePreview(undefined);
       };
+      const handleDelete = async id => {
+        const response = await axiosInstance.delete(`/api/gallery/${id}`, {
+          withCredentials: true,
+        });
+        if (response.data === true) return router.reload();
+      }
 
     const passData = async (id) => {
       const data = await axiosInstance.get(`/api/gallery/${id}`);
       setDataPass(data.data);
      
     }
+
+    const submitAdd = async () => {
+      try {
+        setLoading(true);
+        const formData = new FormData();
+        if(!image) {setImageError("To pole jest wymagane"); return setLoading(false);}
+        if(title_en) formData.append("title_en", title_en);
+        if(width) formData.append("width", width);
+        if(height) formData.append('height', height);
+        if(title_pl) formData.append("title_pl", title_pl);
+        
+        formData.append("image", image);
+        const response = await axiosInstance.post(`/api/gallery/`,
+        formData,
+        {
+          withCredentials: true,
+          onUploadProgress: (data) => {
+            //Set the progress value to show the progress bar
+            setProgress(Math.round((100 * data.loaded) / data.total));
+          },
+        });
+        setLoading(false);
+       if(response.data = true) router.reload();
+    }
+    catch(err) {
+        console.log(err);
+        return err;
+    }
+    }
+
 
     return (
         <>
@@ -571,7 +608,7 @@ export default function GalleryModal ({data}) {
               <TableCell align="left">{item.title_pl}</TableCell>
               <TableCell align="left">{item.title_en}</TableCell>
               <TableCell align="left"><Image src={item.src } objectFit="contain" quality="75%" alt={item.title} width={100} height={50}/></TableCell>
-              <TableCell align="right"><Button onClick={async () => {await passData(item.id); await setOpenEditSingle(true)}}  className={clsx(classes.modalBtns,classes.modalEditBtn)}>EDYTUJ</Button> | <Button className={clsx(classes.modalBtns,classes.modalDeleteBtn)}>USUŃ</Button></TableCell>
+              <TableCell align="right"><Button onClick={async () => {await passData(item.id); await setOpenEditSingle(true)}}  className={clsx(classes.modalBtns,classes.modalEditBtn)}>EDYTUJ</Button> | <Button className={clsx(classes.modalBtns,classes.modalDeleteBtn)} onClick={async () => await handleDelete(item.id)}>USUŃ</Button></TableCell>
             </TableRow>
           ))}
         </TableBody>

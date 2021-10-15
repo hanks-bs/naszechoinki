@@ -220,7 +220,7 @@ function SeedlingsMain(props) {
             {t_spec.heading_desc}
           </Typography>
           <Box component="div" className={classes.BoxStyle}>
-            <Grid
+            <Grid 
               container
               className={classes.columns}
               direction="row"

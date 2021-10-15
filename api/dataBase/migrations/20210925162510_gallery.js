@@ -4,8 +4,8 @@ exports.up = function (knex) {
       table.increments("id");
       table.string("title_pl");
       table.string("title_en");
-      table.string("width").notNullable().defaultTo("1");
-      table.string("height").notNullable().defaultTo("1");
+      table.string("width").defaultTo("1");
+      table.string("height").defaultTo("1");
       table.string("src").notNullable();
       table.timestamps(true, true);
     });

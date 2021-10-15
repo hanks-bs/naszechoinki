@@ -10,6 +10,7 @@ import Seedlings from '../controllers/seedlings.js';
 import Pricelist from '../controllers/pricelist.js';
 import PlantNursery from '../controllers/plantnursery.js';
 import Gallery from '../controllers/gallery.js';
+import HomePage from '../controllers/homepage.js';
 import multer from 'multer';
 
 const max_size = 5242880; // 5 mb
@@ -50,6 +51,8 @@ userRoutes.get('/verifyTokens', checkToken);
 userRoutes.get(['/', '/api'], (req, res) => {
   return res.json({text: "Success"});
 })
+//Contact Form HomePage
+userRoutes.post(["/api/contact", "/contact"], HomePage.Contact);
 
 //Seedlings
 userRoutes.get(["/api/seedlings", "/seedlings"], Seedlings.Get);

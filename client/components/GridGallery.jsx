@@ -44,7 +44,6 @@ export default function GridGallery({ userdata, items }) {
       height: item.height,
     };
   });
-  console.log(photos)
 
   const [currentImage, setCurrentImage] = useState(0);
   const [viewerIsOpen, setViewerIsOpen] = useState(false);

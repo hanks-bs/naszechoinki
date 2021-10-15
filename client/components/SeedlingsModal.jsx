@@ -539,7 +539,7 @@ export default function SeedlingsModal({ data, open, setOpen }) {
                       fullWidth
                       error={modaPlOthersError ? true : false}
                       helperText={modaPlOthersError}
-                      defaultValue={!add ? data.others_pl : ""}
+                      defaultValue={!add && data.others_pl !== "undefined" ? data.others_pl : ""}
                       onChange={(e) => {
                         setModalNoDataError(false);
                         setModalPlOthersError(false);
@@ -564,7 +564,7 @@ export default function SeedlingsModal({ data, open, setOpen }) {
                       fullWidth
                       error={modaEngOthersError ? true : false}
                       helperText={modaEngOthersError}
-                      defaultValue={!add ? data.others_en : ""}
+                      defaultValue={!add && data.others_en !== "undefined" ? data.others_en : ""}
                       onChange={(e) => {
                         setModalNoDataError(false);
                         setModalEngOthersError(false);

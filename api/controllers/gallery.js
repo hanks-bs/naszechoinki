@@ -30,6 +30,7 @@ class Gallery {
         try {
             const data = req.body;
             const file = req.file;
+            if(!file) return res.status(500).json({noData: true})
             const response = await GalleryService.UploadImage(data, file);
             if (response.error) return res.status(500).json(response.error);
             return res.status(200).json(response);

@@ -14,6 +14,9 @@ import TextField from "@material-ui/core/TextField";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import * as Validator from "validatorjs";
 import ContactSupportIcon from '@material-ui/icons/ContactSupport';
+import axiosInstance from "./../lib/axios";
+import axios from "axios";
+
 const CssTextField = withStyles({
   root: {
     "& label.Mui-focused": {
@@ -120,14 +123,21 @@ export default function Contact() {
   const { locale } = router;
   const t = locale === "pl" ? pl : en;
   const [loading, setLoading] = useState(false);
+
   const [firstnameError, setFirstnameError] = useState(false);
+  const [firstname, setFirstname] = useState(undefined);
+
   const [lastnameError, setLastnameError] = useState(false);
+  const [lastname, setLastname] = useState(undefined);
+
   const [emailError, setEmailError] = useState(false);
+  const [email, setEmail] = useState(undefined);
+
   const [messageError, setMessageError] = useState(false);
+  const [message, setMessage] = useState(undefined);
 
   const validateFirstName = async () => {
     setFirstnameError(false);
-    const firstname = document.querySelector("#firstname").value;
     const minLength = 3;
     const maxLength = 15;
 
@@ -148,7 +158,6 @@ export default function Contact() {
 
   const validateLastName = async () => {
     setLastnameError(false);
-    const lastname = document.querySelector("#lastname").value;
     const minLength = 3;
     const maxLength = 20;
 
@@ -168,7 +177,6 @@ export default function Contact() {
   const validateEmail = async () => {
     setEmailError(false);
 
-    const email = document.querySelector("#email").value;
     const validation = new Validator(
       { email: email },
       { email: "required|email" },
@@ -185,7 +193,6 @@ export default function Contact() {
   const validateMessage = async () => {
     setMessageError(false);
 
-    const message = document.querySelector("#message").value;
     const minLength = 20;
     const maxLength = 500;
 
@@ -214,7 +221,29 @@ export default function Contact() {
     await validateMessage();
 
     if (!firstnameError && !lastnameError && !emailError && !messageError) {
-      return setLoading(false);//Jeśli serwer nie zwróci, to dopiero wtedy wyłączyć łądowanie buttona!!
+      const formData = {};
+      formData.firstname = firstname;
+      formData.lastname = lastname;
+      formData.email = email;
+      formData.message = message;
+      const response = await axiosInstance.post('/api/contact', formData,  {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json'
+      },
+        onUploadProgress: (data) => {
+          //Set the progress value to show the progress bar
+          console.log(Math.round((100 * data.loaded) / data.total));
+        },
+      });
+      if(response.data===true) {
+        setFirstname(undefined);
+        setLastname(undefined);
+        setEmail(undefined);
+        setMessage(undefined);
+        document.querySelector('form#contact').reset()
+      };
+      return setLoading(false); //Jeśli serwer nie zwróci, to dopiero wtedy wyłączyć łądowanie buttona!!
     }
     return setLoading(false)
   };
@@ -246,6 +275,7 @@ export default function Contact() {
               <form
                 autoComplete="off"
                 noValidate
+                id="contact"
                 onSubmit={(e) => handleValidation(e)}
               >
                 <Grid container spacing={2}>
@@ -256,7 +286,7 @@ export default function Contact() {
                       error={firstnameError ? true : false}
                       helperText={firstnameError}
                       label={t.firstname}
-                      onChange={() => setFirstnameError(false)}
+                      onChange={async (e) => {setFirstnameError(false); setFirstname(e.target.value); await validateFirstName()}}
                       required
                     />
                   </Grid>
@@ -268,7 +298,7 @@ export default function Contact() {
                       error={lastnameError ? true : false}
                       helperText={lastnameError}
                       label={t.lastname}
-                      onChange={() => setLastnameError(false)}
+                      onChange={async (e) => {setLastnameError(false); setLastname(e.target.value); await validateLastName()}}
                       required
                     />
                   </Grid>
@@ -279,7 +309,7 @@ export default function Contact() {
                       label="Email"
                       error={emailError ? true : false}
                       helperText={emailError}
-                      onChange={() => setEmailError(false)}
+                      onChange={async (e) => {setEmailError(false);setEmail(e.target.value); await validateEmail();}}
                       required
                     />
                   </Grid>
@@ -290,7 +320,7 @@ export default function Contact() {
                       label={t.mess_content}
                       error={messageError ? true : false}
                       helperText={messageError}
-                      onChange={() => setMessageError(false)}
+                      onChange={async (e) => {setMessageError(false); setMessage(e.target.value); await validateMessage()}}
                       multiline
                       style={{ marginTop: 40 }}
                       required

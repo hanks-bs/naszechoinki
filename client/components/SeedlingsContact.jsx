@@ -135,6 +135,7 @@ export default function SeedlingsContact() {
   const { locale } = router;
   const t = locale === "pl" ? pl : en;
   const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(false);
 
   const [firstname, setFirstname] = useState(false);
   const [firstnameError, setFirstnameError] = useState(false);
@@ -339,7 +340,15 @@ export default function SeedlingsContact() {
   const handleValidation = async (e) => {
     e.preventDefault();
     setLoading(true);
-    
+    await validateFirstName();
+    await validateEmail();
+    await validateLastName();
+    await validatePhone();
+    await validateAdress();
+    await validatePostCode();
+    await validateCity();
+    await validateMessage();
+
     if (!firstnameError && !lastnameError && !emailError && !messageError && !phoneError && !adressError && !postCodeError && !cityError) {
       const formData = {};
       if(firstname) formData.firstname = firstname;
@@ -360,10 +369,23 @@ export default function SeedlingsContact() {
       },
         onUploadProgress: (data) => {
           //Set the progress value to show the progress bar
-          console.log(Math.round((100 * data.loaded) / data.total));
+          setProgress(Math.round((100 * data.loaded) / data.total));
         },
       });
-      if(response.data===true) document.querySelector('form#contact').reset();
+      if(response.data===true) 
+      {
+        setFirstname(undefined);
+        setLastname(undefined);
+        setEmail(undefined);
+        setPhone(undefined);
+        setCompany(undefined);
+        setNIP(undefined);
+        setAdress(undefined);
+        setPostCode(undefined);
+        setCity(undefined);
+        setMessage(undefined);
+        document.querySelector('form#contact').reset()
+      };
       return setLoading(false); //Jeśli serwer nie zwróci, to dopiero wtedy wyłączyć łądowanie buttona!!
     }
     return setLoading(false);

@@ -598,7 +598,7 @@ export default function PricelistsModal({ data, open, setOpen }) {
                         fullWidth
                         error={additional_info_pl_error ? true : false}
                         helperText={additional_info_pl_error}
-                        defaultValue={!add ? data.additional_info_pl : ""}
+                        defaultValue={!add && data.additional_info_pl !== "undefined" ? data.additional_info_pl : ""}
                         onChange={(e) => {
                           setModalNoDataError(false);
                           setAdditional_info_pl_error(false);
@@ -623,7 +623,7 @@ export default function PricelistsModal({ data, open, setOpen }) {
                         fullWidth
                         error={additional_info_en_error ? true : false}
                         helperText={additional_info_en_error}
-                        defaultValue={!add ? data.additional_info_en : ""}
+                        defaultValue={!add && data.additional_info_en !== "undefined" ? data.additional_info_en : ""}
                         onChange={(e) => {
                           setModalNoDataError(false);
                           setAdditional_info_en_error(false);

@@ -230,8 +230,8 @@ export default function GalleryEditModal(props, {open, setOpen, data}) {
             if(height) formData.append('height', height);
             if(id) formData.append('id', id);
             if(width) formData.append("width", width);
-            if(title_pl) formData.append("title_pl", title_pl);
-            if(title_en) formData.append("title_en", title_en);
+            if(title_pl || title_pl === "") formData.append("title_pl", title_pl);
+            if(title_en || title_en === "") formData.append("title_en", title_en);
             if(image) formData.append("image", image);
             setLoading(true);
             const response = await axiosInstance.put(`/api/gallery/${props.data.id}`,
@@ -240,7 +240,6 @@ export default function GalleryEditModal(props, {open, setOpen, data}) {
               withCredentials: true,
               onUploadProgress: (data) => {
                 //Set the progress value to show the progress bar
-                console.log(progress);
                 setProgress(Math.round((100 * data.loaded) / data.total));
               },
             });
