@@ -67,7 +67,7 @@ class PlantNurseryAccess {
         const AddItem = await db("files_download").insert({
           title_pl: data.title_pl,
           title_en: data.title_en,
-          path: path,
+          src: path,
         });
         return true;
       } catch (error) {

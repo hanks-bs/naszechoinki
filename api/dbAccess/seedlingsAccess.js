@@ -2,12 +2,12 @@ import { db } from "../dataBase/connection.js";
 import nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
-  host: "mail41.mydevil.net",
+  host: "smtp.gmail.com",
   port: 587,
   secure: false, //zmienić w produkcji na true
   auth: {
-    user: "contactform@hanks.usermd.net",
-    pass: "P6D9QMFRq82pLEf"
+    user: "naszechoinki.formularz@gmail.com",
+    pass: "Q12345rew"
   },
 });
 class SeedlingsAccess {
@@ -112,8 +112,8 @@ class SeedlingsAccess {
     <b>Treść wiadomości</b>: ${data.message} <br>
     `
     const info = await transporter.sendMail({
-      from: '"Formularz kontaktowy Sadzonki" <contactform@hanks.usermd.net>',
-      to: "wpmasmix0@gmail.com",
+      from: '"Formularz kontaktowy Sadzonki" <naszechoinki.formularz@gmail.com>',
+      to: "naszechoinki.formularz@gmail.com",
       subject: "Zamówienie sadzonki",
       html: message,
     });

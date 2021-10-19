@@ -314,10 +314,12 @@ export default function GalleryModal ({data}) {
         setLoading(true);
         const formData = new FormData();
         if(!image) {setImageError("To pole jest wymagane"); return setLoading(false);}
+        if(title_pl) formData.append("title_pl", title_pl);
         if(title_en) formData.append("title_en", title_en);
         if(width) formData.append("width", width);
         if(height) formData.append('height', height);
-        if(title_pl) formData.append("title_pl", title_pl);
+        
+        console.log(title_pl, title_en, width, height)
         
         formData.append("image", image);
         const response = await axiosInstance.post(`/api/gallery/`,
@@ -448,12 +450,12 @@ export default function GalleryModal ({data}) {
                         id={`loginform-login`}
                         fullWidth
                         type="number"
-                        error={title_en_error ? true : false}
-                        helperText={title_en_error}
+                        error={heightError ? true : false}
+                        helperText={heightError}
                         onChange={(e) => {
                           setModalNoDataError(false);
-                          setTitle_en_error(false);
-                          setTitle_en(e.target.value);
+                          setHeightError(false);
+                          setHeight(e.target.value);
                         }}
                       />
                     </Grid>
@@ -473,12 +475,12 @@ export default function GalleryModal ({data}) {
                         id={`loginform-login`}
                         fullWidth
                         type="number"
-                        error={title_en_error ? true : false}
-                        helperText={title_en_error}
+                        error={widthError ? true : false}
+                        helperText={widthError}
                         onChange={(e) => {
                           setModalNoDataError(false);
-                          setTitle_en_error(false);
-                          setTitle_en(e.target.value);
+                          setWidthError(false);
+                          setWidth(e.target.value);
                         }}
                       />
                     </Grid>
@@ -607,7 +609,7 @@ export default function GalleryModal ({data}) {
               </TableCell>
               <TableCell align="left">{item.title_pl}</TableCell>
               <TableCell align="left">{item.title_en}</TableCell>
-              <TableCell align="left"><Image src={item.src } objectFit="contain" quality="75%" alt={item.title} width={100} height={50}/></TableCell>
+              <TableCell align="left"><Image src={`https://api.naszechoinki.pl/public${item.src}`} objectFit="contain" quality="75%" alt={item.title} width={100} height={50}/></TableCell>
               <TableCell align="right"><Button onClick={async () => {await passData(item.id); await setOpenEditSingle(true)}}  className={clsx(classes.modalBtns,classes.modalEditBtn)}>EDYTUJ</Button> | <Button className={clsx(classes.modalBtns,classes.modalDeleteBtn)} onClick={async () => await handleDelete(item.id)}>USUŃ</Button></TableCell>
             </TableRow>
           ))}

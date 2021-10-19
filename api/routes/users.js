@@ -19,7 +19,7 @@ const max_size_10mb = 10485760; // 10 mb
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './../client/public/uploads/images')
+    cb(null, './public/uploads/images')
   },
   filename: function(req, file, callback) {
     callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
@@ -28,7 +28,7 @@ const storage = multer.diskStorage({
 
 const fileStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './../client/public/uploads/download_files')
+    cb(null, './public/uploads/download_files')
   },
   filename: function(req, file, callback) {
     callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);

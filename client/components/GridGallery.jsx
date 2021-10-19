@@ -37,7 +37,7 @@ export default function GridGallery({ userdata, items }) {
   const photos = items.map((item) => {
     return {
       id: item.id,
-      src: item.src,
+      src: `https://api.naszechoinki.pl/public${item.src}`,
       alt: locale === "pl" ? item.title_pl : item.title_en,
       title: locale === "pl" && item.title_pl && item.title_en ? item.title_pl : item.title_en,
       width: item.width,

@@ -175,7 +175,7 @@ class PlantNurseryService {
     async RemoveFile(id) {
       try {
         const checkIfExist = await db("files_download")
-          .select("path")
+          .select("src")
           .where("id", id);
         if (checkIfExist.length <= 0) return { error: { notExist: true } };
         const path = checkIfExist[0].path;

@@ -1,9 +1,9 @@
 import axios from 'axios';
-
+import axiosInstance from './axios';
 
 export const verifyTokens = async () => {
     try {
-        const response = await axios.get(`http://${window.location.hostname}:5000/verifyTokens`, {withCredentials: true});
+        const response = await axiosInstance.get(`/api/verifyTokens`, {withCredentials: true});
         return response.data
     } catch (error) {
         return error;

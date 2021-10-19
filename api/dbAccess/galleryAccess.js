@@ -25,6 +25,7 @@ class GalleryAccess {
 
     async UploadImage(formData) {
       try {
+        console.log(formData)
         const AddItem = await db("gallery_items").insert(formData);
         return true;
       } catch (error) {

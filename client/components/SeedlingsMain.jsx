@@ -16,7 +16,7 @@ import { useRouter } from "next/router";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import SeedlingsModal from "./SeedlingsModal";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axiosInstance from "./../lib/axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -189,6 +189,9 @@ function SeedlingsMain(props) {
     setOpen(true);
   };
   const userdata = props.userdata;
+ 
+  
+
   return (
     <>
       <CssBaseline />
@@ -216,8 +219,9 @@ function SeedlingsMain(props) {
             component="p"
             className={classes.pStyle}
             style={{ marginTop: 40 }}
+            dangerouslySetInnerHTML={{__html: t_spec.heading_desc}}
           >
-            {t_spec.heading_desc}
+            
           </Typography>
           <Box component="div" className={classes.BoxStyle}>
             <Grid 
@@ -270,7 +274,7 @@ function SeedlingsMain(props) {
                           <Box
                             className={classes.image}
                             style={{
-                              backgroundImage: `url(${elem.image_link})`,
+                              backgroundImage: `url(https://api.naszechoinki.pl/public${elem.image_link})`,
                             }}
                           />
                         </Grid>

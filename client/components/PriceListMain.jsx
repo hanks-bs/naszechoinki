@@ -249,7 +249,7 @@ export default function PriceListMain(props) {
                   className={classes.image}
                   style={{
                     backgroundImage:
-                      `url(${item.image_link})`,
+                      `url(https://api.naszechoinki.pl/public${item.image_link})`,
                   }}
                 />
 

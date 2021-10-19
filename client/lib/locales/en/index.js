@@ -12,17 +12,17 @@ export default {
   our_trees: "Our trees",
 
   //Dlaczego my START
-  heading1: "Lorem ipsum",
+  heading1: "Caucasian fir plantation",
   description1:
-    "Do consequat dolore consectetur voluptate. Eiusmod aliquip et mollit labore eiusmod adipisicing deserunt. Labore consectetur aliquip ea consectetur est sint quis occaecat nulla magna labore minim.",
+    "For several dozen years, our warehouse has been producing and selling Caucasian fir for Christmas trees. You will also find blue spruce here.",
 
-  heading2: "Lorem ipsum",
+  heading2: "Experience",
   description2:
-    "Do consequat dolore consectetur voluptate. Eiusmod aliquip et mollit labore eiusmod adipisicing deserunt. Labore consectetur aliquip ea consectetur est sint quis occaecat nulla magna labore minim.",
+    "Our more than thirty years of experience allows us to obtain the highest quality of planted trees.",
 
-  heading3: "Lorem ipsum",
+  heading3: "Seedlings",
   description3:
-    "Do consequat dolore consectetur voluptate. Eiusmod aliquip et mollit labore eiusmod adipisicing deserunt. Labore consectetur aliquip ea consectetur est sint quis occaecat nulla magna labore minim.",
+    "Our wholesaler sells Caucasian fir, blue spruce and Norway spruce seedlings.",
 
   see_pricelist: "See the pricelist",
   //Dlaczego my END

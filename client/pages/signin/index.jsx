@@ -19,7 +19,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 const CheckIcon = dynamic(() => import("@material-ui/icons/Check"), {ssr: false});
 import { withRouter } from "next/router";
 const Head = dynamic(() => import("next/head"));
-
+import axiosInstance from './../../lib/axios';
 const styles = (theme) => ({
   root: {
     display: "flex",
@@ -154,9 +154,9 @@ class Login extends Component {
   };
 
   handleSubmit = async () => {
-    await axios
+    await axiosInstance
       .post(
-        `http://${window.location.hostname}:5000/signin`,
+        '/api/signin',
         {
           login: this.state.username,
           password: this.state.password,
@@ -293,7 +293,7 @@ class Login extends Component {
     return (
       <>
       <Head>
-      <title>Trio | Zaloguj się</title>
+      <title>Logowanie - Naszechoinki.pl</title>
     </Head>
       <Layout>
         <motion.div

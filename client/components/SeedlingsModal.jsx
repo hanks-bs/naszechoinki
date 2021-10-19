@@ -393,7 +393,7 @@ export default function SeedlingsModal({ data, open, setOpen }) {
           withCredentials: true,
           onUploadProgress: (data) => {
             //Set the progress value to show the progress bar
-            console.log(progress);
+            console.log(data);
             setProgress(Math.round((100 * data.loaded) / data.total));
           },
         }

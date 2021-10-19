@@ -11,17 +11,17 @@ export default {
   our_trees: "Nasze choinki",
 
   //Dlaczego my START
-  heading1: "Lorem ipsum",
+  heading1: "Plantacja jodły kaukaskiej",
   description1:
-    "Do consequat dolore consectetur voluptate. Eiusmod aliquip et mollit labore eiusmod adipisicing deserunt. Labore consectetur aliquip ea consectetur est sint quis occaecat nulla magna labore minim.",
+    "Nasza hurtownia od kilkudziesięciu lat zajmuje się produkcją i sprzedaż jodły kaukaskiej z przeznaczeniem na choinki. Znajdziecie u nas również świerka kłującego.",
 
-  heading2: "Lorem ipsum",
+  heading2: "Doświadczenie",
   description2:
-    "Do consequat dolore consectetur voluptate. Eiusmod aliquip et mollit labore eiusmod adipisicing deserunt. Labore consectetur aliquip ea consectetur est sint quis occaecat nulla magna labore minim.",
+    "Nasze ponad trzydziestoletnie  doświadczenie pozwala uzyskać najwyższą jakość sadzonych drzew.",
 
-  heading3: "Lorem ipsum",
+  heading3: "Sadzonki",
   description3:
-    "Do consequat dolore consectetur voluptate. Eiusmod aliquip et mollit labore eiusmod adipisicing deserunt. Labore consectetur aliquip ea consectetur est sint quis occaecat nulla magna labore minim.",
+    "Nasz hurtownia zajmuje się sprzedażą sadzonek jodły kaukaskiej, świerka kłującego oraz świerka pospolitego.",
 
   see_pricelist: "Zobacz cennik",
   //Dlaczego my END

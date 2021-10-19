@@ -77,14 +77,14 @@ export default function FilesDownload(props) {
             <Grid item className={classes.singleItem} key={`file-${elem.id}`}>
             <Grid container direction="column" >
               <Grid item className={classes.imagefile}>
-              <Image src={elem.path.split('.')[1] === "pdf" ? `/images/pdf-icon.png` : `/images/excel-icon.png`} alt="Excel icon" width={75} height={75} objectFit="contain"
+              <Image src={elem.src.split('.')[1] === "pdf" ? `/images/pdf-icon.png` : `/images/excel-icon.png`} alt="Excel icon" width={75} height={75} objectFit="contain"
               quality="75%"/>
               </Grid>
               <Grid item className={classes.NameFile}>
                 {locale==='pl' ? elem.title_pl : elem.title_en}
               </Grid>
               <Grid item className={classes.download}>
-              <a href={elem.path} download>{t_spec.download.toUpperCase()}</a>
+              <a href={elem.src} download>{t_spec.download.toUpperCase()}</a>
               </Grid>
               {props.userdata ?  <Grid item className={classes.download}>
               <button style={{border: 0, backgroundColor: "transparent", color: "red", cursor: "pointer"}}  onClick={() => {handleDelete(elem.id)}}>Usuń</button>

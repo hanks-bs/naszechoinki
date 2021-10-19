@@ -1,3 +1,4 @@
+const withImages = require('next-images')
 module.exports = {
   reactStrictMode: true,
   pageExtensions: ["mdx", "jsx", "js", "ts", "tsx"],
@@ -33,4 +34,9 @@ module.exports = {
       },
     ]
   },
+  images: {
+    domains: ["api.naszechoinki.pl"],
+  },
 };
+
+

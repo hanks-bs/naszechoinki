@@ -1,6 +1,6 @@
 export default {
     title: "Gallery",
-    description: "Lorem ipsum",
+    description: "Work done by our company.",
     keywords:
       "gallery, cuttings, price, Caucasian fir, Korean fir, Serbian spruce, silver spruce, California fir",
     subject: "Photos of our work",

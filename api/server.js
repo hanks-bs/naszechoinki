@@ -7,6 +7,10 @@ import randomString from 'randomstring';
 import cookieParser from 'cookie-parser';
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
+import path from "path";
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 dotenv.config();
 
@@ -22,7 +26,7 @@ app.use(express.json());
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }))
 
-
+app.use('/public', express.static(__dirname + '/public'));
 
 app.use(cookieParser())
 // adding Helmet to enhance your API's security

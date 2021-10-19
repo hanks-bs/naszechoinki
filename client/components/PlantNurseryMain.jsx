@@ -205,7 +205,7 @@ export default function PlantNurseryMain(props) {
   const [data, setData] = useState({});
 
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (e, id) => {
     const response = await axiosInstance.delete(`/api/plantnursery_items/${id}`, {
       withCredentials: true,
     });
@@ -248,7 +248,7 @@ export default function PlantNurseryMain(props) {
                     className={classes.image}
                     style={{
                       backgroundImage:
-                        `url(${item.image_link})`,
+                        `url(https://api.naszechoinki.pl/public${item.image_link})`,
                     }}
                   />
 

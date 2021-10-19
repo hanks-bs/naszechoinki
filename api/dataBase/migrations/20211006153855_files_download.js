@@ -6,7 +6,6 @@ exports.up = function(knex) {
         table.string("title_pl");
         table.string("title_en");
         table.string("src").notNullable();
-        table.string("alt").notNullable();
         table.timestamps(true, true);
 
     })

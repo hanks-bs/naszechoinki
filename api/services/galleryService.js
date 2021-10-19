@@ -33,6 +33,7 @@ class GalleryService {
       try {
         const errors = {};
         const formData = {};
+        console.log(data)
         if (data.title_pl) formData.title_pl = data.title_pl;
         if (data.title_en) formData.title_en = data.title_en;
         if (data.height) formData.height = data.height;
@@ -51,8 +52,9 @@ class GalleryService {
         if (size > max_size) errors.size = true;
         const path = `/uploads/images/${file.filename}`;
         formData.src = path;
-  
+        console.log(formData)
         const response = await GalleryAccess.UploadImage(formData);
+        
         return response;
       } catch (error) {
         console.log(error);
