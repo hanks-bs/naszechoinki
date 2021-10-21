@@ -536,7 +536,7 @@ export default function GalleryModal ({data}) {
                     />
                   )}</Button>
               </Box>
-              {!image && data.src ? `Nazwa: ${data.src.split("/")[3]}` : null }
+              {!image && data.src ? `Nazwa: ${data.src.split("/")[4]}` : null }
               {image ? `Nazwa: ${image.name}` : null}
               {image && (
                 <div>
@@ -622,7 +622,7 @@ export default function GalleryModal ({data}) {
               </Box>
             </form>
             
-            {!image && data.src ? `Nazwa: ${data.src.split("/")[3]}` : null }
+            {!image && data.src ? `Nazwa: ${data.src.split("/")[4]}` : null }
             {image ? `Nazwa: ${image.name}` : null}
             {image && (
               <div>

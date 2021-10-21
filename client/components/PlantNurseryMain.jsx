@@ -248,7 +248,7 @@ export default function PlantNurseryMain(props) {
                     className={classes.image}
                     style={{
                       backgroundImage:
-                        `url(https://api.naszechoinki.pl/public${item.image_link})`,
+                        `url(https://api.naszechoinki.pl/${item.image_link})`,
                     }}
                   />
 

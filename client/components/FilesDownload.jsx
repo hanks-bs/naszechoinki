@@ -84,7 +84,7 @@ export default function FilesDownload(props) {
                 {locale==='pl' ? elem.title_pl : elem.title_en}
               </Grid>
               <Grid item className={classes.download}>
-              <a href={elem.src} download>{t_spec.download.toUpperCase()}</a>
+              <a href={`https://api.naszechoinki.pl/${elem.src}`} download>{t_spec.download.toUpperCase()}</a>
               </Grid>
               {props.userdata ?  <Grid item className={classes.download}>
               <button style={{border: 0, backgroundColor: "transparent", color: "red", cursor: "pointer"}}  onClick={() => {handleDelete(elem.id)}}>Usuń</button>

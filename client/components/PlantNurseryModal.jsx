@@ -582,7 +582,7 @@ export default function PlantNurseryModal({ data, open, setOpen }) {
   
                 {!add && !loading ? <Button  disabled={loading} className={classes.delete} onClick={(e) => handleDelete(e, data.id)}>Usuń</Button> : null}
               </Box>
-              {!add && !image && data.image_link ? `Nazwa: ${data.image_link.split("/")[3]}` : null }
+              {!add && !image && data.image_link ? `Nazwa: ${data.image_link.split("/")[4]}` : null }
               {image ? `Nazwa: ${image.name}` : null}
               {image && (
                 <div>

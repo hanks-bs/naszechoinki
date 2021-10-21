@@ -1,6 +1,7 @@
 import GalleryAccess from './../dbAccess/galleryAccess.js';
 import { db } from "./../dataBase/connection.js";
 import crypto from "crypto";
+import sharp from 'sharp';
 
 
 class GalleryService {
@@ -44,15 +45,20 @@ class GalleryService {
 
         const max_size = 5242880; // 5 mb
         const size = file.size;
-        file.originalname =
-          crypto.randomBytes(16).toString("hex") +
-          `.${file.mimetype.split("/")[1]}`;
+
         const type = ["image/png", "image/jpeg", "image/jpg"];
         if (type.indexOf(file.mimetype) < 0) errors.type = true;
         if (size > max_size) errors.size = true;
-        const path = `/uploads/images/${file.filename}`;
+
+        const filename = file.fieldname + "_" + Date.now() + "_" + crypto.randomBytes(16).toString("hex");
+        const path = `./public/uploads/images/${filename}.webp`;
+       
+        const {buffer} = file;
+        await sharp(buffer)
+        .webp({quality: 50})
+        .toFile(path);
         formData.src = path;
-        console.log(formData)
+
         const response = await GalleryAccess.UploadImage(formData);
         
         return response;
@@ -83,13 +89,18 @@ class GalleryService {
         if (file) {
           const max_size = 5242880; // 5 mb
           const size = file.size;
-          file.originalname =
-            crypto.randomBytes(16).toString("hex") +
-            `.${file.mimetype.split("/")[1]}`;
           const type = ["image/png", "image/jpeg", "image/jpg"];
           if (type.indexOf(file.mimetype) < 0) errors.Filetype = true;
           if (size > max_size) errors.Filesize = true;
-          const path = `/uploads/images/${file.filename}`;
+
+          const filename = file.fieldname + "_" + Date.now() + "_" + crypto.randomBytes(16).toString("hex");
+          const path = `./public/uploads/images/${filename}.webp`;
+         
+          const {buffer} = file;
+          await sharp(buffer)
+          .webp({quality: 20})
+          .toFile(path);
+
           formData.src = path;
           const response = await GalleryAccess.UpdateImage(id, formData);
           return response;
@@ -111,7 +122,7 @@ class GalleryService {
           .select("src")
           .where("id", id);
         if (checkIfExist.length <= 0) return { error: { notExist: true } };
-        const path = checkIfExist[0].path;
+        const path = checkIfExist[0].src;
         const response = await GalleryAccess.DeleteImage(id, path);
         return response;
       } catch (error) {

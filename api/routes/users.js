@@ -12,26 +12,19 @@ import PlantNursery from '../controllers/plantnursery.js';
 import Gallery from '../controllers/gallery.js';
 import HomePage from '../controllers/homepage.js';
 import multer from 'multer';
-
+import crypto from "crypto";
 const max_size = 5242880; // 5 mb
 
 const max_size_10mb = 10485760; // 10 mb
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/uploads/images')
-  },
-  filename: function(req, file, callback) {
-    callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
-}
-})
+const storage = multer.memoryStorage()
 
 const fileStorage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './public/uploads/download_files')
   },
   filename: function(req, file, callback) {
-    callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname);
+    callback(null, file.fieldname + "_" + Date.now() + "_" + crypto.randomBytes(16).toString("hex") + `.${file.mimetype.split("/")[1]}`);
 }
 })
 const upload = multer({storage: storage, limits: max_size});

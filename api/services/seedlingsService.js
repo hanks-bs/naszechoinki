@@ -2,7 +2,7 @@ import SeedlingsAccess from "../dbAccess/seedlingsAccess.js";
 import Validator from "validatorjs";
 import crypto from "crypto";
 import { db } from "../dataBase/connection.js";
-
+import sharp from 'sharp';
 class SeedlingsService {
   async Get() {
     const response = await SeedlingsAccess.Get();
@@ -36,12 +36,17 @@ class SeedlingsService {
 
     if (file) {
       const size = file.size;
-      file.originalname =
-        crypto.randomBytes(16).toString("hex") +
-        `.${file.mimetype.split("/")[1]}`;
       const type = ["image/png", "image/jpeg", "image/jpg"];
       if (type.indexOf(file.mimetype) < 0) errors.type = true;
       if (size > max_size) errors.size = true;
+
+      file.filename = file.fieldname + "_" + Date.now() + "_" + crypto.randomBytes(16).toString("hex");
+      const path = `./public/uploads/images/${file.filename}.webp`;
+     
+      const {buffer} = file;
+      await sharp(buffer)
+      .webp({quality: 20})
+      .toFile(path);
     } else {
       errors.noFile = true;
     }
@@ -81,7 +86,7 @@ class SeedlingsService {
       errors = Object.assign(errors, validation.errors.errors);
       return;
     });
-    const path = `/uploads/images/${file.filename}`;
+    const path = `./public/uploads/images/${file.filename}.webp`;
     if (validation.fails() || Object.keys(errors).length > 0) return {errors};
     const response = await SeedlingsAccess.Items_Upload(data, path);
 
@@ -104,13 +109,18 @@ class SeedlingsService {
       const max_size = 5242880; // 5 mb
     if (file) {
       const size = file.size;
-      file.originalname =
-        crypto.randomBytes(16).toString("hex") +
-        `.${file.mimetype.split("/")[1]}`;
+
       const type = ["image/png", "image/jpeg", "image/jpg"];
       if (type.indexOf(file.mimetype) < 0) errors.type = true;
       if (size > max_size) errors.size = true;
-      const path =  `/uploads/images/${file.filename}`;
+
+      const filename = file.fieldname + "_" + Date.now() + "_" + crypto.randomBytes(16).toString("hex");
+      const path = `./public/uploads/images/${filename}.webp`;
+         
+          const {buffer} = file;
+          await sharp(buffer)
+          .webp({quality: 20})
+          .toFile(path);
       const response =  await SeedlingsAccess.Items_Update(id, data, path);
       return response;
     }
@@ -120,8 +130,9 @@ class SeedlingsService {
 
   async Items_Delete(id) {
     const _exist = await db('seedlings_items').select("*").where("id", id);
+    const path = _exist[0].image_link;
     if(!_exist.length) return {errors: {NotExist: true}};
-    const response = await SeedlingsAccess.Items_Delete(id);
+    const response = await SeedlingsAccess.Items_Delete(id, path);
 
     return response;
   }

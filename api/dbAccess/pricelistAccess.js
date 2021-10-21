@@ -1,4 +1,5 @@
 import { db } from "./../dataBase/connection.js";
+import * as fs from 'fs';
 
 class PricelistAccess {
   async GetItems() {
@@ -10,9 +11,12 @@ class PricelistAccess {
       return {error};
     }
   }
-  async DeleteItem(id) {
+  async DeleteItem(id, path) {
     try {
       const deleteItem = await db("pricelist_items").del().where("id", id);
+      fs.unlink(path, function(err){
+        if(err) return {error: err};
+      });
 
       return true;
     } catch (error) {
@@ -52,11 +56,14 @@ class PricelistAccess {
     
   }
 
-  async Items_Update(id, data) {
+  async Items_Update(id, data, path) {
     try {
+      const path_toDel = await db("pricelist_items").select("image_link").where("id", id);
       const item = await db("pricelist_items").select("*").where("id", id).update(data);
+      fs.unlink(path_toDel[0].image_link, function(err){
+        if(err) return {error: err};
+      });
       return true;
-    return 
     } catch (error) {
       console.log(error);
       return { error };

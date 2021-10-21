@@ -54,7 +54,6 @@ class Pricelist {
         const { id } = req.params;
         const data = req.body
         const file = req.file;
-        console.log(data)
         if(!file && Object.keys(data) <= 0) return res.status(201).json({errors: {noData: true}})
         const response = await PricelistService.Items_Update(id, data, file);
         if (response.error) return res.status(500).json(response.errors);

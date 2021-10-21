@@ -1,5 +1,6 @@
 import { db } from "../dataBase/connection.js";
 import nodemailer from 'nodemailer';
+import * as fs from 'fs';
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
@@ -83,13 +84,20 @@ class SeedlingsAccess {
 
     const _update = await db('seedlings_items').select("*").where('id', id);
     if(!_update.length) return {errors: {notExists: true}};
+    const path_unlink = _update[0].image_link;
+    fs.unlink(path_unlink, function(err){
+      if(err) return {error: err};
+    });
     const _updateItem = await db('seedlings_items').select("*").where('id', id).update(formData);
     return true;
   }
 
-  async Items_Delete(id) {
+  async Items_Delete(id, path) {
     try {
       const _delete = await db('seedlings_items').del().where("id", id);
+      fs.unlink(path, function(err){
+        if(err) return {error: err};
+      });
       return true;
     } catch (error) {
       return console.log(error);

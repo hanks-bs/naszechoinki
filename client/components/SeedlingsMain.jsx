@@ -274,7 +274,7 @@ function SeedlingsMain(props) {
                           <Box
                             className={classes.image}
                             style={{
-                              backgroundImage: `url(https://api.naszechoinki.pl/public${elem.image_link})`,
+                              backgroundImage: `url(https://api.naszechoinki.pl/${elem.image_link})`,
                             }}
                           />
                         </Grid>

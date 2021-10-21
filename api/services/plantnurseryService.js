@@ -1,6 +1,7 @@
 import PlantNurseryAccess from './../dbAccess/plantnurseryAccess.js';
 import { db } from "./../dataBase/connection.js";
 import crypto from "crypto";
+import sharp from 'sharp';
 
 class PlantNurseryService {
     async GetItems() {
@@ -16,11 +17,11 @@ class PlantNurseryService {
     async DeleteItem(id) {
         try {
           const checkIfExist = await db("plant_nursery_items")
-            .select("id")
+            .select("id", "image_link")
             .where("id", id);
           if (checkIfExist.length <= 0) return { error: { notExist: true } };
-    
-          const response = await PlantNurseryAccess.DeleteItem(id);
+          const path = checkIfExist[0].image_link;
+          const response = await PlantNurseryAccess.DeleteItem(id, path);
           return response;
         } catch (error) {
           console.log(error);
@@ -51,13 +52,17 @@ class PlantNurseryService {
     
           const max_size = 5242880; // 5 mb
           const size = file.size;
-          file.originalname =
-            crypto.randomBytes(16).toString("hex") +
-            `.${file.mimetype.split("/")[1]}`;
+          
           const type = ["image/png", "image/jpeg", "image/jpg"];
           if (type.indexOf(file.mimetype) < 0) errors.type = true;
           if (size > max_size) errors.size = true;
-          const path = `/uploads/images/${file.filename}`;
+          const filename = file.fieldname + "_" + Date.now() + "_" + crypto.randomBytes(16).toString("hex");
+          const path = `./public/uploads/images/${filename}.webp`;
+         
+          const {buffer} = file;
+          await sharp(buffer)
+          .webp({quality: 20})
+          .toFile(path);
     
           const response = await PlantNurseryAccess.AddItem(data, path);
           return response;
@@ -115,13 +120,17 @@ class PlantNurseryService {
           if (file) {
             const max_size = 5242880; // 5 mb
             const size = file.size;
-            file.originalname =
-              crypto.randomBytes(16).toString("hex") +
-              `.${file.mimetype.split("/")[1]}`;
             const type = ["image/png", "image/jpeg", "image/jpg"];
             if (type.indexOf(file.mimetype) < 0) errors.Filetype = true;
             if (size > max_size) errors.Filesize = true;
-            const path = `/uploads/images/${file.filename}`;
+
+            const filename = file.fieldname + "_" + Date.now() + "_" + crypto.randomBytes(16).toString("hex");
+            const path = `./public/uploads/images/${filename}.webp`;
+                const {buffer} = file;
+                await sharp(buffer)
+                .webp({quality: 20})
+                .toFile(path);
+
             formData.image_link = path;
             const response = await PlantNurseryAccess.Items_Update(id, formData);
             return response;
@@ -162,7 +171,8 @@ class PlantNurseryService {
         const type = ["application/pdf", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/vnd.ms-excel"];
         if (type.indexOf(file.mimetype) < 0) errors.type = true;
         if (size > max_size) errors.size = true;
-        const path = `/uploads/download_files/${file.filename}`;
+        const path = `./public/uploads/download_files/${file.filename}`;
+
   
         const response = await PlantNurseryAccess.AddFile(data, path);
         return response;

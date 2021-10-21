@@ -448,7 +448,7 @@ export default function GalleryEditModal(props, {open, setOpen, data}) {
               />
             )}</Button>
         </Box>
-        {!image && props.data &&  props.data.src ? `Nazwa: ${props.data.src.split("/")[3]}` : null }
+        {!image && props.data &&  props.data.src ? `Nazwa: ${props.data.src.split("/")[4]}` : null }
         {image ? `Nazwa: ${image.name}` : null}
         {image && (
           <div>

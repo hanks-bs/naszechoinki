@@ -1,6 +1,7 @@
-import PricelistAccess from "./../dbAccess/PricelistAccess.js";
+import PricelistAccess from "./../dbAccess/pricelistAccess.js";
 import { db } from "./../dataBase/connection.js";
 import crypto from "crypto";
+import sharp from 'sharp';
 
 class PricelistService {
   async GetItems() {
@@ -16,11 +17,11 @@ class PricelistService {
   async DeleteItem(id) {
     try {
       const checkIfExist = await db("pricelist_items")
-        .select("id")
+        .select("id", "image_link")
         .where("id", id);
       if (checkIfExist.length <= 0) return { error: { notExist: true } };
-
-      const response = await PricelistAccess.DeleteItem(id);
+      const path = checkIfExist[0].image_link
+      const response = await PricelistAccess.DeleteItem(id, path);
       return response;
     } catch (error) {
       console.log(error);
@@ -52,13 +53,17 @@ class PricelistService {
 
       const max_size = 5242880; // 5 mb
       const size = file.size;
-      file.originalname =
-        crypto.randomBytes(16).toString("hex") +
-        `.${file.mimetype.split("/")[1]}`;
       const type = ["image/png", "image/jpeg", "image/jpg"];
       if (type.indexOf(file.mimetype) < 0) errors.type = true;
       if (size > max_size) errors.size = true;
-      const path = `/uploads/images/${file.filename}`;
+      
+      const filename = file.fieldname + "_" + Date.now() + "_" + crypto.randomBytes(16).toString("hex");
+      const path = `./public/uploads/images/${filename}.webp`;
+     
+      const {buffer} = file;
+      await sharp(buffer)
+      .webp({quality: 20})
+      .toFile(path);
 
       const response = await PricelistAccess.AddItem(data, path);
       return response;
@@ -113,19 +118,23 @@ class PricelistService {
       if (data.description_pl) formData.description_pl = data.description_pl;
       if (data.description_en) formData.description_en = data.description_en;
       if (data.heights) formData.heights = data.heights;
-      if (data.additional_info_pl !== undefined) formData.additional_info_pl = data.additional_info_pl;
-      if (data.additional_info_en !== undefined) formData.additional_info_en = data.additional_info_en;
+      if (data.additional_info_pl !== 'undefined') formData.additional_info_pl = data.additional_info_pl;
+      if (data.additional_info_en !== 'undefined') formData.additional_info_en = data.additional_info_en;
 
       if (file) {
         const max_size = 5242880; // 5 mb
         const size = file.size;
-        file.originalname =
-          crypto.randomBytes(16).toString("hex") +
-          `.${file.mimetype.split("/")[1]}`;
         const type = ["image/png", "image/jpeg", "image/jpg"];
         if (type.indexOf(file.mimetype) < 0) errors.Filetype = true;
         if (size > max_size) errors.Filesize = true;
-        const path = `/uploads/images/${file.filename}`;
+
+        const filename = file.fieldname + "_" + Date.now() + "_" + crypto.randomBytes(16).toString("hex");
+        const path = `./public/uploads/images/${filename}.webp`;
+            const {buffer} = file;
+            await sharp(buffer)
+            .webp({quality: 20})
+            .toFile(path);
+
         formData.image_link = path;
         const response = await PricelistAccess.Items_Update(id, formData);
         return response;

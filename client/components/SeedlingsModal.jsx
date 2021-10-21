@@ -684,7 +684,7 @@ export default function SeedlingsModal({ data, open, setOpen }) {
 
               {!add && !loading ? <Button  disabled={loading} className={classes.delete} onClick={(e) => handleDelete(e, data.id)}>Usuń</Button> : null}
             </Box>
-            {!add && !currentFile && data.image_link ? `Nazwa: ${data.image_link.split("/")[3]}` : null }
+            {!add && !currentFile && data.image_link ? `Nazwa: ${data.image_link.split("/")[4]}` : null }
             {currentFile ? `Nazwa: ${currentFile.name}` : null}
             {previewImage && (
               <div>
