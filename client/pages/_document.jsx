@@ -52,7 +52,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
 
-          <link rel="canonical" href="https://naszechoinki.pl/"/>
+          
          
         </Head>
         <body>

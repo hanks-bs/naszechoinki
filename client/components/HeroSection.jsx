@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     position:"relative",
     height: "67vh",
     backgroundColor: "grey",
-    backgroundImage: "url(/images/home/hero-image.jpg)",
+    backgroundImage: "url(/images/home/hero-image.webp)",
     backgroundSize: "cover",
     backgroundPositionY: "65%",
     backgroundPositionX: "50%",

@@ -104,21 +104,21 @@ export default function OurTrees() {
       <Typography component={`h1`} variant="h1" className={classes.heading}>{t_spec.our_trees}</Typography>
         <Container maxWidth={`lg`} p={3} className={classes.container}>
        
-          <Grid item className={classes.item} style={{backgroundImage: "url('./images/home/jod-kau.jpg')"}}>
+          <Grid item className={classes.item} style={{backgroundImage: "url('./images/home/jod-kau.webp')"}}>
           <Box className={classes.description}>
           <Typography component="h2" variant="h3">{t_spec.cau_fir}</Typography>
           </Box>
           </Grid>
          
 
-          <Grid item className={classes.item} style={{backgroundImage: "url('./images/home/swierk.jpg')"}}>
+          <Grid item className={classes.item} style={{backgroundImage: "url('./images/home/swierk.webp')"}}>
           <Box className={classes.description}>
           <Typography component="h2" variant="h3">{t_spec.blue_spruce}</Typography>
           </Box>
           </Grid>
           
 
-          <Grid item className={classes.item} style={{backgroundImage: "url('./images/home/swierk-pos.jpg')"}}>
+          <Grid item className={classes.item} style={{backgroundImage: "url('./images/home/swierk-pos.webp')"}}>
           <Box className={classes.description}>
           <Typography component="h2" variant="h3">{t_spec.Nor_spruce}</Typography>
           </Box>

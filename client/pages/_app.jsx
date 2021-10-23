@@ -173,6 +173,7 @@ class MyApp extends App {
             name="author"
             content="Wiktor Poniewierski, wiktor.poniewierski09@gmail.com"
           />
+          <link rel="canonical" href="https://naszechoinki.pl/"/>
         </Head>
         <ThemeProvider theme={themeLight}>
           <Layout userdata={this.state.userdata}>

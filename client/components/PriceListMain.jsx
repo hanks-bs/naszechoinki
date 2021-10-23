@@ -131,13 +131,16 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     marginBottom: 20,
     "& > button": {
-      fontSize: "1.3rem",
-      [theme.breakpoints.down(840)]: {
-        flexDirection: "column-reverse",
+      [theme.breakpoints.down(610)]: {
+        fontSize: "1.1rem",
       },
+      fontSize: "1.3rem",
       padding: "8px 70px",
+      [theme.breakpoints.down(840)]: {
+        padding: "8px 35px",
+      },
       borderRadius: 30,
-    },
+    }
   },
   gridRow: {
     [theme.breakpoints.down(840)]: {
@@ -148,7 +151,7 @@ const useStyles = makeStyles((theme) => ({
   },
   edit: {
     [theme.breakpoints.down(840)]: {
-      right: 15,
+      right: 20,
     },
     right: 27,
     color: "#fff",
@@ -159,7 +162,7 @@ const useStyles = makeStyles((theme) => ({
   },
   delete: {
     [theme.breakpoints.down(840)]: {
-      right: 50,
+      right: -20,
     },
     right: -27,
     backgroundColor: "#ff3636",
@@ -171,14 +174,16 @@ const useStyles = makeStyles((theme) => ({
   },
   controllers: {
     top: -100,
+    width: "100%",
     zIndex: 1,
     left: "50%",
     transform: "translateX(-50%)",
     textAlign: "center",
     position: "absolute",
-    [theme.breakpoints.down(670)]: {
-      top: 15,
+    [theme.breakpoints.down(840)]: {
+      top: -50,
     },
+    
     "& > button": {
       minWidth: "auto",
     },

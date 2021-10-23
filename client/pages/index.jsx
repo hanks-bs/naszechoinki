@@ -31,7 +31,16 @@ export default function Home(props) {
 
         <meta name="keywords" content={t_spec.keywords} />
         <meta name="subject" content={t_spec.subject} />
-
+        <link href="https://fonts.googleapis.com" rel="preconnect" crossOrigin/>
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossOrigin/>
+        <link href="https://www.google-analytics.com" rel="preconnect" crossOrigin/>
+        <link href="https://stats.g.doubleclick.net" rel="preconnect" crossOrigin/>
+        <link href="https://www.google.com" rel="preconnect" crossOrigin/>
+        <link href="https://apis.google.com" rel="preconnect" crossOrigin/>
+        <link href="https://www.gstatic.com" rel="preconnect" crossOrigin/>
+        <link href="https://accounts.google.com" rel="preconnect" crossOrigin/>
+        <link href="https://ssl.gstatic.com" rel="preconnect" crossOrigin/>
+        
       </Head>
       <WhyUs />
       <OurTrees />

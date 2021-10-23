@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /signin/
+Disallow: /logowanie/
+Disallow: /pl/logowanie/
+Disallow: /pl/signin/
+Disallow: /en/signin/
+Disallow: /en/logowanie/
+Sitemap: https://www.naszechoinki.pl/sitemap.xml
+Disallow: /public/

@@ -108,8 +108,14 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     marginBottom: 20,
     "& > button": {
+      [theme.breakpoints.down(610)]: {
+        fontSize: "1.1rem",
+      },
       fontSize: "1.3rem",
       padding: "8px 70px",
+      [theme.breakpoints.down(840)]: {
+        padding: "8px 35px",
+      },
       borderRadius: 30,
     },
   },
@@ -150,8 +156,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   columns: {
-    marginLeft: "auto",
-    marginRight: "auto",
+    width: "calc(100%)",
+    margin: "24px auto",
   },
 }));
 

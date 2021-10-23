@@ -155,7 +155,7 @@ const useStyles = makeStyles((theme) => ({
   },
   edit: {
     [theme.breakpoints.down(840)]: {
-      right: 15,
+      right: 20,
     },
     right: 27,
     color: "#fff",
@@ -166,7 +166,7 @@ const useStyles = makeStyles((theme) => ({
   },
   delete: {
     [theme.breakpoints.down(840)]: {
-      right: 50,
+      right: -20,
     },
     right: -27,
     backgroundColor: "#ff3636",
@@ -178,14 +178,17 @@ const useStyles = makeStyles((theme) => ({
   },
   controllers: {
     top: -100,
+    width: "100%",
     zIndex: 1,
     left: "50%",
     transform: "translateX(-50%)",
     textAlign: "center",
     position: "absolute",
-    [theme.breakpoints.down(670)]: {
-      top: 15,
+    [theme.breakpoints.down(840)]: {
+      display:"inline-flex",
+      top: -50,
     },
+    
     "& > button": {
       minWidth: "auto",
     },
