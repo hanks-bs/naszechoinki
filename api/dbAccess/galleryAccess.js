@@ -40,15 +40,18 @@ class GalleryAccess {
         .where("id", id);
       if (!_update.length) return { errors: { notExists: true } };
       const path_unlink = _update[0].src;
-      fs.unlink(path_unlink, function (err) {
-        if (err) return { error: err };
-      });
+      if(data.src)
+      {
+        fs.unlink(path_unlink, function (err) {
+          if (err) return { error: err };
+        });
+      }
+     
       const item = await db("gallery_items")
         .select("*")
         .where("id", id)
         .update(data);
       return true;
-      return;
     } catch (error) {
       console.log(error);
       return { error };

@@ -337,7 +337,13 @@ export default function PlantNurseryModal({ data, open, setOpen }) {
     );
 
     validation.checkAsync(undefined, () => {
-      return { errors: validation.errors.errors };
+      const { errors } = validation.errors;
+      if(errors.title_pl) setTitle_pl_error(errors.title_pl)
+      errors.title_en ? setTitle_en_error(errors.title_en) : undefined;
+      errors.description_pl ? setDescription_pl_error(errors.description_pl) : undefined;
+      errors.description_en ? setDescription_en_error(errors.description_en) : undefined;
+      if(errors.image) {setImageError(errors.image)}
+      return;
     });
     if (validation.passes() && !imageError) {
       //elements.image_link === currentFile.name ? undefined : formData.append("image", currentFile);
@@ -358,7 +364,7 @@ export default function PlantNurseryModal({ data, open, setOpen }) {
     ? undefined
     : formData.append("image", image);
     
-   
+   console.log(!!description_pl)
 
     const response = await axiosInstance.put(
       `/api/plantnursery_items/${data.id}`,

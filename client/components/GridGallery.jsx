@@ -24,6 +24,12 @@ const useStyles = makeStyles((theme) => ({
   gallery: {
     overflow: "auto",
   },
+  border: {
+    "&:before": {
+      left: "50%",
+      transform: "translateX(-50%)"
+    }
+  },
 }));
 
 
@@ -81,17 +87,10 @@ export default function GridGallery({ userdata, items }) {
 
   return (
     <section className={classes.root} id={`gallery`}>
-      <Container maxWidth={`lg`}>
+      <Container maxWidth={`lg`} style={{textAlign: 'center'}}>
       {userdata ? (<GalleryModal data={items} />) : null}
-        <Typography variant="h1" component="h1">
-          {t.gallery}
-        </Typography>
-        <Typography
-          component="p"
-          className={classes.pStyle}
-          style={{ marginTop: 40, marginBottom: 80 }}
-        >
-          {t_spec.heading_desc}
+        <Typography variant="h1" component="h1" className={classes.border}>
+          {t_spec.heading}
         </Typography>
         {userdata && editMode ? (
           <Gallery

@@ -84,10 +84,14 @@ class SeedlingsAccess {
 
     const _update = await db('seedlings_items').select("*").where('id', id);
     if(!_update.length) return {errors: {notExists: true}};
-    const path_unlink = _update[0].image_link;
-    fs.unlink(path_unlink, function(err){
-      if(err) return {error: err};
-    });
+    if(path) {
+      const path_unlink = _update[0].image_link;
+      fs.unlink(path_unlink, function(err){
+        if(err) return {error: err};
+      });
+     
+     
+    }
     const _updateItem = await db('seedlings_items').select("*").where('id', id).update(formData);
     return true;
   }

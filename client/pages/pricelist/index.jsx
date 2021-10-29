@@ -40,7 +40,10 @@ export default function Pricelist (props) {
 
 Pricelist.getInitialProps = async (ctx) => {
   const items = await axiosInstance.get('/api/pricelist_items');
-  return {items: items.data};
+  
+  return {items: items.data.sort((a, b) => {
+    return a.id - b.id  ||  a.name.localeCompare(b.name);
+  })};
 }
 
 Pricelist.Layout = Layout;

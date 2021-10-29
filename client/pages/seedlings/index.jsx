@@ -48,7 +48,9 @@ export default function Seedlings(props) {
 
 Seedlings.getInitialProps = async (ctx) => {
   const items = await axiosInstance.get('/api/seedlings_items');
-  return {items: items.data};
+  return {items: items.data.sort((a, b) => {
+    return a.id - b.id  ||  a.name.localeCompare(b.name);
+  })};
 }
 
 Seedlings.Layout = Layout;

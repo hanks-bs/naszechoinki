@@ -207,7 +207,7 @@ class Footer extends React.Component {
                 </Link>
               </Grid>
               <Grid item>
-                <a href="https://instagram.com/projektowanie_ogrodow" rel="noopener noreferrer" target="_blank">
+                <a href="https://www.instagram.com/projektowanie_ogrodow_/" rel="noopener noreferrer" target="_blank">
                   
                     <IconButton
                       aria-label="Instagram"

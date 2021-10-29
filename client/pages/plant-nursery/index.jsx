@@ -41,7 +41,11 @@ export default function PlantNursery (props) {
 PlantNursery.getInitialProps = async (ctx) => {
   const items = await axiosInstance.get('/api/plantnursery_items');
   const files = await axiosInstance.get('/api/files_download');
-  return {items: items.data, files: files.data};
+  return {items: items.data.sort((a, b) => {
+    return a.id - b.id  ||  a.name.localeCompare(b.name);
+  }), files: files.data.sort((a, b) => {
+    return a.id - b.id  ||  a.name.localeCompare(b.name);
+  })};
 }
 
 PlantNursery.Layout = Layout;

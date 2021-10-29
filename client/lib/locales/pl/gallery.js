@@ -1,10 +1,11 @@
 export default {
     title: "Galeria",
-    description: "Pracę wykonane przez naszą firmę.",
+    description: "Galeria zdjęć wykonanych przez nas prac nasadzeniowych oraz naszych roślin.",
     keywords:
       "galeria, sadzonki, cena, jodła kaukaska, jodła koreańska, świerk serbski, świerk srebrny, jodła kalifornijska",
     subject: "Zdjęcia realizacji naszej pracy",
+    heading: "Galeria naszych prac",
     heading_desc:
-      "Pracę wykonane przez naszą firmę.",
+      "Galeria naszych prac",
   };
   

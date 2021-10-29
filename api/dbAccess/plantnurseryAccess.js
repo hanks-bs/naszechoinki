@@ -57,9 +57,13 @@ class PlantNurseryAccess {
       const _update = await db("plant_nursery_items").select("image_link").where("id", id);
       if (!_update.length) return { errors: { notExists: true } };
       const path_unlink = _update[0].image_link;
-      fs.unlink(path_unlink, function (err) {
-        if (err) return { error: err };
-      });
+      if(data.image_link)
+      {
+        fs.unlink(path_unlink, function (err) {
+          if (err) return { error: err };
+        });
+      }
+     
       const item = await db("plant_nursery_items")
         .select("*")
         .where("id", id)

@@ -60,9 +60,13 @@ class PricelistAccess {
     try {
       const path_toDel = await db("pricelist_items").select("image_link").where("id", id);
       const item = await db("pricelist_items").select("*").where("id", id).update(data);
-      fs.unlink(path_toDel[0].image_link, function(err){
-        if(err) return {error: err};
-      });
+      if(path)
+      {
+        fs.unlink(path_toDel[0].image_link, function(err){
+          if(err) return {error: err};
+        });
+        
+      }
       return true;
     } catch (error) {
       console.log(error);

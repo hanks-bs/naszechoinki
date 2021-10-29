@@ -114,8 +114,8 @@ class PlantNurseryService {
     
           if (data.title_pl) formData.title_pl = data.title_pl;
           if (data.title_en) formData.title_en = data.title_en;
-          if (data.description_pl) formData.description_pl = data.description_pl;
-          if (data.description_en) formData.description_en = data.description_en;
+          if (data.description_pl !== 'undefined') formData.description_pl = data.description_pl;
+          if (data.description_en !== 'undefined') formData.description_en = data.description_en;
     
           if (file) {
             const max_size = 5242880; // 5 mb
