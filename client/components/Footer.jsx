@@ -33,7 +33,7 @@ const styles = (theme) => ({
     },
   },
   footerDirection: {
-    [theme.breakpoints.down(656)]: {
+    [theme.breakpoints.down(1020)]: {
       flexDirection: "column",
       gap: 15,
     },
@@ -152,10 +152,42 @@ class Footer extends React.Component {
                           </a>
                         </Link>
                       )}
-                       
                       </Grid>
                     );
                   })}
+                  <Grid
+                  item
+                  key={`footer-privacy-policy`}
+                  style={{ margin: "0 10px" }}
+                >
+                  <Link href={`/${locale}/${t.link_privacy_policy}`} >
+                      <a>
+                        <Typography>{t.privacy_policy}</Typography>
+                      </a>
+                    </Link>
+                    </Grid>
+                    <Grid
+                  item
+                  key={`footer-terms-of-service`}
+                  style={{ margin: "0 10px" }}
+                >
+                    <Link href={`/${locale}/${t.link_terms_of_service}`}>
+                      <a>
+                        <Typography>{t.terms_of_service}</Typography>
+                      </a>
+                    </Link>
+                    </Grid>
+                    <Grid
+                  item
+                  key={`footer-terms-of-service`}
+                  style={{ margin: "0 10px" }}
+                >
+                    <Link href={`/${locale}/${t.link_rodo}`}>
+                      <a>
+                        <Typography>{t.rodo}</Typography>
+                      </a>
+                    </Link>
+                    </Grid>
                 </Grid>
               </Grid>
             </Grid>

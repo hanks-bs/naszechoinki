@@ -30,6 +30,12 @@ export default {
   link_plant_nursery: "szkolka",
   gallery: "Galeria",
   link_gallery: "galeria",
+  privacy_policy: "Polityka Prywatności",
+  link_privacy_policy: "polityka-prywatnosci",
+  terms_of_service: "Regulamin serwisu",
+  link_terms_of_service: "regulamin",
+  rodo: "RODO",
+  link_rodo: "obowiazek-informacyjny-rodo",
 
   //Footer
   realization: "Realizacja",

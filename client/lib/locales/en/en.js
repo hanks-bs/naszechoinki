@@ -30,6 +30,12 @@ export default {
   link_plant_nursery: "plant-nursery",
   gallery: "Gallery",
   link_gallery: "gallery",
+  privacy_policy: "Privacy Policy",
+  link_privacy_policy: "privacy-policy",
+  terms_of_service: "Terms of service",
+  link_terms_of_service: "terms-of-service",
+  rodo: "RODO",
+  link_rodo: "obligatory-information-rodo",
 
   //Footer
   realization: "Realization",

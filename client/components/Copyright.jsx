@@ -57,7 +57,7 @@ export default function Copyright () {
        {t.rights_reserved} © naszechoinki.pl
         </Grid>
       <Grid item className={clsx(classes.author, classes.gridItem )}>
-      {t.realization} Wiktor Poniewierski
+      <a href="mailto:wiktor.poniewierski09@gmail.com">{t.realization} Wiktor Poniewierski</a>
       </Grid>
         </Grid>
        <div >

@@ -9,92 +9,152 @@
 
 <url>
   <loc>https://naszechoinki.pl/en</loc>
-  <lastmod>2021-10-22T09:04:33+00:00</lastmod>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://naszechoinki.pl/pl</loc>
-  <lastmod>2021-10-22T09:04:33+00:00</lastmod>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://naszechoinki.pl/en/pricelist</loc>
-  <lastmod>2021-10-22T09:04:33+00:00</lastmod>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://naszechoinki.pl/en/seedlings</loc>
-  <lastmod>2021-10-22T09:04:33+00:00</lastmod>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://naszechoinki.pl/en/plant-nursery</loc>
-  <lastmod>2021-10-22T09:04:33+00:00</lastmod>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://naszechoinki.pl/en/gallery</loc>
-  <lastmod>2021-10-22T09:04:33+00:00</lastmod>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://naszechoinki.pl/en/privacy-policy</loc>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://naszechoinki.pl/en/terms-of-service</loc>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://naszechoinki.pl/en/obligatory-information-rodo</loc>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://naszechoinki.pl/pl/cennik</loc>
-  <lastmod>2021-10-22T09:04:33+00:00</lastmod>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://naszechoinki.pl/pl/sadzonki</loc>
-  <lastmod>2021-10-22T09:04:33+00:00</lastmod>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://naszechoinki.pl/pl/szkolka</loc>
-  <lastmod>2021-10-22T09:04:33+00:00</lastmod>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://naszechoinki.pl/pl/galeria</loc>
-  <lastmod>2021-10-22T09:04:33+00:00</lastmod>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://naszechoinki.pl/pl/polityka-prywatnosci</loc>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://naszechoinki.pl/pl/regulamin</loc>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://naszechoinki.pl/pl/pricelist</loc>
-  <lastmod>2021-10-22T09:04:33+00:00</lastmod>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://naszechoinki.pl/pl/seedlings</loc>
-  <lastmod>2021-10-22T09:04:33+00:00</lastmod>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://naszechoinki.pl/pl/plant-nursery</loc>
-  <lastmod>2021-10-22T09:04:33+00:00</lastmod>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://naszechoinki.pl/pl/gallery</loc>
-  <lastmod>2021-10-22T09:04:33+00:00</lastmod>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://naszechoinki.pl/pl/privacy-policy</loc>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://naszechoinki.pl/regulamin</loc>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://naszechoinki.pl/pl/terms-of-service</loc>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://naszechoinki.pl/polityka-prywatnosci</loc>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://naszechoinki.pl/rodo</loc>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://naszechoinki.pl/pl/rodo</loc>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://naszechoinki.pl/en/rodo</loc>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://naszechoinki.pl/en/cennik</loc>
-  <lastmod>2021-10-22T09:04:33+00:00</lastmod>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://naszechoinki.pl/en/sadzonki</loc>
-  <lastmod>2021-10-22T09:04:33+00:00</lastmod>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://naszechoinki.pl/en/szkolka</loc>
-  <lastmod>2021-10-22T09:04:33+00:00</lastmod>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 <url>
   <loc>https://naszechoinki.pl/en/galeria</loc>
-  <lastmod>2021-10-22T09:04:33+00:00</lastmod>
+  <lastmod>2021-11-04T13:43:45+00:00</lastmod>
   <priority>0.51</priority>
 </url>
 

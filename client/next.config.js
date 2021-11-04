@@ -32,6 +32,18 @@ module.exports = {
         source: '/logowanie',
         destination: '/signin',
       },
+      {
+        source: '/polityka-prywatnosci',
+        destination: '/privacy-policy',
+      },
+      {
+        source: '/regulamin',
+        destination: '/terms-of-service',
+      },
+      {
+        source: '/obligatory-information-rodo',
+        destination: '/rodo',
+      },
     ]
   },
   images: {
