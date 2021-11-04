@@ -1,4 +1,3 @@
-const withImages = require('next-images')
 module.exports = {
   reactStrictMode: true,
   pageExtensions: ["mdx", "jsx", "js", "ts", "tsx"],
@@ -41,8 +40,8 @@ module.exports = {
         destination: '/terms-of-service',
       },
       {
-        source: '/obligatory-information-rodo',
-        destination: '/rodo',
+        source: '/obowiazek-informacyjny-rodo',
+        destination: '/obligatory-information-rodo',
       },
     ]
   },

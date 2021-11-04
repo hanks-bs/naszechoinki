@@ -179,7 +179,7 @@ class Footer extends React.Component {
                     </Grid>
                     <Grid
                   item
-                  key={`footer-terms-of-service`}
+                  key={`footer-rodo`}
                   style={{ margin: "0 10px" }}
                 >
                     <Link href={`/${locale}/${t.link_rodo}`}>
