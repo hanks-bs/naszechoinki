@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
@@ -609,7 +610,7 @@ export default function GalleryModal ({data}) {
               </TableCell>
               <TableCell align="left">{item.title_pl}</TableCell>
               <TableCell align="left">{item.title_en}</TableCell>
-              <TableCell align="left"><Image src={`https://api.naszechoinki.pl/public${item.src}`} objectFit="contain" quality="75%" alt={item.title} width={100} height={50}/></TableCell>
+              <TableCell align="left"><img src={`https://api.naszechoinki.pl/public${item.src}`} objectFit="contain" alt={item.title} width={100} height={50}/></TableCell>
               <TableCell align="right"><Button onClick={async () => {await passData(item.id); await setOpenEditSingle(true)}}  className={clsx(classes.modalBtns,classes.modalEditBtn)}>EDYTUJ</Button> | <Button className={clsx(classes.modalBtns,classes.modalDeleteBtn)} onClick={async () => await handleDelete(item.id)}>USUŃ</Button></TableCell>
             </TableRow>
           ))}
