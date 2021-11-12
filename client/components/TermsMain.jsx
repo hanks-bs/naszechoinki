@@ -57,6 +57,8 @@ export default function TermsMain(props) {
 article {
   margin-bottom: 4em;
 }
+article li {
+  margin: 15px 0;}
      `}
       </style>
       <Container maxWidth={`md`} className={classes.container}>
@@ -175,7 +177,10 @@ article {
                 innych Usługobiorców korzystających z Serwisu, wszyscy
                 Usługobiorcy korzystający z Serwisu powinni stosować się do
                 ogólnie przyjętych{" "}
-                <a href="https://nety.pl/cyberbezpieczenstwo/zasady-ogolne-korzystania-z-sieci-internet/"  rel="nofollow external">
+                <a
+                  href="https://nety.pl/cyberbezpieczenstwo/zasady-ogolne-korzystania-z-sieci-internet/"
+                  rel="nofollow external"
+                >
                   zasad bezpieczeństwa w sieci
                 </a>
                 ,
@@ -369,7 +374,276 @@ article {
                 </ul>
               </li>
             </ul>
-            <h2>VI. Gromadzenie danych o Usługobiorcach</h2>
+            <h2>VI. Gwarancja</h2>
+            <ul style={{ listStyle: "decimal" }}>
+              <li>
+                Zgodnie z Ustawą z dnia 30 maja 2014 r. o prawach konsumenta
+                (Dz. U. 2014 poz. 827.) przesyłane rośliny zaliczamy do towarów
+                szybko psujących (Art. 38 pkt. 4.), w związku, z czym nie
+                przysługuje na nie 14-to dniowy termin zwrotu.
+              </li>
+              <li>
+                Gwarancją objęte są bulwy, cebule i nasiona zakupione w III, IV,
+                IX i X, gdzie gwarancja wynosi 14 dni od dnia dostawy, natomiast
+                w pozostałym okresie wynosi 7 dni od dnia dostawy.
+              </li>
+              <li>
+                Gwarancją objęte są rośliny balotowane oraz rośliny w donicach
+                zakupione w III, IV, IX i X, gdzie gwarancja wynosi 1 miesiąc od
+                dnia dostawy, natomiast w pozostałym okresie wynosi 14 dni od
+                dnia dostawy.
+              </li>
+              <li>
+                Gwarancją są objęte rośliny z gołym korzeniem zakupione w III,
+                IV, IX i X, gdzie gwarancja wynosi 1 tydzień od dnia dostawy,
+                natomiast w pozostałym okresie gwarancja nie przysługuje.
+              </li>
+              <li>
+                Klient nie poniesie żadnych dodatkowych kosztów związanych z
+                dostarczeniem reklamowanego towaru do siedziby firmy. Po
+                uzgodnieniu z klientem istnieje możliwość podesłania kuriera po
+                reklamowany towar, bądź zostaną w całości zwrócone koszty
+                odesłania przez klienta do naszej firmy towaru.
+              </li>
+              <li>
+                W przypadku nieuzasadnionej reklamacji klient zostanie obciążony
+                kosztem zwrotu, jak i ponownej wysyłki towaru.
+              </li>
+              <li>Nie zwracamy kosztów wysyłki i pakowania.</li>
+              <li>
+                Reklamacje oraz zwroty pieniędzy są realizowane w terminie do 14
+                dni roboczych.
+              </li>
+              <li>
+                W przypadku gdy rośliny dojdą inne niż zamówione; połamane, w
+                innych rozmiarach lub gatunkach należy zgłosić roszczenia do 24
+                godzin od otrzymania przesyłki.
+              </li>
+              <li>
+                Reklamacje rozpatrywane będą jedynie za okazaniem dowodu zakupu
+                (paragon, faktura).
+              </li>
+              <li>
+                Warunkiem uzyskania gwarancji jest posadzenie i pielęgnacja
+                rośliny zgodnie ze sztuką ogrodniczą, tzn.:
+                <ul>
+                  <li>podłoże powinno być odpowiednio przygotowane</li>
+                  <li>
+                    JAK SADZIĆ ROŚLINY W DONICACH, BALOTOWANE I Z GOŁYM
+                    KORZENIEM? - Po otrzymaniu paczki od kuriera rośliny należy
+                    wyjąć z kartonu. Jeżeli towar jest w donicach, bądź
+                    multipletach podlewamy rośliny, natomiast towar z gołym
+                    korzeniem moczymy w wodzie o temperaturze powietrza przez
+                    około 1 h (nie może być zbyt duża amplituda temperatur).
+                    Następnie prosimy o przygotowanie rowu o szerokości i
+                    głębokości 40 cm na długości docelowego posadzenia
+                    żywopłotu. Do sadzenia należy używać torfu dla iglaków o ph
+                    4,5-5,5. Taki torf trzeba zmoczyć i wymieszać tak, aby
+                    powstała tzw. „ciapa”. Taką mieszanką zalać cały rów i
+                    sadzić w nim iglaki. Podlewamy rano i wieczorem. W dni
+                    upalne nie podlewamy na słońcu, aby ich nie spalić. Przez
+                    pierwszy miesiąc należy koniecznie zastosować podlewanie
+                    wodą z ukorzeniaczem (kristalon żółty) rano i późnym
+                    wieczorem 3 razy w tygodniu powtarzając czynność minimum 10
+                    razy ( 1 kg – 1000 l) .
+                  </li>
+                  <p>
+                    Zalecamy używanie następujących proporcji dla jednego
+                    podlania.
+                  </p>
+                  <p>
+                    Dla roślin poniżej 80cm należy użyć 25l torfu 4,5-5,5ph oraz
+                    dla jednego podlania roślin należy użyć 25g. Ukorzeniacza
+                    wymieszanego z 25l wody.
+                  </p>
+                  <p>
+                    Dla roślin powyżej 80cm należy użyć 50l torfu 4,5-5,5ph oraz
+                    dla jednego podlania roślin należy użyć 50g ukorzeniacza
+                    wymieszanego z 50l wody.
+                  </p>
+                  <li>
+                    w przypadku, gdy roślina została zasadzona niezgodnie z
+                    powyższą instrukcją – gwarancja nie przysługuje
+                  </li>
+                  <li>
+                    dodatkowo, by uznano gwarancję za zasadną, torf musi być
+                    zakupiony w naszej firmie lub musi być zakupiony w innej
+                    firmie specjalizującej się w sprzedaży, bądź handlu torfem,
+                    z uwzględnieniem na fakturze nazwy i odpowiedniego ph
+                    4,5-5,5, przy czym data faktury nie może być starsza niż 24
+                    h od otrzymania roślin od kuriera
+                  </li>
+                  <li>
+                    sprzedający udzielając gwarancji wychodzi z założenia, że
+                    kupujący będzie pielęgnował rośliny zgodnie z zasadami
+                    pielęgnacji dla danego gatunku roślin (odpowiednia głębokość
+                    nasadzenia, rodzaj gleby, przygotowanie gleby, nawożenie i
+                    podlewanie)
+                  </li>
+                  <li>
+                    w przypadku wystąpienia siły wyższej, szczególnie w
+                    przypadku klęski suszy, mrozu, zaatakowania przez szkodniki
+                    etc. gwarancja nie obowiązuje.
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                Na wyraźne żądanie kupującego może zostać udzielona gwarancja na
+                okres 1 roku, jednakże tylko i wyłącznie po uprzednim
+                porozumieniu się z naszą Firmą, bowiem każde zgłoszenie będzie
+                rozpatrywane indywidualnie.
+              </li>
+              <li>Sprzedający nie daje gwarancji na przyjęcie się roślin.</li>
+              <li>
+                Wszystkie podane rozmiary roślin mogą odbiegać o 10% w dół lub w
+                górę, różnice te są dopuszczalne w przypadku produktów natury i
+                nie stanowią braku jakości.
+              </li>
+              <li>
+                Wzory pokazują przeciętne cechy rośliny. Nie wszystkie rośliny
+                muszą być identyczne ze wzorem.
+              </li>
+            </ul>
+            <h2>VII. Płatności</h2>
+            <ul style={{ listStyle: "decimal" }}>
+              <li>
+                Kupujący nie będący osobą fizyczną, w celu realizacji
+                zamówienia, upoważnia Sprzedawcę do wystawiania dowodu zakupu
+                bez podpisu odbiorcy.
+              </li>
+              <li>
+                Wyboru płatności dokonuje kupujący podczas składania zamówienia.
+                Kupujący może wybrać jeden z możliwych sposobów płatności:
+                <ul style={{ listStyleType: "'✔'" }}>
+                  <li style={{ paddingLeft: "10px" }}>
+                    płatność za pobraniem,
+                  </li>
+                  <li style={{ paddingLeft: "10px" }}>
+                    płatność przelewem zwykłym lub internetowym na konto bankowe
+                    Sprzedawcy,
+                  </li>
+                  <li style={{ paddingLeft: "10px" }}>
+                    płatność gotówką (przy odbiorze produktu),
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Jeżeli kupujący nie dokona płatności w terminie 7 dni od daty
+                potwierdzenia zamówienia, Sprzedawca ma prawo anulować
+                zamówienie, informując o tym kupującego drogą mailową lub
+                telefoniczną.
+              </li>
+              <li>
+                Sprzedawca zastrzega sobie prawo do dokonywania zmiany cen
+                produktów. Zamówienia złożone przed wejściem w życie zmian, o
+                których mowa w powyższym punkcie, realizowane będą zasadach
+                obowiązujących w momencie ich składania.
+              </li>
+              <li>
+                W przypadku nieterminowej płatności, najpóźniej 30 dni od daty
+                faktury lub daty przyjęcia towaru, będą naliczane ustawowe
+                odsetki.
+              </li>
+            </ul>
+            <h2>VIII. Wysyłka i opakowanie oraz obowiązek dostawy</h2>
+            <ul style={{ listStyle: "decimal" }}>
+              <li>
+                Transport odbywa się na koszt i ryzyko kupującego. Jeżeli termin
+                wysyłki opóźni się z winy kupującego, wszelkie niebezpieczeństwa
+                związane z opóźnieniem odbioru roślin przechodzą z dniem
+                gotowości do ich odbioru na kupującego.
+              </li>
+              <li>
+                Sprzedający zobowiązuje się do solidnego zapakowania towaru.
+              </li>
+              <li>
+                W przypadku wystąpienia katastrof naturalnych takich jak susza,
+                grad, mróz lub innych niezawinionych przez sprzedającego
+                przyczyn (np. strajk, zmiana waluty, inne przeszkody
+                uniemożliwiające funkcjonowanie firmy), termin dostawy przedłuża
+                się do momentu ustąpienia przeszkody. Jeżeli z powodu
+                wymienionych przyczyn dostawa jest niemożliwa, sprzedający
+                zostaje zwolniony z obowiązku dostawy. Ewentualne żądania
+                odszkodowania ze strony kupującego nie będą akceptowane.
+              </li>
+            </ul>
+            <h2>IX. Zastrzeżenie własności</h2>
+            <ul style={{ listStyle: "decimal" }}>
+              <li>
+                Dostarczony towar pozostaje własnością sprzedawcy do momentu
+                całkowitej zapłaty, tzn. do momentu spłacenia przez kupującego
+                wszelkich przysługujących nam zobowiązań łącznie z odsetkami.
+              </li>
+              <li>
+                Sprzedający nie traci prawa do dostarczonych roślin również
+                wtedy, gdy kupujący dokonał ich zasadzenia na swoim lub obcym
+                terenie.
+              </li>
+              <li>
+                Kupujący jest zobowiązany do odpowiedniej pielęgnacji towaru,
+                poprzez odpowiednie przechowywanie, posadzenie, nawożenie i
+                podlewanie.
+              </li>
+            </ul>
+            <h2>X. Reklamacja</h2>
+            <ul style={{ listStyle: "decimal" }}>
+              <li>
+                Kupujący może składać Sprzedawcy pisemne reklamacje dotyczące
+                zawartej Umowy wraz ze wszystkimi załącznikami na adres Firmy:
+                Gospodarstwo Rolne Mieczysław Bednarz Suchowola 65a, 28-130
+                Stopnica
+              </li>
+              <li>
+                Kupujący nie poniesie żadnych dodatkowych kosztów związanych z
+                dostarczeniem reklamowanego towaru do siedziby firmy. Po
+                uzgodnieniu z Klientem, zostanie podesłany kurier po reklamowany
+                towar bądź zostaną w całości zwrócone koszty odesłania do Nas
+                towaru. W przypadku nieuzasadnionej reklamacji Klient zostanie
+                obciążony kosztem zwrotu, jak i ponownej wysyłki przedmiotu.
+              </li>
+              <li>
+                Kupujący może żądać nieodpłatnej naprawy lub wymiany na towar
+                zgodny z umową. Jeżeli naprawa lub wymiana okażą się niemożliwe
+                lub zbyt kosztowne, a zgłoszona usterka będzie istotna, kupujący
+                może odstąpić od umowy z żądaniem zwrotu pieniędzy.
+              </li>
+              <li>
+                Do złożenia reklamacji konieczny jest paragon lub faktura
+                potwierdzające nabycie towaru u danego Sprzedawcy.
+              </li>
+              <li>
+                Poprawnie złożona reklamacja powinna zawierać co najmniej:
+                <ul style={{listStyleType: 'disc'}}>
+                  <li>imię, nazwisko, adres, adres e-mail Kupującego,</li>
+                  <li>datę zawarcia Umowy stanowiącej podstawę reklamacji,</li>
+                  <li>
+                    przedmiot reklamacji, ze wskazaniem żądania Kupującego,
+                  </li>
+                  <li>
+                    wszelkie okoliczności uzasadniające reklamację wraz z opisem
+                    procedury sadzenia,
+                  </li>
+                  <li>
+                    załączony dowód zakupu towaru w postaci paragonu lub
+                    faktury,
+                  </li>
+                  <li>załączony dowód zakupu torfu w postaci faktury,</li>
+                  <li>
+                    załączony dowód zakupu ukorzeniacza – (kristalon żółty) w
+                    postaci faktury,
+                  </li>
+                </ul>
+              </li>
+              <li>
+                Jeżeli podane w reklamacji dane lub informaje wymagają
+                uzupełnienia, przed rozpatrzeniem reklamacji, Sprzedający zwraca
+                się do składającego reklamację o jej uzupełnienie we wskazanym
+                zakresie.
+              </li>
+              <li>Odpowiedź na reklamację wysyłana będzie na podany przez Kupującego adres poczty tradycyjnej.</li>
+            </ul>
+            <h2>XI. Gromadzenie danych o Usługobiorcach</h2>
             <p>
               W celu prawidłowego świadczenia usług przez Serwis, zabezpieczenia
               prawnego interesu Usługodawcy oraz w celu zapewnienia zgodności
@@ -450,7 +724,7 @@ article {
                 </p>
               </li>
             </ul>
-            <h2>VII. Prawa autorskie</h2>
+            <h2>XII. Prawa autorskie</h2>
             <ul>
               <li>
                 Właścicielem Serwisu oraz praw autorskich do serwisu jest
@@ -484,7 +758,7 @@ article {
                 poszczególnym materiale udostępnionym w Serwisie.
               </li>
             </ul>
-            <h2>VIII. Zmiany Regulaminu</h2>
+            <h2>XIII. Zmiany Regulaminu</h2>
             <ul>
               <li>
                 Wszelkie postanowienia Regulaminu mogą być w każdej chwili
@@ -510,7 +784,7 @@ article {
                 Serwisu po zmianie Regulaminu akceptuje go w całości.
               </li>
             </ul>
-            <h2>IX. Postanowienia końcowe</h2>
+            <h2>XIV. Postanowienia końcowe</h2>
             <ul>
               <li>
                 Usługodawca nie odpowiada w żaden sposób, jak tylko pozwalają na

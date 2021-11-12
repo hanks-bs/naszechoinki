@@ -67,6 +67,7 @@ const useStyles = makeStyles((theme) => ({
       [theme.breakpoints.up("sm")]: {
         width: 700,
         minHeight: "50vh",
+        
       },
   
       [theme.breakpoints.down(320)]: {
@@ -83,6 +84,8 @@ const useStyles = makeStyles((theme) => ({
       [theme.breakpoints.up("sm")]: {
         width: 600,
         minHeight: "50vh",
+        maxHeight: "95vh",
+        overflowY: "scroll",
       },
       [theme.breakpoints.up("md")]: {
         width: 850,
@@ -156,7 +159,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
     inputBox: {
-      marginTop: "60px",
+      
     },
     input: {
       display: "none",
@@ -610,7 +613,7 @@ export default function GalleryModal ({data}) {
               </TableCell>
               <TableCell align="left">{item.title_pl}</TableCell>
               <TableCell align="left">{item.title_en}</TableCell>
-              <TableCell align="left"><img src={`https://api.naszechoinki.pl/public${item.src}`} objectFit="contain" alt={item.title} width={100} height={50}/></TableCell>
+              <TableCell align="left"><img src={`https://api.naszechoinki.pl/${item.src}`}  alt={item.title} style={{maxWidth: 100, maxHeight: 50}}/></TableCell>
               <TableCell align="right"><Button onClick={async () => {await passData(item.id); await setOpenEditSingle(true)}}  className={clsx(classes.modalBtns,classes.modalEditBtn)}>EDYTUJ</Button> | <Button className={clsx(classes.modalBtns,classes.modalDeleteBtn)} onClick={async () => await handleDelete(item.id)}>USUŃ</Button></TableCell>
             </TableRow>
           ))}

@@ -28,8 +28,7 @@
     "nodemon": "^2.0.12",
     "pg": "^8.6.0",
     "randomstring": "^1.2.1",
-    "sequelize": "^6.6.2",
-    "sharp": "^0.29.2"
+    "sequelize": "^6.6.2"
   },
   "repository": {
     "type": "git",
@@ -42,6 +41,7 @@
   "description": "",
   "devDependencies": {
     "fs": "^0.0.1-security",
+    "sharp": "^0.29.2",
     "validatorjs": "^3.22.1"
   }
 }

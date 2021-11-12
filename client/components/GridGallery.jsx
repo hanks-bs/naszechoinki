@@ -26,8 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
   border: {
     "&:before": {
-      left: "50%",
-      transform: "translateX(-50%)"
+      display: "none",
     }
   },
 }));
@@ -120,7 +119,7 @@ export default function GridGallery({ userdata, items }) {
           </>
         )}
 
-        <style>{`.react-photo-gallery--gallery{margin-bottom: 80px}`}</style>
+        <style>{`.react-photo-gallery--gallery{margin-bottom: 80px;margin-top: 50px}`}</style>
       </Container>
     </section>
   );
